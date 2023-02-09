@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Users.init({
     password: DataTypes.TEXT,
-    userId: {
-      type:DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
       primaryKey: true,
       allowNull: false,
       defaultValue: DataTypes.UUIDV4
@@ -24,12 +24,12 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     fmno: DataTypes.STRING,
-    currentEngagementIds: DataTypes.ARRAY(DataTypes.STRING),
-    caseStudies: DataTypes.ARRAY(DataTypes.STRING),
+    current_engagement_ids: DataTypes.ARRAY(DataTypes.STRING),
+    case_studies: DataTypes.ARRAY(DataTypes.STRING),
     skills: DataTypes.ARRAY(DataTypes.STRING),
     role: DataTypes.ENUM('unspecified'),
     guild: DataTypes.ENUM('unspecified'),
-    pastEngagementId: DataTypes.ARRAY(DataTypes.STRING),
+    past_engagement_id: DataTypes.ARRAY(DataTypes.STRING),
     image: DataTypes.STRING
   }, {
     sequelize,
