@@ -1,11 +1,11 @@
 
-const projectServices=require('./../services/projectServices');
+const projectServices = require('../services/projectServices');
 
-const listProjects=async(req,res)=>{
-  try{
-    const allProjects=await projectServices.listProjects();
+const listProjects = async (req, res) => {
+  try {
+    const allProjects = await projectServices.listProjects();
     res.status(200).json(allProjects);
-  }catch(error){
+  } catch (error) {
     {
       res.status(500).json({
         error: error.message
@@ -17,12 +17,12 @@ const listProjects=async(req,res)=>{
 
 
 
-const getProject=async(req,res)=>{
-  try{
-    const {id}=req.params;
-    const project=await projectServices.getProject(id);
+const getProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const project = await projectServices.getProject(id);
     res.status(200).json(project);
-  }catch(error){
+  } catch (error) {
     {
       res.status(500).json({
         error: error.message
@@ -32,11 +32,11 @@ const getProject=async(req,res)=>{
   }
 };
 
-const updateProject=async(req,res)=>{
-  try{
-   
+const updateProject = async (req, res) => {
+  try {
+
     res.status(200).json();
-  }catch(error){
+  } catch (error) {
     {
       res.status(500).json({
         error: error.message
@@ -46,11 +46,11 @@ const updateProject=async(req,res)=>{
   }
 };
 
-const createProject=async(req,res)=>{
-  try{
-    
+const createProject = async (req, res) => {
+  try {
+
     res.status(200).json();
-  }catch(error){
+  } catch (error) {
     {
       res.status(500).json({
         error: error.message
@@ -60,11 +60,11 @@ const createProject=async(req,res)=>{
   }
 };
 
-const deleteProject=async(req,res)=>{
-  try{
-   
+const deleteProject = async (req, res) => {
+  try {
+
     res.status(200).json();
-  }catch(error){
+  } catch (error) {
     {
       res.status(500).json({
         error: error.message
@@ -75,4 +75,4 @@ const deleteProject=async(req,res)=>{
 };
 
 
-module.exports={listProjects,getProject,deleteProject,updateProject,createProject};
+module.exports = { listProjects, getProject, deleteProject, updateProject, createProject };
