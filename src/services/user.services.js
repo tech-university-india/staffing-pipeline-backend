@@ -1,5 +1,4 @@
 
-// require user model
 const { users } = require('../models');
 
 const getAllUsers = async () => {
