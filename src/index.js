@@ -9,6 +9,15 @@ const projectRouter=require('./routes/projectRoutes');
 //add swagger documentation
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
+//const swaggerAutogen = require('swagger-autogen')();
+
+// const outputFile = "../swagger.json";
+// const endpointsFiles = ["./routes/loginRoutes.js","./routes/userRoutes.js"];
+// //const config = {}
+// console.log(typeof(swaggerAutogen))
+// swaggerAutogen(outputFile, endpointsFiles, config).then(async () => {
+//   await import('./index.js'); // Your express api project's root file where the server starts
+// });
 
 const app = express();
 const PORT = process.env.PORT || 8000;

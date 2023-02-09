@@ -1,18 +1,28 @@
 const HttpError = require('../utils/httpError');
 const bcrypt = require('bcrypt');
-// require user model
 const db = require('../models');
 
-exports.getAllUsers=async () => {
-    const allUsers = await db.Users.findAll();
+const getAllUsers=async () => {
+  try{
+    const allUsers = await db.users.findAll();
     return allUsers;
   }
+  catch(error){
+    throw new HttpError(error.message,500);
+  }
+  }
 
-exports.createUser = async (userDetails) => {
-    const newUser = await db.Users.create(userDetails);
+const createUser = async (userDetails) => {
+  try{
+    const newUser = await db.users.create(userDetails);
     return newUser;
   }
-exports.setUserCredentials = async(credentials) => {
+  catch(error){
+    throw new HttpError(error.message,500);
+  }
+
+  }
+const setUserCredentials = async(credentials) => {
     credentials.password = await bcrypt.hash(credentials.password, parseInt(process.env.SALT_ROUNDS));
     const { email, password} = credentials;
     const user = await db.auth.findOne({ where: { email: email } });
@@ -28,6 +38,6 @@ exports.setUserCredentials = async(credentials) => {
       throw new HttpError('cannot create the user',500);
     } 
 }
-  
+module.exports = { getAllUsers, createUser, setUserCredentials}  
 
 

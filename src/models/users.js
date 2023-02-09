@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Users.init({
-    password: DataTypes.TEXT,
     user_id: {
       type: DataTypes.STRING,
       primaryKey: true,
@@ -22,18 +21,22 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4
     },
     name: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     fmno: DataTypes.STRING,
     current_engagement_ids: DataTypes.ARRAY(DataTypes.STRING),
     case_study_ids: DataTypes.ARRAY(DataTypes.STRING),
     skills: DataTypes.ARRAY(DataTypes.STRING),
     role: DataTypes.ENUM('unspecified'),
     guild: DataTypes.ENUM('unspecified'),
-    past_engagement_id: DataTypes.ARRAY(DataTypes.STRING),
+    past_engagement_ids: DataTypes.ARRAY(DataTypes.STRING),
     image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'users',
+    underscored: true,
   });
   return Users;
 };

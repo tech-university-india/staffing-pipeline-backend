@@ -1,15 +1,15 @@
 
 const express = require('express');
 const userController = require('../controllers/userController');
-const validator = require('../middlewares/request.validator');
+const validateRequests = require('../middlewares/request.validator');
 // require schemas
 const schemas = require('../middlewares/schemas.validator');
 
 const router = express.Router();
 
-router.get('/users', userController.getUsers);
-router.post('/users', userController.createUser);
-router.post('/users/register',userController.createUserLogin);
+router.route('/users').get( validateRequests.reqAuthValidator,userController.getUsers)
+                      .post( validateRequests.reqAuthValidator,userController.createUser);
+router.post('/users/register', userController.createUserLogin);
 
 
 module.exports = router;

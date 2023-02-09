@@ -1,14 +1,16 @@
 const db = require('../models');
 const bcrypt = require('bcrypt');
 const LoginError = require('../utils/loginError');
-exports.validateUserAndReturnToken = async(data) => {
+const tokenVerificationUtil = require('../utils/tokenVerification');
+const jwt = require('jsonwebtoken');
+const validateUserAndReturnToken = async(data) => {
     const { email, password } = data;
-    const user = await db.users.findOne({ where: { email: email } });
-    
+    const user = await db.auth.findOne({ where: { email: email } });
     if (user) {
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        const isPasswordCorrect = await bcrypt.compare(password, user.dataValues.password);
         if (isPasswordCorrect) {
-            const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            
             return {data:user,token:token,success:true,message:'Login successful'};
         }
         else {
@@ -19,3 +21,5 @@ exports.validateUserAndReturnToken = async(data) => {
         throw new LoginError('No such user found',404);
     }   
 }
+
+module.exports={validateUserAndReturnToken};

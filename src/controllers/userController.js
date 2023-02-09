@@ -1,10 +1,17 @@
-const userServices = require('../services/userServices');
 
-exports.getUsers = async (req, res) => {
+const userServices = require('../services/userServices');
+const getUsers = async (req, res) => {
+  try{
   const allUsers = await userServices.getAllUsers();
   res.status(200).json(allUsers);
+  }
+  catch(error){
+    res.status(error.statusCode).json({
+      error:error.message
+    });
+  }
 };
-exports.createUserLogin = async(req,res)=>{
+ const createUserLogin = async(req,res)=>{
   try{
     const userCredentials = await userServices.setUserCredentials(req.body);
     res.status(201).json({success:true});
@@ -14,9 +21,8 @@ exports.createUserLogin = async(req,res)=>{
     res.status(error.statusCode).json({error:error.message,success:false});
   }
 }
-exports.createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try{
-    
     const newUser = await userServices.createUser(req.body);
     res.status(201).json({data:newUser,success:true});
   }
@@ -26,4 +32,4 @@ exports.createUser = async (req, res) => {
     })
   }
 };
-
+module.exports = { getUsers, createUser, createUserLogin };
