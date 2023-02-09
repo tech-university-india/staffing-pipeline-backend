@@ -7,5 +7,17 @@ const getUsers = async (_, res) => {
   res.status(200);
   res.json(allUsers);
 };
-
-module.exports = { getUsers };
+const updateUser = async (req, res) => {
+  try{
+    const { id } = req.params;
+    const { body } = req;
+    const updatedUser = await userServices.updateUser(id, body);
+    res.status(200).json(updatedUser);
+  }
+  catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+module.exports = { getUsers , updateUser};
