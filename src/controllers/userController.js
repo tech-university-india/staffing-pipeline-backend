@@ -2,8 +2,8 @@
 const userServices = require('../services/userServices');
 const getUsers = async (req, res) => {
   try{
-  const allUsers = await userServices.getAllUsers();
-  res.status(200).json(allUsers);
+    const allUsers = await userServices.getAllUsers();
+    res.status(200).json(allUsers);
   }
   catch(error){
     res.status(error.statusCode).json({
@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
     });
   }
 };
- const createUserLogin = async(req,res)=>{
+const createUserLogin = async(req,res)=>{
   try{
     const userCredentials = await userServices.setUserCredentials(req.body);
     res.status(201).json({success:true});
@@ -20,7 +20,7 @@ const getUsers = async (req, res) => {
     
     res.status(error.statusCode).json({error:error.message,success:false});
   }
-}
+};
 const createUser = async (req, res) => {
   try{
     const newUser = await userServices.createUser(req.body);
@@ -29,7 +29,7 @@ const createUser = async (req, res) => {
   catch(error){
     res.status(error.statusCode).json({
       error:error.message
-    })
+    });
   }
 };
 module.exports = { getUsers, createUser, createUserLogin };
