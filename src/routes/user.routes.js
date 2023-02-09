@@ -1,6 +1,6 @@
 
 const express = require('express');
-const { getUsers, postUser, deleteUser } = require('../controllers/userController');
+const { getUsers, postUser, deleteUser } = require('../controllers/user.controller');
 const validator = require('../middlewares/request.validator');
 // require schemas
 const schemas = require('../middlewares/schemas.validator');

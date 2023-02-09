@@ -1,5 +1,4 @@
-const userController = require('../../src/controllers/userController');
-const userServices = require('../../src/services/userServices');
+const userServices = require('../../src/services/user.services');
 const { users } = require('../../src/models');
 
 describe('User Services', () => {
