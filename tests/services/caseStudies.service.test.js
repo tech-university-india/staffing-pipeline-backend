@@ -1,4 +1,4 @@
-const caseStudiesService = require('../../src/services/caseStudiesServices');
+const caseStudiesService = require('../../src/services/caseStudies.service');
 const models = require('../../src/models');
 
 describe('Case Studies Service', () => {

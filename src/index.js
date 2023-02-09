@@ -4,7 +4,7 @@ const router = require('./routes/user.routes');
 const authRouter = require('./routes/loginRoutes');
 require('dotenv').config();
 const projectRouter = require('./routes/projectRoutes');
-const { caseStudiesRouter } = require('./routes/caseStudiesRoutes');
+const { caseStudiesRouter } = require('./routes/caseStudies.routes');
 
 
 
