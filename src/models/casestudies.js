@@ -14,13 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   CaseStudies.init({
-    caseStudyId: DataTypes.STRING,
+    case_study_id: DataTypes.STRING,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    collaboratorsId: DataTypes.ARRAY(DataTypes.STRING),
+    collaborators_ids: DataTypes.ARRAY(DataTypes.STRING),
     image: DataTypes.STRING,
-    boxLink: DataTypes.STRING,
-    engagementId: DataTypes.STRING
+    box_link: DataTypes.STRING,
+    engagement_id: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'case_studies',
