@@ -1,7 +1,7 @@
-const { CaseStudies } = require('../models');
+const { case_studies } = require('../models');
 
 const createCaseStudy = async (caseStudy) => {
-  const newCaseStudy = await CaseStudies.create(caseStudy);
+  const newCaseStudy = await case_studies.create(caseStudy);
   return newCaseStudy;
 };
 

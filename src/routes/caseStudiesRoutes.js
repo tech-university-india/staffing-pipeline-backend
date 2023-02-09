@@ -1,6 +1,6 @@
-const { caseStudiesRouter } = require('express').Router();
-const { caseStudiesController } = require('../controllers/caseStudiesController');
+const caseStudiesRouter = require('express').Router();
+const caseStudiesController = require('./../controllers/caseStudiesController');
 
-caseStudiesRouter.post('/caseStudies', caseStudiesController.createCaseStudy);
+caseStudiesRouter.post('/', caseStudiesController.createCaseStudy);
 
-module.exports = caseStudiesRouter;
+module.exports = { caseStudiesRouter };
