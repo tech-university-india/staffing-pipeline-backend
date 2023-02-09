@@ -15,4 +15,18 @@ const getProject = async (req, res) => {
   }
 };
 
-module.exports = { getProject };
+const listProjects = async (req, res) => {
+  try {
+    const allProjects = await projectServices.listProjects();
+    res.status(200).json(allProjects);
+  } catch (error) {
+    {
+      res.status(500).json({
+        error: error.message
+
+      });
+    }
+  }
+};
+
+module.exports = { getProject, listProjects };

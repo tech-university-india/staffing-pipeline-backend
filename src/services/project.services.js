@@ -6,4 +6,10 @@ const getProject = async (id) => {
 
 };
 
-module.exports = { getProject };
+const listProjects = async () => {
+  const allProjects = await engagements.findAll();
+  return allProjects;
+
+};
+
+module.exports = { getProject, listProjects };
