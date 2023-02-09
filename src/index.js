@@ -1,9 +1,9 @@
 //create an express server 
 const express = require('express');
-const router = require('./routes/userRoutes');
+const router = require('./routes/user.routes');
 const authRouter = require('./routes/loginRoutes');
 require('dotenv').config();
-const projectRouter=require('./routes/projectRoutes');
+const projectRouter = require('./routes/projectRoutes');
 
 
 //add swagger documentation
