@@ -17,7 +17,6 @@ const reqAuthValidator = async(req,res,next)=>{
     }
     else{
       const isTokenValid = await tokenValidationUtil.verifyToken(token);
-      
       if(isTokenValid.success){
         next();
       }

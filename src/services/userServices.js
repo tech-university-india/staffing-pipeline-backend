@@ -18,7 +18,7 @@ const createUser = async (userDetails) => {
     return newUser;
   }
   catch(error){
-    throw new HttpError(error.message,500);
+    throw new HttpError(error.message,400);
   }
 
   }

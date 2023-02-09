@@ -11,5 +11,6 @@ const verifyToken = async(token) => {
     else {
         throw new LoginError('Unauthorized Token',401);
     }
+
 }
 module.exports={verifyToken};

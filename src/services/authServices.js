@@ -11,7 +11,7 @@ const validateUserAndReturnToken = async(data) => {
         if (isPasswordCorrect) {
             const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
             
-            return {data:user,token:token,success:true,message:'Login successful'};
+            return {data:user.dataValues,token:token,success:true,message:'Login successful'};
         }
         else {
             throw new LoginError('Invalid credentials',401);
