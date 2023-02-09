@@ -12,4 +12,9 @@ const postUser = async (req, res) => {
   res.status(201).json(newUser);
 };
 
-module.exports = { getUsers, postUser };
+const deleteUser = async (req, res) => {
+  await userServices.deleteUser(req.params.id);
+  res.status(200).json({ message: 'User deleted' });
+};
+
+module.exports = { getUsers, postUser, deleteUser };
