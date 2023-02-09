@@ -9,7 +9,6 @@ const getProject = async (req, res) => {
     {
       res.status(500).json({
         error: error.message
-
       });
     }
   }
@@ -23,7 +22,6 @@ const listProjects = async (req, res) => {
     {
       res.status(500).json({
         error: error.message
-
       });
     }
   }

@@ -8,7 +8,6 @@ describe('Engagement Services', () => {
         engagement_id: 1223,
         user_ids: ['1', '2', '3'],
         case_study_ids: ['23', '34', '56']
-
       }
     ]
     );
@@ -19,33 +18,27 @@ describe('Engagement Services', () => {
           engagement_id: 1223,
           user_ids: ['1', '2', '3'],
           case_study_ids: ['23', '34', '56']
-
         }
-
       ]
     );
   });
 
   it('should return list of all engagements from the database', async () => {
     jest.spyOn(engagements, 'findAll').mockResolvedValue([
-
       {
         engagement_id: 1223,
         user_ids: ['1', '2', '3'],
         case_study_ids: ['23', '34', '56']
-
       },
       {
         engagement_id: 1223,
         user_ids: ['1', '2', '3'],
         case_study_ids: ['23', '34', '56']
-
       },
       {
         engagement_id: 1223,
         user_ids: ['1', '2', '3'],
         case_study_ids: ['23', '34', '56']
-
       }
     ]
     );
@@ -56,7 +49,6 @@ describe('Engagement Services', () => {
           engagement_id: 1223,
           user_ids: ['1', '2', '3'],
           case_study_ids: ['23', '34', '56']
-
         },
         {
           engagement_id: 1223,
