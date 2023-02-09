@@ -11,5 +11,9 @@ const postUser = async (req, res) => {
   const newUser = await userServices.createUser(req.body);
   res.status(201).json(newUser);
 };
-
-module.exports = { getUsers, postUser };
+const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const updatedUser = await userServices.updateUser(id,req.body);
+  res.status(200).json(updatedUser);
+};
+module.exports = { getUsers, postUser , updateUser };

@@ -10,6 +10,14 @@ const userServices = {
   'createUser': async (userDetails) => {
     const newUser = await Users.create(userDetails);
     return newUser;
+  },
+  'updateUser': async (id, userDetails) => {
+    const user = await Users.findOne({ where: { id } });
+    for(let key in userDetails) {
+      user[key] = userDetails[key];
+    }
+    await user.save();
+    return user;
   }
 };
 
