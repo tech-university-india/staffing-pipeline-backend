@@ -1,6 +1,6 @@
 
 
-const userServices = require('../services/userServices');
+const userServices = require('../services/users.services');
 
 const getUsers = async (req, res) => {
   const allUsers = await userServices.getAllUsers();

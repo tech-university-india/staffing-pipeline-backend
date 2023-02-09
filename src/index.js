@@ -1,9 +1,9 @@
 //create an express server 
 const express = require('express');
-const router = require('./routes/userRoutes');
+const userRouter = require('./routes/users.routes');
 const authRouter = require('./routes/loginRoutes');
 require('dotenv').config();
-const projectRouter=require('./routes/projectRoutes');
+const projectRouter = require('./routes/projectRoutes');
 
 
 //add swagger documentation
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 8000;
 
 // middlewares
 app.use(express.json());
-app.use('/api', router);
+app.use('/api', userRouter);
 app.use('/auth', authRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
