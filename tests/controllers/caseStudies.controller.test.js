@@ -1,4 +1,4 @@
-const caseStudiesController = require('../../src/controllers/caseStudiesController');
+const caseStudiesController = require('../../src/controllers/caseStudies.controller');
 const caseStudiesServices = require('../../src/services/caseStudies.service');
 
 describe('Case Studies Controller', () => {
