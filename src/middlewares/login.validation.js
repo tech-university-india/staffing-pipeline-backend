@@ -4,9 +4,9 @@ const loginReqSchema = Joi.object({
   password: Joi.string().required(),
 });
 exports.validateLoginReq = (req, res, next) => {
-  const {error} = loginReqSchema.validate(req.body);
+  const { error } = loginReqSchema.validate(req.body);
   if (error) {
-    res.status(401).json({message: error.message});
+    res.status(401).json({ message: error.message });
   } else {
     next();
   }
