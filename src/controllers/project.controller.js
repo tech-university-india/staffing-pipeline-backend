@@ -2,13 +2,13 @@ const projectServices = require('../services/project.service');
 
 const getProject = async (req, res) => {
   try {
-    const { id } = req.params;
+    const {id} = req.params;
     const project = await projectServices.getProject(id);
     res.status(200).json(project);
   } catch (error) {
     {
       res.status(500).json({
-        error: error.message
+        error: error.message,
       });
     }
   }
@@ -21,10 +21,10 @@ const listProjects = async (req, res) => {
   } catch (error) {
     {
       res.status(500).json({
-        error: error.message
+        error: error.message,
       });
     }
   }
 };
 
-module.exports = { getProject, listProjects };
+module.exports = {getProject, listProjects};

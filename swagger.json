@@ -1,16 +1,16 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-      "title": "Staffing Pipeline API",
-      "description": "Api built for creating backend services for the staffing pipline portal",
-      "version": "0.0.1"
-    },
-    "paths": {
-        "/": {
-            "get": {
-              "description": "Hello World message will display!",
-              "responses": {}
-            }
-          }
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Staffing Pipeline API",
+    "description": "Api built for creating backend services for the staffing pipline portal",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Hello World message will display!",
+        "responses": {}
+      }
     }
+  }
 }

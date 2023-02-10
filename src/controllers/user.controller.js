@@ -1,5 +1,3 @@
-
-
 const userServices = require('../services/user.service');
 
 const getUsers = async (_, res) => {
@@ -8,4 +6,4 @@ const getUsers = async (_, res) => {
   res.json(allUsers);
 };
 
-module.exports = { getUsers };
+module.exports = {getUsers};

@@ -20,6 +20,5 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
     await queryInterface.renameColumn('users', 'case_study_ids', 'case_studies');
-
-  }
+  },
 };
