@@ -29,8 +29,8 @@ module.exports = (sequelize, DataTypes) => {
     skills: DataTypes.ARRAY(DataTypes.STRING),
     role: DataTypes.ENUM('unspecified'),
     guild: DataTypes.ENUM('unspecified'),
-    past_engagement_id: DataTypes.ARRAY(DataTypes.STRING),
-    image: DataTypes.STRING,
+    past_engagement_ids: DataTypes.ARRAY(DataTypes.STRING),
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'users',
