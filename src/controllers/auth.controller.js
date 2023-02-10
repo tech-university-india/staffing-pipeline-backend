@@ -8,5 +8,15 @@ const loginController = async(req, res) => {
     res.status(error.statusCode).json({ message: error.message,success:false });
   }
 };
+const createUserLogin = async(req,res)=>{
+  try{
+    const userCredentials = await userServices.setUserCredentials(req.body);
+    res.status(201).json({success:true});
+  }
+  catch(error){
+    
+    res.status(error.statusCode).json({error:error.message,success:false});
+  }
+};
 
-module.exports = { loginController};
+module.exports = { loginController, createUserLogin};

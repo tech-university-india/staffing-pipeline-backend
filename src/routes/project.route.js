@@ -4,10 +4,10 @@ const projectRouter=express.Router();
 
 projectRouter.route('/')
   .get(listProjects)
-  .post(createProject);
+  // .post(createProject);
 projectRouter.route('/:id')
   .get(getProject)
-  .patch(updateProject)
-  .delete(deleteProject);
+  // .patch(updateProject)
+  // .delete(deleteProject);
 
 module.exports=projectRouter;

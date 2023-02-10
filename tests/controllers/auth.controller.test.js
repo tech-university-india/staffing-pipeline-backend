@@ -2,6 +2,74 @@ const authController = require('../../src/controllers/authController');
 const authServices = require('../../src/services/authServices');
 const LoginError = require('../../src/utils/loginError');
 describe('Check Authentication Controller', () => {
+  it('check createUserLogin function which should create the user and status returned is 201', async () => {
+    jest.spyOn(authServices, 'setUserCredentials').mockResolvedValue(
+      {
+        id: 1,
+        email: 'promit.revar2211@gmail.com',
+        password: '$2b$08$ap2OSCeWEBVlDY.xui2bPuoblmWTDQwetDvMHZF1B7k.NI3Ae5Tyq',
+        createdAt: '2023-02-09T14:45:57.071Z',
+        updatedAt: '2023-02-09T14:45:57.071Z'
+      }
+    );
+    
+    const mockRes = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis()
+    };
+  
+    await authController.createUserLogin({
+      body:{
+        email:'promit.revar2211@gmail.com',
+        password:'test'
+      }}, mockRes);
+    expect(mockRes.status).toBeCalledWith(201);
+    expect(mockRes.json).toBeCalledWith({
+      'success': true
+    });
+  });
+  it('check createUserLogin function which should throw error with message user already exists and status 400', async () => {
+    jest.spyOn(authServices, 'setUserCredentials').mockImplementation(() => {
+      throw new HttpError('User already exists',400);
+    });
+      
+    const mockRes = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis()
+    };
+    
+    await authController.createUserLogin({
+      body:{
+        email:'promit.revar2211@gmail.com',
+        password:'test'
+      }}, mockRes);
+    expect(mockRes.status).toBeCalledWith(400);
+    expect(mockRes.json).toBeCalledWith({
+      'error': 'User already exists',
+      'success': false
+    });
+  });
+  it('check createUserLogin function which should throw http error with message cannot create the user and status 500 if there is error in database insert', async () => {
+    jest.spyOn(authServices, 'setUserCredentials').mockImplementation(() => {
+      throw new HttpError('cannot create the user',500);
+    });
+      
+    const mockRes = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis()
+    };
+    
+    await authController.createUserLogin({
+      body:{
+        email:'promit.revar2211@gmail.com',
+        password:'test'
+      }}, mockRes);
+    expect(mockRes.status).toBeCalledWith(500);
+    expect(mockRes.json).toBeCalledWith({
+      'error': 'cannot create the user',
+      'success': false
+    });
+  });
   it('should verify the email and password and return token', async () => {
     jest.spyOn(authServices, 'validateUserAndReturnToken').mockResolvedValue({
       data: {

@@ -11,16 +11,6 @@ const getUsers = async (req, res) => {
     });
   }
 };
-const createUserLogin = async(req,res)=>{
-  try{
-    const userCredentials = await userServices.setUserCredentials(req.body);
-    res.status(201).json({success:true});
-  }
-  catch(error){
-    
-    res.status(error.statusCode).json({error:error.message,success:false});
-  }
-};
 const createUser = async (req, res) => {
   try{
     const newUser = await userServices.createUser(req.body);
@@ -32,4 +22,4 @@ const createUser = async (req, res) => {
     });
   }
 };
-module.exports = { getUsers, createUser, createUserLogin };
+module.exports = { getUsers, createUser};

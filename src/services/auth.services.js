@@ -20,5 +20,21 @@ const validateUserAndReturnToken = async(data) => {
     throw new LoginError('No such user found',404);
   }   
 };
+const setUserCredentials = async(credentials) => {
+  credentials.password = await bcrypt.hash(credentials.password, parseInt(process.env.SALT_ROUNDS));
+  const { email, password} = credentials;
+  const user = await db.auth.findOne({ where: { email: email } });
+  if(user){
+    throw new HttpError('User already exists',400);
+  }
+  const result = await db.auth.create({email,password});
+    
+  if(result){
+    return result;
+  }
+  else{
+    throw new HttpError('cannot create the user',500);
+  } 
+};
 
-module.exports={validateUserAndReturnToken};
+module.exports={validateUserAndReturnToken, setUserCredentials };
