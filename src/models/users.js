@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     fmno: DataTypes.STRING,
     current_engagement_ids: DataTypes.ARRAY(DataTypes.STRING),
-    case_study_ids: DataTypes.ARRAY(DataTypes.STRING),
+    case_studies: DataTypes.ARRAY(DataTypes.STRING),
     skills: DataTypes.ARRAY(DataTypes.STRING),
     role: DataTypes.ENUM('unspecified'),
     guild: DataTypes.ENUM('unspecified'),

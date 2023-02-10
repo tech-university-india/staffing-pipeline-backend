@@ -15,7 +15,7 @@ const updateUser = async (req, res) => {
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({
-      message: 'Something went wrong',
+      message: error.message,
     });
   }
 };

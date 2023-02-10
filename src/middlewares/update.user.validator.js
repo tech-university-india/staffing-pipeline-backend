@@ -20,10 +20,6 @@ const updateUserSchema = Joi.object({
   guildId: uuidType
 });
 
-const idUserSchema = Joi.object({
-  id: uuidType
-});
-
 const updateValidator = (req, res, next) => {
   try {
     const { error } =  updateUserSchema.validate(req.body);
