@@ -8,7 +8,7 @@ class HttpError extends Error {
 class NotFoundError extends HttpError {
   constructor(message) {
     super(message);
-    this.errorCode = 404;
+    this.code = 404;
   }
 }
 module.exports = { HttpError, NotFoundError };

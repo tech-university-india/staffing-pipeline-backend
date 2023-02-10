@@ -16,7 +16,7 @@ const getUserById = async (req, res) => {
     res.json(user);
   } catch (error) {
     if (error instanceof NotFoundError) {
-      res.status(error.errorCode);
+      res.status(error.code);
       res.json({ message: error.message });
     } else {
       res.status(500);
