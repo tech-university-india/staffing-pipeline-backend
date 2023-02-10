@@ -5,12 +5,14 @@
     "node": true,
     "jest": true
   },
-  "extends": "eslint:recommended",
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest"
   },
+  "plugins": ["prettier"],
+  "extends": ["prettier"],
   "rules": {
+    "prettier/prettier": "error",
     "no-unused-vars": "warn",
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
