@@ -10,19 +10,19 @@ describe('Check tokenVerification Util', () => {
       exp: 1675972409,
     });
     jest.spyOn(db.users, 'findOne').mockResolvedValue({
-        user_id: '9a492c13-85e8-4b26-9339-a5d037664d1a',
-        name: 'Promit Revar',
-        email: 'promit.revar2211@gmail.com',
-        fmno: null,
-        current_engagement_ids: null,
-        case_study_ids: null,
-        skills: null,
-        role: null,
-        guild: null,
-        past_engagement_ids: null,
-        image: null,
-        createdAt: '2023-02-09T15:02:53.658Z',
-        updatedAt: '2023-02-09T15:02:53.658Z',
+      user_id: '9a492c13-85e8-4b26-9339-a5d037664d1a',
+      name: 'Promit Revar',
+      email: 'promit.revar2211@gmail.com',
+      fmno: null,
+      current_engagement_ids: null,
+      case_study_ids: null,
+      skills: null,
+      role: null,
+      guild: null,
+      past_engagement_ids: null,
+      image: null,
+      createdAt: '2023-02-09T15:02:53.658Z',
+      updatedAt: '2023-02-09T15:02:53.658Z',
     });
 
     const result = await tokenVerification.verifyToken('token');
