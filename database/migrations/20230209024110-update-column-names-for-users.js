@@ -9,12 +9,12 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    queryInterface.renameColumn('users', 'userId', 'user_id');
-    queryInterface.renameColumn('users', 'currentEngagementIds', 'current_engagement_ids');
-    queryInterface.renameColumn('users', 'caseStudies', 'case_studies');
-    queryInterface.renameColumn('users', 'pastEngagementId', 'past_engagement_ids');
-    queryInterface.renameColumn('users', 'createdAt', 'created_at');
-    queryInterface.renameColumn('users', 'updatedAt', 'updated_at');
+    await queryInterface.renameColumn('users', 'userId', 'user_id');
+    await queryInterface.renameColumn('users', 'currentEngagementIds', 'current_engagement_ids');
+    await queryInterface.renameColumn('users', 'caseStudies', 'case_studies');
+    await queryInterface.renameColumn('users', 'pastEngagementId', 'past_engagement_ids');
+    await queryInterface.renameColumn('users', 'createdAt', 'created_at');
+    await queryInterface.renameColumn('users', 'updatedAt', 'updated_at');
   },
 
   async down(queryInterface, Sequelize) {
@@ -25,12 +25,12 @@ module.exports = {
      * await queryInterface.dropTable('users');
      * 
      */
-    queryInterface.renameColumn('users', 'user_id', 'userId');
-    queryInterface.renameColumn('users', 'current_engagement_ids', 'currentEngagementIds');
-    queryInterface.renameColumn('users', 'case_studies', 'caseStudies');
-    queryInterface.renameColumn('users', 'past_engagement_ids', 'pastEngagementId');
-    queryInterface.renameColumn('users', 'created_at', 'createdAt');
-    queryInterface.renameColumn('users', 'updated_at', 'updatedAt');
+    await queryInterface.renameColumn('users', 'user_id', 'userId');
+    await queryInterface.renameColumn('users', 'current_engagement_ids', 'currentEngagementIds');
+    await queryInterface.renameColumn('users', 'case_studies', 'caseStudies');
+    await queryInterface.renameColumn('users', 'past_engagement_ids', 'pastEngagementId');
+    await queryInterface.renameColumn('users', 'created_at', 'createdAt');
+    await queryInterface.renameColumn('users', 'updated_at', 'updatedAt');
 
 
   }

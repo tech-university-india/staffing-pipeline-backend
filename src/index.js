@@ -3,8 +3,9 @@ const express = require('express');
 const router = require('./routes/user.routes');
 const authRouter = require('./routes/loginRoutes');
 require('dotenv').config();
+
 const projectRouter = require('./routes/projectRoutes');
-const { caseStudiesRouter } = require('./routes/caseStudies.routes');
+const { caseStudiesRouter } = require('./routes/case-study.routes');
 
 
 
