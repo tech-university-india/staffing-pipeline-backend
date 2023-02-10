@@ -9,12 +9,12 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    queryInterface.renameColumn('case_studies', 'caseStudyId', 'case_study_id');
-    queryInterface.renameColumn('case_studies', 'collaboratorsIds', 'collaborators_ids');
-    queryInterface.renameColumn('case_studies', 'boxLink', 'box_link');
-    queryInterface.renameColumn('case_studies', 'engagementId', 'engagement_id');
-    queryInterface.renameColumn('case_studies', 'createdAt', 'created_at');
-    queryInterface.renameColumn('case_studies', 'updatedAt', 'updated_at');
+    await queryInterface.renameColumn('case_studies', 'caseStudyId', 'case_study_id');
+    await queryInterface.renameColumn('case_studies', 'collaboratorsIds', 'collaborators_ids');
+    await queryInterface.renameColumn('case_studies', 'boxLink', 'box_link');
+    await queryInterface.renameColumn('case_studies', 'engagementId', 'engagement_id');
+    await queryInterface.renameColumn('case_studies', 'createdAt', 'created_at');
+    await queryInterface.renameColumn('case_studies', 'updatedAt', 'updated_at');
 
   },
 
@@ -25,12 +25,12 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    queryInterface.renameColumn('case_studies', 'case_study_id', 'caseStudyId');
-    queryInterface.renameColumn('case_studies', 'collaborators_ids', 'collaboratorsIds');
-    queryInterface.renameColumn('case_studies', 'box_link', 'boxLink');
-    queryInterface.renameColumn('case_studies', 'engagement_id', 'engagementId');
-    queryInterface.renameColumn('case_studies', 'created_at', 'createdAt');
-    queryInterface.renameColumn('case_studies', 'updated_at', 'updatedAt');
+    await queryInterface.renameColumn('case_studies', 'case_study_id', 'caseStudyId');
+    await queryInterface.renameColumn('case_studies', 'collaborators_ids', 'collaboratorsIds');
+    await queryInterface.renameColumn('case_studies', 'box_link', 'boxLink');
+    await queryInterface.renameColumn('case_studies', 'engagement_id', 'engagementId');
+    await queryInterface.renameColumn('case_studies', 'created_at', 'createdAt');
+    await queryInterface.renameColumn('case_studies', 'updated_at', 'updatedAt');
 
   }
 };
