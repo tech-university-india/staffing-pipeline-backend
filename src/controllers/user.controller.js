@@ -1,14 +1,12 @@
-
-
 const userServices = require('../services/user.service');
 const { NotFoundError } = require('../../errors/httpError');
 
-const getUsers = async (_, res) => {
+const listUsers = async (_, res) => {
   const allUsers = await userServices.listUsers();
   res.status(200);
   res.json(allUsers);
 };
-const getUserById = async (req, res) => {
+const getUser = async (req, res) => {
   const { user_id } = req.params;
   try {
     const user = await userServices.getUser(user_id);
@@ -24,4 +22,4 @@ const getUserById = async (req, res) => {
     }
   }
 };
-module.exports = { getUsers, getUserById };
+module.exports = { listUsers, getUser };
