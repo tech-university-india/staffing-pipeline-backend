@@ -1,11 +1,26 @@
+// require user model
+const {users} = require('../models');
 
-const { users } = require('../models');
-
-const userServices = {
-  getAllUsers: async () => {
-    const allUsers = await users.findAll();
-    return allUsers;
-  }
+const getAllUsers = async () => {
+  const allUsers = await users.findAll();
+  return allUsers;
+};
+const createUser = async userDetails => {
+  const newUser = await users.create(userDetails);
+  return newUser;
 };
 
-module.exports = userServices;
+const deleteUser = async userId => {
+  const deletedUser = await users.destroy({
+    where: {
+      user_id: userId,
+    },
+  });
+  return deletedUser;
+};
+
+module.exports = {
+  getAllUsers,
+  createUser,
+  deleteUser,
+};

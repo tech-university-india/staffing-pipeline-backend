@@ -1,11 +1,14 @@
-
 // require joi
 const Joi = require('joi');
 const uuidType = Joi.string().uuid({
+<<<<<<< HEAD
   version: [
     'uuidv4',
     'uuidv1',
   ],
+=======
+  version: ['uuidv4', 'uuidv1'],
+>>>>>>> main
 });
 
 const userSchema = Joi.object({

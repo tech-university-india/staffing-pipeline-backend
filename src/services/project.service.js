@@ -1,6 +1,6 @@
-const { engagements } = require('../models');
+const {engagements} = require('../models');
 
-const getProject = async (id) => {
+const getProject = async id => {
   const engagement = await engagements.findByPk(id);
   return engagement;
 };
@@ -10,4 +10,4 @@ const listProjects = async () => {
   return allProjects;
 };
 
-module.exports = { getProject, listProjects };
+module.exports = {getProject, listProjects};
