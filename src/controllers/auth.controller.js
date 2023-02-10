@@ -10,7 +10,7 @@ const loginController = async(req, res) => {
 };
 const createUserLogin = async(req,res)=>{
   try{
-    const userCredentials = await userServices.setUserCredentials(req.body);
+    const userCredentials = await authServices.setUserCredentials(req.body);
     res.status(201).json({success:true});
   }
   catch(error){

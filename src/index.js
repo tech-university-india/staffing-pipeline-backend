@@ -1,7 +1,7 @@
 //create an express server 
 const express = require('express');
 const router = require('./routes/user.routes');
-const authRouter = require('./routes/loginRoutes');
+const authRouter = require('./routes/login.routes');
 require('dotenv').config();
 const projectRouter = require('./routes/project.route');
 
