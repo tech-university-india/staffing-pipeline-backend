@@ -6,7 +6,7 @@ describe('User Controller', () => {
     it('Should return all users', async () => {
       const mockReq = {};
       const mockRes = {
-        status: jest.fn(),
+        status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
       const resolvedValue = [
@@ -25,7 +25,7 @@ describe('User Controller', () => {
           updatedAt: '2022-01-17T04:33:12.000Z',
         },
       ];
-      jest.spyOn(userServices, 'getAllUsers').mockResolvedValue(resolvedValue);
+      jest.spyOn(userServices, 'listUsers').mockResolvedValue(resolvedValue);
       await userController.getUsers(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(200);
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
@@ -49,7 +49,7 @@ describe('User Controller', () => {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      jest.spyOn(userServices, 'getAllUsers').mockResolvedValue(users);
+      jest.spyOn(userServices, 'listUsers').mockResolvedValue(users);
       await userController.getUsers(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(users);

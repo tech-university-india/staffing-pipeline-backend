@@ -1,6 +1,6 @@
 const userServices = require('../services/user.service');
 
-const getUsers = async (_, res) => {
+const listUsers = async (_, res) => {
   const allUsers = await userServices.listUsers();
   res.status(200).json(allUsers);
 };
@@ -15,4 +15,4 @@ const deleteUser = async (req, res) => {
   res.status(200).json({ message: 'User deleted' });
 };
 
-module.exports = { getUsers, postUser, deleteUser };
+module.exports = { listUsers, postUser, deleteUser };
