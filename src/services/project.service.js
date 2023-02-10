@@ -1,6 +1,6 @@
 const { engagements } = require('../models');
 
-const getProject = async (id) => {
+const getProject = async id => {
   const engagement = await engagements.findByPk(id);
   return engagement;
 };

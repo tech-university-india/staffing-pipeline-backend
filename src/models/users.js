@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -13,30 +11,33 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Users.init({
-    user_id: {
-      type: DataTypes.STRING,
-      primaryKey: true,
-      allowNull: false,
-      defaultValue: DataTypes.UUIDV4
+  Users.init(
+    {
+      userId: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      name: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      fmno: DataTypes.STRING,
+      currentEngagementIds: DataTypes.ARRAY(DataTypes.STRING),
+      caseStudyIds: DataTypes.ARRAY(DataTypes.STRING),
+      skills: DataTypes.ARRAY(DataTypes.STRING),
+      role: DataTypes.ENUM('unspecified'),
+      guild: DataTypes.ENUM('unspecified'),
+      pastEngagementIds: DataTypes.ARRAY(DataTypes.STRING),
+      image: DataTypes.STRING,
     },
-    name: DataTypes.STRING,
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    fmno: DataTypes.STRING,
-    current_engagement_ids: DataTypes.ARRAY(DataTypes.STRING),
-    case_study_ids: DataTypes.ARRAY(DataTypes.STRING),
-    skills: DataTypes.ARRAY(DataTypes.STRING),
-    role: DataTypes.ENUM('unspecified'),
-    guild: DataTypes.ENUM('unspecified'),
-    past_engagement_ids: DataTypes.ARRAY(DataTypes.STRING),
-    image: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'users',
-    underscored: true,
-  });
+    {
+      sequelize,
+      modelName: 'users',
+      underscored: true,
+    }
+  );
   return Users;
 };

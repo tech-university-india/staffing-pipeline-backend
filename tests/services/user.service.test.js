@@ -12,23 +12,15 @@ describe('User Services', () => {
           name: 'john doe',
           email: 'johndoe@mckinsey.com',
           fmno: '123456',
-          current_engagement_ids: [
-            '1', '2'
-          ],
-          case_study_ids: [
-            '1', '2'
-          ],
-          skills: [
-            'node, react'
-          ],
+          current_engagement_ids: ['1', '2'],
+          case_study_ids: ['1', '2'],
+          skills: ['node, react'],
           role: 'intern',
           guild: 'swe',
-          past_engagement_ids: [
-            '1', '2'
-          ],
+          past_engagement_ids: ['1', '2'],
           createdAt: '2022-01-17T04:33:12.000Z',
-          updatedAt: '2022-01-17T04:33:12.000Z'
-        }
+          updatedAt: '2022-01-17T04:33:12.000Z',
+        },
       ];
       jest.spyOn(users, 'findAll').mockResolvedValue(resolvedValue);
       const result = await userServices.getAllUsers();

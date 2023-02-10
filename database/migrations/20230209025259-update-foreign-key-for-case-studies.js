@@ -15,8 +15,8 @@ module.exports = {
       fields: ['engagement_id'],
       references: {
         table: 'engagements',
-        field: 'engagement_id'
-      }
+        field: 'engagement_id',
+      },
     });
   },
 
@@ -28,5 +28,5 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
     await queryInterface.removeConstraint('case_studies', 'engagement_id_fk');
-  }
+  },
 };

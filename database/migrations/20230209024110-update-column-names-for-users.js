@@ -23,7 +23,7 @@ module.exports = {
      *
      * Example:
      * await queryInterface.dropTable('users');
-     * 
+     *
      */
     await queryInterface.renameColumn('users', 'user_id', 'userId');
     await queryInterface.renameColumn('users', 'current_engagement_ids', 'currentEngagementIds');
@@ -31,7 +31,5 @@ module.exports = {
     await queryInterface.renameColumn('users', 'past_engagement_ids', 'pastEngagementId');
     await queryInterface.renameColumn('users', 'created_at', 'createdAt');
     await queryInterface.renameColumn('users', 'updated_at', 'updatedAt');
-
-
-  }
+  },
 };

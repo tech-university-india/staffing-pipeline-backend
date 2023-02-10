@@ -1,11 +1,7 @@
-
 // require joi
 const Joi = require('joi');
 const uuidType = Joi.string().uuid({
-  version: [
-    'uuidv4',
-    'uuidv1'
-  ]
+  version: ['uuidv4', 'uuidv1'],
 });
 
 const userSchema = Joi.object({
@@ -16,10 +12,10 @@ const userSchema = Joi.object({
   caseStudyId: uuidType.required(),
   studyId: uuidType.required(),
   roleId: uuidType.required(),
-  guildId: uuidType.required()
+  guildId: uuidType.required(),
 });
 const loginReqSchema = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string().required()
+  password: Joi.string().required(),
 });
 module.exports = { userSchema, loginReqSchema };
