@@ -1,5 +1,5 @@
 const getProjectControllers = require('../../src/controllers/project.controller');
-const getProjectServices = require('../../src/services/project.services');
+const getProjectServices = require('../../src/services/project.service');
 
 describe('Engagements Controllers', () => {
   it('should return the engagement details of the provided id', async () => {

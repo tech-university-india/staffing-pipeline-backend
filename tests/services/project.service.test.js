@@ -1,5 +1,5 @@
 const { engagements } = require('../../src/models');
-const getProjectServices = require('../../src/services/project.services');
+const getProjectServices = require('../../src/services/project.service');
 
 describe('Engagement Services', () => {
   it('should return the engagement details of the provided id from the database', async () => {
