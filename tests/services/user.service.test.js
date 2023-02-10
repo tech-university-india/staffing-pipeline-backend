@@ -23,8 +23,37 @@ describe('User Services', () => {
         },
       ];
       jest.spyOn(users, 'findAll').mockResolvedValue(resolvedValue);
-      const result = await userServices.getAllUsers();
+      const result = await userServices.listUsers();
       expect(result).toEqual(resolvedValue);
+    });
+  });
+  describe('createUser test', () => {
+    it('should create a new user', async () => {
+      const userData = {
+        name: 'John Doe',
+        email: 'john@gmail.com',
+        password: '12345',
+      };
+      const newUser = {
+        id: 1,
+        ...userData,
+      };
+      jest.spyOn(users, 'create').mockResolvedValue(newUser);
+      const response = await userServices.createUser(userData);
+      expect(response).toEqual(newUser);
+    });
+  });
+  describe('deleteUser test', () => {
+    it('should delete a user', async () => {
+      const deletedUser = {
+        id: 1,
+        name: 'John Doe',
+        email: 'john@gmail.com',
+        password: '12345',
+      };
+      jest.spyOn(users, 'destroy').mockResolvedValue(deletedUser);
+      const response = await userServices.deleteUser(deletedUser.id);
+      expect(response).toEqual(deletedUser);
     });
   });
 });
