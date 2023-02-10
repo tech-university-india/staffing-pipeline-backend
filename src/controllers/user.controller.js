@@ -1,5 +1,3 @@
-
-
 const userServices = require('../services/user.service');
 
 const getUsers = async (_, res) => {
@@ -7,18 +5,18 @@ const getUsers = async (_, res) => {
   res.status(200);
   res.json(allUsers);
 };
+
 const updateUser = async (req, res) => {
-  try{
+  try {
     const { id } = req.params;
     const { body } = req;
     const updatedUser = await userServices.updateUser(id, body);
-    if(!updatedUser) res.status(404).json({ message: 'User not found' });
+    if (!updatedUser) res.status(404).json({ message: 'User not found' });
     res.status(200).json(updatedUser);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({
       message: 'Something went wrong',
     });
   }
 };
-module.exports = { getUsers , updateUser};
+module.exports = { getUsers, updateUser };

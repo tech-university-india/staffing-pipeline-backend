@@ -1,11 +1,14 @@
 const Joi = require('joi');
+
 const { HttpError } = require('../utils/HttpError');
+
 const uuidType = Joi.string().uuid({
   version: [
     'uuidv4',
     'uuidv1'
   ]
 });
+
 const updateUserSchema = Joi.object({
   name: Joi.string().min(3).max(30),
   email: Joi.string().email(),
@@ -16,9 +19,11 @@ const updateUserSchema = Joi.object({
   roleId: uuidType,
   guildId: uuidType
 });
+
 const idUserSchema = Joi.object({
   id: uuidType
 });
+
 const updateValidator = (req, res, next) => {
   try {
     const { error } =  updateUserSchema.validate(req.body);
