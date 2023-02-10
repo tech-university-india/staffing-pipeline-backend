@@ -9,12 +9,12 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-   await queryInterface.renameColumn('case_studies', 'caseStudyId', 'case_study_id');
-   await queryInterface.renameColumn('case_studies', 'collaboratorsIds', 'collaborators_ids');
-   await queryInterface.renameColumn('case_studies', 'boxLink', 'box_link');
-   await queryInterface.renameColumn('case_studies', 'engagementId', 'engagement_id');
-   await queryInterface.renameColumn('case_studies', 'createdAt', 'created_at');
-   await queryInterface.renameColumn('case_studies', 'updatedAt', 'updated_at');
+    await queryInterface.renameColumn('case_studies', 'caseStudyId', 'case_study_id');
+    await queryInterface.renameColumn('case_studies', 'collaboratorsIds', 'collaborators_ids');
+    await queryInterface.renameColumn('case_studies', 'boxLink', 'box_link');
+    await queryInterface.renameColumn('case_studies', 'engagementId', 'engagement_id');
+    await queryInterface.renameColumn('case_studies', 'createdAt', 'created_at');
+    await queryInterface.renameColumn('case_studies', 'updatedAt', 'updated_at');
 
   },
 
