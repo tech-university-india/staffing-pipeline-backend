@@ -1,4 +1,4 @@
-const tokenValidationUtil = require('../utils/tokenVerification');
+const tokenValidationUtil = require('../utils/token.verification');
 const validator = (schema, propery) => (req, res, next) => {
   const { error } = schema.validate(req[propery]);
   if (error) {
@@ -11,7 +11,7 @@ const validator = (schema, propery) => (req, res, next) => {
 const reqAuthValidator = async(req,res,next)=>{
   try{
     const token = req.headers.authorization;
-    
+    console.log(token)
     if(!token){
       res.status(401).json({message:'Unauthorized'});
     }

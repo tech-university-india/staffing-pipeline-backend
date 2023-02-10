@@ -1,7 +1,6 @@
 const db = require('../models');
 const bcrypt = require('bcrypt');
 const LoginError = require('../utils/loginError');
-const tokenVerificationUtil = require('../utils/tokenVerification');
 const jwt = require('jsonwebtoken');
 const validateUserAndReturnToken = async(data) => {
   const { email, password } = data;

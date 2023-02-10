@@ -1,6 +1,6 @@
 
 const express = require('express');
-const userController = require('../controllers/userController');
+const userController = require('../controllers/user.controller');
 const validateRequests = require('../middlewares/request.validator');
 // require schemas
 const schemas = require('../middlewares/schemas.validator');

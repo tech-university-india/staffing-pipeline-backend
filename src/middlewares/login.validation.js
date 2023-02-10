@@ -1,8 +1,4 @@
-const Joi = require('joi');
-const loginReqSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().required()
-});
+const {loginReqSchema} = require('./schemas.validator');
 exports.validateLoginReq = (req, res, next) => {
   const { error } = loginReqSchema.validate(req.body);
   if (error) {

@@ -1,4 +1,4 @@
-const LoginError = require('../utils/loginError');
+const LoginError = require('./loginError');
 const jwt = require('jsonwebtoken');
 const db = require('../models');
 const verifyToken = async(token) => {
@@ -6,7 +6,7 @@ const verifyToken = async(token) => {
   if (decodedToken) {
     
     const user = await db.users.findOne({ where: { email: decodedToken.email } });
-    return {data:user.dataValues, success:true};
+    return {data:user, success:true};
   }
   else {
     throw new LoginError('Unauthorized Token',401);
