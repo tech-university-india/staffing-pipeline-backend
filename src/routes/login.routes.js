@@ -5,7 +5,7 @@ const db = require('../models');
 
 authRouter.post('/login', middlewares.validateLoginReq, authController.loginController);
 authRouter.post('/register', authController.createUserLogin);
-authRouter.get('/', async(req, res) => {
-    res.send(await db.auth.findAll());
-})
+authRouter.get('/', async (req, res) => {
+  res.send(await db.auth.findAll());
+});
 module.exports = authRouter;
