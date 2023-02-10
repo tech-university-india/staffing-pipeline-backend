@@ -1,4 +1,4 @@
-const projectServices = require('../services/project.services');
+const projectServices = require('../services/project.service');
 
 const getProject = async (req, res) => {
   try {
@@ -8,11 +8,23 @@ const getProject = async (req, res) => {
   } catch (error) {
     {
       res.status(500).json({
-        error: error.message
-
+        error: error.message,
       });
     }
   }
 };
 
-module.exports = { getProject };
+const listProjects = async (req, res) => {
+  try {
+    const allProjects = await projectServices.listProjects();
+    res.status(200).json(allProjects);
+  } catch (error) {
+    {
+      res.status(500).json({
+        error: error.message,
+      });
+    }
+  }
+};
+
+module.exports = { getProject, listProjects };
