@@ -3,7 +3,7 @@ const express = require('express');
 const router = require('./routes/user.routes');
 const authRouter = require('./routes/loginRoutes');
 require('dotenv').config();
-const projectRouter = require('./routes/project.routes');
+const projectRouter = require('./routes/project.route');
 
 
 //add swagger documentation
