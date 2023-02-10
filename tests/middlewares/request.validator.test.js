@@ -1,5 +1,5 @@
 const requestValidator = require('../../src/middlewares/request.validator');
-const tokenVerification = require('../../src/utils/tokenVerification');
+const tokenVerification = require('../../src/utils/token.verification');
 describe('Check request.validator middleware', () => {
   it('check if the function reqAuthValidator() calls the next() when token is verified', async () => {
     jest.spyOn(tokenVerification, 'verifyToken').mockResolvedValue({

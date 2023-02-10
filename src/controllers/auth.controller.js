@@ -1,4 +1,4 @@
-const authServices = require('../services/auth.services');
+const authServices = require('../services/auth.service');
 const loginController = async (req, res) => {
   try {
     const validate = await authServices.validateUserAndReturnToken(req.body);

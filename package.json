@@ -22,8 +22,6 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
-    "prettier": "^2.8.4",
-    "prettier-eslint-cli": "^7.1.0",
     "sequelize": "^6.28.0",
     "sequelize-cli": "^6.6.0",
     "swagger-ui-express": "^4.6.0"

@@ -1,4 +1,4 @@
-const loginValidation = require('../../src/middlewares/login.validation');
+const loginValidation = require('../../src/middlewares/login.validator');
 const Joi = require('joi');
 describe('Check request.validator middleware', () => {
   it('check if the function validateLoginReq() calls the next() when request is correct', async () => {

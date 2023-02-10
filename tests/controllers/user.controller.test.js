@@ -1,5 +1,5 @@
-const userController = require('../../src/controllers/userController');
-const userServices = require('../../src/services/userServices');
+const userController = require('../../src/controllers/user.controller');
+const userServices = require('../../src/services/user.service');
 const HttpError = require('../../src/utils/httpError');
 describe('Check User Controller', () => {
   it('check createUser function which should create the user and status returned is 201', async () => {
@@ -126,12 +126,12 @@ describe('User Controller', () => {
         json: jest.fn(),
       };
       jest.spyOn(userServices, 'listUsers').mockResolvedValue(users);
-      await userController.getUsers(req, res);
+      await userController.createUser(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(users);
     });
   });
-  describe('postUser test', () => {
+  describe('createUser test', () => {
     it('should create a new user', async () => {
       const reqBody = {
         name: 'John Doe',
@@ -152,7 +152,7 @@ describe('User Controller', () => {
         json: jest.fn(),
       };
       jest.spyOn(userServices, 'createUser').mockResolvedValue(newUser);
-      await userController.postUser(req, res);
+      await userController.createUser(req, res);
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith(newUser);
     });

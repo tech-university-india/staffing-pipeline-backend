@@ -1,5 +1,5 @@
-const authController = require('../../src/controllers/authController');
-const authServices = require('../../src/services/authServices');
+const authController = require('../../src/controllers/auth.controller');
+const authServices = require('../../src/services/auth.service');
 const LoginError = require('../../src/utils/loginError');
 describe('Check Authentication Controller', () => {
   it('check createUserLogin function which should create the user and status returned is 201', async () => {

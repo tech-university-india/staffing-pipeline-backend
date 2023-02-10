@@ -1,5 +1,5 @@
-const userServices = require('../services/user.services');
-const getUsers = async (req, res) => {
+const userServices = require('../services/user.service');
+const listUsers = async (req, res) => {
   try {
     const allUsers = await userServices.getAllUsers();
     res.status(200).json(allUsers);
@@ -23,4 +23,4 @@ const deleteUser = async (req, res) => {
   await userServices.deleteUser(req.params.id);
   res.status(200).json({ message: 'User deleted' });
 };
-module.exports = { getUsers, createUser, deleteUser };
+module.exports = { listUsers, createUser, deleteUser };
