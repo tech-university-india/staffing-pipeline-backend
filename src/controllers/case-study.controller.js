@@ -1,4 +1,4 @@
-const caseStudiesServices = require('../services/caseStudies.service');
+const caseStudiesServices = require('../services/case-study.service');
 
 const createCaseStudy = async (req, res) => {
   try {

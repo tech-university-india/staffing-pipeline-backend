@@ -1,5 +1,5 @@
 const caseStudiesRouter = require('express').Router();
-const caseStudiesController = require('../controllers/caseStudies.controller');
+const caseStudiesController = require('../controllers/case-study.controller');
 
 caseStudiesRouter.post('/', caseStudiesController.createCaseStudy);
 
