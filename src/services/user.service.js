@@ -3,11 +3,11 @@ const { users } = require('../models');
 const CustomErrors = require('../../errors/httpError');
 
 const userServices = {
-  getAllUsers: async () => {
+  listUsers: async () => {
     const allUsers = await users.findAll();
     return allUsers;
   },
-  getOneUser: async (user_id) => {
+  getUser: async (user_id) => {
     const user = await users.findOne({
       where: {
         user_id

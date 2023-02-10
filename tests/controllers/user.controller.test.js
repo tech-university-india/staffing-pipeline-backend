@@ -36,7 +36,7 @@ describe('User Controller', () => {
           updatedAt: '2022-01-17T04:33:12.000Z'
         }
       ];
-      jest.spyOn(userServices, 'getAllUsers').mockResolvedValue(resolvedValue);
+      jest.spyOn(userServices, 'listUsers').mockResolvedValue(resolvedValue);
       await userController.getUsers(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(200);
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
@@ -75,7 +75,7 @@ describe('User Controller', () => {
         createdAt: '2022-01-17T04:33:12.000Z',
         updatedAt: '2022-01-17T04:33:12.000Z'
       };
-      jest.spyOn(userServices, 'getOneUser').mockResolvedValue(resolvedValue);
+      jest.spyOn(userServices, 'getUser').mockResolvedValue(resolvedValue);
       await userController.getUserById(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(200);
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
@@ -91,7 +91,7 @@ describe('User Controller', () => {
         json: jest.fn()
       };
       const err = new NotFoundError('User not found');
-      jest.spyOn(userServices, 'getOneUser').mockRejectedValue(err);
+      jest.spyOn(userServices, 'getUser').mockRejectedValue(err);
       await userController.getUserById(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(err.code);
       expect(mockRes.json).toHaveBeenCalledWith({ message: err.message });
