@@ -8,7 +8,7 @@ const listProjects = async (req, res) => {
   } catch (error) {
     {
       res.status(500).json({
-        error: error.message
+        error: error.message,
 
       });
     }
@@ -16,16 +16,15 @@ const listProjects = async (req, res) => {
 };
 
 
-
 const getProject = async (req, res) => {
   try {
-    const { id } = req.params;
+    const {id} = req.params;
     const project = await projectServices.getProject(id);
     res.status(200).json(project);
   } catch (error) {
     {
       res.status(500).json({
-        error: error.message
+        error: error.message,
 
       });
     }
@@ -34,12 +33,11 @@ const getProject = async (req, res) => {
 
 const updateProject = async (req, res) => {
   try {
-
     res.status(200).json();
   } catch (error) {
     {
       res.status(500).json({
-        error: error.message
+        error: error.message,
 
       });
     }
@@ -48,12 +46,11 @@ const updateProject = async (req, res) => {
 
 const createProject = async (req, res) => {
   try {
-
     res.status(200).json();
   } catch (error) {
     {
       res.status(500).json({
-        error: error.message
+        error: error.message,
 
       });
     }
@@ -62,12 +59,11 @@ const createProject = async (req, res) => {
 
 const deleteProject = async (req, res) => {
   try {
-
     res.status(200).json();
   } catch (error) {
     {
       res.status(500).json({
-        error: error.message
+        error: error.message,
 
       });
     }
@@ -75,4 +71,4 @@ const deleteProject = async (req, res) => {
 };
 
 
-module.exports = { listProjects, getProject, deleteProject, updateProject, createProject };
+module.exports = {listProjects, getProject, deleteProject, updateProject, createProject};

@@ -1,12 +1,12 @@
-//create an express server 
+// create an express server
 const express = require('express');
-const userRouter = require('./routes/users.routes');
+const userRouter = require('./routes/user.routes');
 const authRouter = require('./routes/loginRoutes');
 require('dotenv').config();
 const projectRouter = require('./routes/projectRoutes');
 
 
-//add swagger documentation
+// add swagger documentation
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
 
@@ -20,9 +20,8 @@ app.use('/auth', authRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
-//for the engagements
+// for the engagements
 app.use('/api/projects', projectRouter);
-
 
 
 app.get('/', (req, res) => {
@@ -30,8 +29,7 @@ app.get('/', (req, res) => {
 });
 
 
-
-//start a server on port 8000
+// start a server on port 8000
 app.listen(PORT, () => {
   console.log(`Server is up on port ${PORT}`);
 });

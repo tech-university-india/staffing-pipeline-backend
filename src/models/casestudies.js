@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class CaseStudies extends Model {
@@ -20,10 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     collaborators_ids: DataTypes.ARRAY(DataTypes.STRING),
     image: DataTypes.STRING,
     box_link: DataTypes.STRING,
-    engagement_id: DataTypes.STRING
+    engagement_id: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'case_studies',
+    underscored: true,
   });
   return CaseStudies;
 };

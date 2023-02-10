@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       primaryKey: true,
       allowNull: false,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     name: DataTypes.STRING,
     email: DataTypes.STRING,
@@ -30,10 +30,11 @@ module.exports = (sequelize, DataTypes) => {
     role: DataTypes.ENUM('unspecified'),
     guild: DataTypes.ENUM('unspecified'),
     past_engagement_id: DataTypes.ARRAY(DataTypes.STRING),
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'users',
+    underscored: true,
   });
   return Users;
 };

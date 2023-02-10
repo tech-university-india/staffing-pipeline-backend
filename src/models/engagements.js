@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Engagements extends Model {
@@ -24,10 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.ENUM('upcoming', 'ongoing', 'completed'),
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'engagements',
+    underscored: true,
   });
   return Engagements;
 };

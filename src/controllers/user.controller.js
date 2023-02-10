@@ -1,6 +1,4 @@
-
-
-const userServices = require('../services/users.services');
+const userServices = require('../services/user.services');
 
 const getUsers = async (req, res) => {
   const allUsers = await userServices.getAllUsers();
@@ -14,7 +12,7 @@ const postUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   await userServices.deleteUser(req.params.id);
-  res.status(200).json({ message: 'User deleted' });
+  res.status(200).json({message: 'User deleted'});
 };
 
-module.exports = { getUsers, postUser, deleteUser };
+module.exports = {getUsers, postUser, deleteUser};

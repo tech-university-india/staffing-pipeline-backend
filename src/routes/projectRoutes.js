@@ -1,5 +1,5 @@
 const express=require('express');
-const {getProject,listProjects,createProject,deleteProject,updateProject}=require('./../controllers/projectController');
+const {getProject, listProjects, createProject, deleteProject, updateProject}=require('./../controllers/projectController');
 
 
 const projectRouter=express.Router();
