@@ -99,4 +99,38 @@ describe('Engagements Controllers', () => {
       error: 'Internal Server error!!',
     });
   });
+
+  it('should delete engagement of the provided id', async () => {
+    jest.spyOn(getProjectServices, 'deleteProject').mockResolvedValue('engagement has been deleted');
+
+    const mockReq = {
+      params: jest.fn(),
+    };
+
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    await getProjectControllers.deleteProject(mockReq, mockRes);
+    expect(mockRes.status).toBeCalledWith(200);
+    expect(mockRes.send).toBeCalledWith('engagement has been deleted');
+  });
+
+  it('should return error', async () => {
+    jest.spyOn(getProjectServices, 'deleteProject').mockRejectedValue(new Error('Internal Server error!!'));
+
+    const mockReq = {
+      params: jest.fn(),
+    };
+
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+    await getProjectControllers.deleteProject(mockReq, mockRes);
+    expect(mockRes.status).toBeCalledWith(500);
+    expect(mockRes.json).toBeCalledWith({
+      error: 'Internal Server error!!',
+    });
+  });
 });
