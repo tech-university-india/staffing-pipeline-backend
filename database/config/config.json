@@ -16,7 +16,7 @@
     "port": 5433
   },
   "test": {
-    "username": "postgres" ,
+    "username": "postgres",
     "password": null,
     "database": "postgres",
     "host": "127.0.0.1",

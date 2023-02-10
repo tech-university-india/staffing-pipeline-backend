@@ -55,10 +55,7 @@ describe('User Services', () => {
         save: jest.fn(),
       };
       jest.spyOn(users, 'findOne').mockResolvedValue(resolvedValue);
-      const result = await userServices.updateUser(
-        mockReq.params.id,
-        mockReq.body
-      );
+      const result = await userServices.updateUser(mockReq.params.id, mockReq.body);
       expect(result).toEqual(resolvedValue);
     });
   });

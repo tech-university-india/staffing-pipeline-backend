@@ -3,10 +3,7 @@ const Joi = require('joi');
 const { HttpError } = require('../utils/HttpError');
 
 const uuidType = Joi.string().uuid({
-  version: [
-    'uuidv4',
-    'uuidv1'
-  ]
+  version: ['uuidv4', 'uuidv1'],
 });
 
 const updateUserSchema = Joi.object({
@@ -17,22 +14,20 @@ const updateUserSchema = Joi.object({
   caseStudyId: uuidType,
   studyId: uuidType,
   roleId: uuidType,
-  guildId: uuidType
+  guildId: uuidType,
 });
 
 const updateValidator = (req, res, next) => {
   try {
-    const { error } =  updateUserSchema.validate(req.body);
+    const { error } = updateUserSchema.validate(req.body);
     if (error) {
       throw new HttpError(error.message, 400);
     }
     next();
-  }
-  catch (error) {
-    if(error instanceof HttpError) {
+  } catch (error) {
+    if (error instanceof HttpError) {
       res.status(error.status).json({ message: error.message });
-    }
-    else {
+    } else {
       res.status(500).json({ message: error.message });
     }
   }
@@ -41,4 +36,3 @@ const updateValidator = (req, res, next) => {
 module.exports = {
   updateValidator,
 };
-

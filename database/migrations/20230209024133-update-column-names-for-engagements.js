@@ -16,7 +16,6 @@ module.exports = {
     queryInterface.renameColumn('engagements', 'endDate', 'end_date');
     queryInterface.renameColumn('engagements', 'createdAt', 'created_at');
     queryInterface.renameColumn('engagements', 'updatedAt', 'updated_at');
-
   },
 
   async down(queryInterface, Sequelize) {
@@ -33,5 +32,5 @@ module.exports = {
     queryInterface.renameColumn('engagements', 'end_date', 'endDate');
     queryInterface.renameColumn('engagements', 'created_at', 'createdAt');
     queryInterface.renameColumn('engagements', 'updated_at', 'updatedAt');
-  }
+  },
 };
