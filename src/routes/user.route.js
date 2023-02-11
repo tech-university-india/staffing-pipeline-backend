@@ -3,7 +3,7 @@ const { listUsers, postUser, deleteUser, updateUser } = require('../controllers/
 const validator = require('../middlewares/request.validator');
 // require schemas
 const schemas = require('../middlewares/schemas.validator');
-const { updateIdValidator, updateBodyValidator } = require('../middlewares/update.user.validator');
+const { updateIdValidator, updateBodyValidator } = require('../middlewares/user.update.validator');
 const router = express.Router();
 
 router.get('/users', listUsers);
