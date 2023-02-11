@@ -2,11 +2,12 @@ const HttpError = require('../utils/httpError');
 const bcrypt = require('bcrypt');
 const db = require('../models');
 
-const getAllUsers = async () => {
+const listUsers = async () => {
   try {
     const allUsers = await db.users.findAll();
     return allUsers;
   } catch (error) {
+    console.log(error);
     throw new HttpError(error.message, 500);
   }
 };
@@ -20,4 +21,4 @@ const createUser = async userDetails => {
   }
 };
 
-module.exports = { getAllUsers, createUser };
+module.exports = { listUsers, createUser };

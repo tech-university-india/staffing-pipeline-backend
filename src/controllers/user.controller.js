@@ -1,7 +1,8 @@
 const userServices = require('../services/user.service');
 const listUsers = async (req, res) => {
   try {
-    const allUsers = await userServices.getAllUsers();
+    console.log('listUsers called')
+    const allUsers = await userServices.listUsers();
     res.status(200).json(allUsers);
   } catch (error) {
     res.status(error.statusCode).json({

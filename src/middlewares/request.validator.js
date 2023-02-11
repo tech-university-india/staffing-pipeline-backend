@@ -11,7 +11,6 @@ const validator = (schema, propery) => (req, res, next) => {
 const reqAuthValidator = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    console.log(token);
     if (!token) {
       res.status(401).json({ message: 'Unauthorized' });
     } else {
@@ -26,7 +25,7 @@ const reqAuthValidator = async (req, res, next) => {
     if (error.statusCode) {
       res.status(error.statusCode).json({ error: error.message });
     } else {
-      res.status(401).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
   }
 };

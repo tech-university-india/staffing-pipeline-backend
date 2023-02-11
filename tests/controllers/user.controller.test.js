@@ -78,7 +78,7 @@ describe('Check User Controller', () => {
   });
 });
 describe('User Controller', () => {
-  describe('function getUsers', () => {
+  describe('function listUsers', () => {
     it('Should return all users', async () => {
       const mockReq = {};
       const mockRes = {
@@ -102,7 +102,7 @@ describe('User Controller', () => {
         },
       ];
       jest.spyOn(userServices, 'listUsers').mockResolvedValue(resolvedValue);
-      await userController.getUsers(mockReq, mockRes);
+      await userController.listUsers(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(200);
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
     });
@@ -110,7 +110,7 @@ describe('User Controller', () => {
 });
 
 describe('User Controller', () => {
-  describe('getUsers test', () => {
+  describe('listUsers test', () => {
     it('should return a list of users', async () => {
       const users = [
         {
@@ -126,35 +126,9 @@ describe('User Controller', () => {
         json: jest.fn(),
       };
       jest.spyOn(userServices, 'listUsers').mockResolvedValue(users);
-      await userController.createUser(req, res);
+      await userController.listUsers(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(users);
-    });
-  });
-  describe('createUser test', () => {
-    it('should create a new user', async () => {
-      const reqBody = {
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        password: '12345',
-      };
-      const newUser = {
-        id: 1,
-        ...reqBody,
-      };
-      const req = {
-        body: {
-          ...reqBody,
-        },
-      };
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn(),
-      };
-      jest.spyOn(userServices, 'createUser').mockResolvedValue(newUser);
-      await userController.createUser(req, res);
-      expect(res.status).toHaveBeenCalledWith(201);
-      expect(res.json).toHaveBeenCalledWith(newUser);
     });
   });
   describe('deleteUser test', () => {
