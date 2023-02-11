@@ -21,6 +21,9 @@ const deleteUser = async userId => {
 
 const updateUser = async (userId, userDetails) => {
   const user = await users.findOne({ where: { user_id: id } });
+  if (!user) {
+    return null;
+  }
   for (let key in userDetails) {
     user[key] = userDetails[key];
   }

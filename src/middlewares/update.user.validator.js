@@ -13,12 +13,8 @@ const updateUserIdSchema = Joi.object({
 const updateUserBodySchema = Joi.object({
   name: Joi.string().min(3).max(30),
   email: Joi.string().email(),
-  fmno: Joi.number().integer(),
-  skillId: uuidType,
-  caseStudyId: uuidType,
-  studyId: uuidType,
-  roleId: uuidType,
-  guildId: uuidType,
+  skills: Joi.array().items(Joi.string()),
+  image: Joi.string(),
 });
 
 const updateIdValidator = (req, res, next) => {
