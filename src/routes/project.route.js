@@ -1,8 +1,9 @@
 const express = require('express');
-const { getProject, listProjects } = require('../controllers/project.controller');
+const projectController = require('../controllers/project.controller');
+const authMiddlewares = require('../middlewares/request.validator');
 const projectRouter = express.Router();
 
-projectRouter.route('/').get(listProjects);
-projectRouter.route('/:id').get(getProject);
+projectRouter.get('/', authMiddlewares.reqAuthValidator, projectController.listProjects);
+projectRouter.get('/:id', authMiddlewares.reqAuthValidator, projectController.getProject);
 
 module.exports = projectRouter;
