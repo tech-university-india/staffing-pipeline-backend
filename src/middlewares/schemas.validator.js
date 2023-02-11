@@ -14,5 +14,8 @@ const userSchema = Joi.object({
   roleId: uuidType.required(),
   guildId: uuidType.required(),
 });
-
-module.exports = { userSchema };
+const loginReqSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+});
+module.exports = { userSchema, loginReqSchema };

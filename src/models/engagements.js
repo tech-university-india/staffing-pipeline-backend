@@ -13,16 +13,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   Engagements.init(
     {
-      engagement_id: DataTypes.STRING,
+      engagementId: DataTypes.STRING,
       name: DataTypes.STRING,
       tags: DataTypes.ARRAY(DataTypes.STRING),
       skills: DataTypes.ARRAY(DataTypes.STRING),
       guild: DataTypes.ENUM('Swe', 'Product', 'Data'),
-      user_ids: DataTypes.ARRAY(DataTypes.STRING),
-      case_study_ids: DataTypes.ARRAY(DataTypes.STRING),
+      userIds: DataTypes.ARRAY(DataTypes.STRING),
+      caseStudyIds: DataTypes.ARRAY(DataTypes.STRING),
       status: DataTypes.ENUM('upcoming', 'ongoing', 'completed'),
-      start_date: DataTypes.DATE,
-      end_date: DataTypes.DATE,
+      startDate: DataTypes.DATE,
+      endDate: DataTypes.DATE,
       image: DataTypes.STRING,
     },
     {
