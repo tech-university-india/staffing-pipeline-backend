@@ -1,12 +1,88 @@
 const userController = require('../../src/controllers/user.controller');
 const userServices = require('../../src/services/user.service');
+const HttpError = require('../../src/utils/httpError');
+describe('Check User Controller', () => {
+  it('check createUser function which should create the user and status returned is 201', async () => {
+    jest.spyOn(userServices, 'createUser').mockResolvedValue({
+      user_id: '9a492c13-85e8-4b26-9339-a5d037664d1a',
+      email: 'promit.revar2211@gmail.com',
+      name: 'Promit Revar',
+      updatedAt: '2023-02-09T15:02:53.658Z',
+      createdAt: '2023-02-09T15:02:53.658Z',
+      fmno: null,
+      current_engagement_ids: null,
+      case_study_ids: null,
+      skills: null,
+      role: null,
+      guild: null,
+      past_engagement_ids: null,
+      image: null,
+    });
 
+    const mockRes = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis(),
+    };
+
+    await userController.createUser(
+      {
+        body: {
+          email: 'promit.revar2211@gmail.com',
+          name: 'Promit Revar',
+        },
+      },
+      mockRes
+    );
+    expect(mockRes.status).toBeCalledWith(201);
+    expect(mockRes.json).toBeCalledWith({
+      data: {
+        user_id: '9a492c13-85e8-4b26-9339-a5d037664d1a',
+        email: 'promit.revar2211@gmail.com',
+        name: 'Promit Revar',
+        updatedAt: '2023-02-09T15:02:53.658Z',
+        createdAt: '2023-02-09T15:02:53.658Z',
+        fmno: null,
+        current_engagement_ids: null,
+        case_study_ids: null,
+        skills: null,
+        role: null,
+        guild: null,
+        past_engagement_ids: null,
+        image: null,
+      },
+      success: true,
+    });
+  });
+  it('check createUser function which should throw error with status 400', async () => {
+    jest.spyOn(userServices, 'createUser').mockImplementation(() => {
+      throw new HttpError('notNull Violation: users.email cannot be null', 400);
+    });
+
+    const mockRes = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis(),
+    };
+
+    await userController.createUser(
+      {
+        body: {
+          name: 'Promit Revar',
+        },
+      },
+      mockRes
+    );
+    expect(mockRes.status).toBeCalledWith(400);
+    expect(mockRes.json).toBeCalledWith({
+      error: 'notNull Violation: users.email cannot be null',
+    });
+  });
+});
 describe('User Controller', () => {
-  describe('function getUsers', () => {
+  describe('function listUsers', () => {
     it('Should return all users', async () => {
       const mockReq = {};
       const mockRes = {
-        status: jest.fn().mockReturnThis(),
+        status: jest.fn(),
         json: jest.fn(),
       };
       const resolvedValue = [
@@ -26,7 +102,7 @@ describe('User Controller', () => {
         },
       ];
       jest.spyOn(userServices, 'listUsers').mockResolvedValue(resolvedValue);
-      await userController.getUsers(mockReq, mockRes);
+      await userController.listUsers(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(200);
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
     });
@@ -34,7 +110,7 @@ describe('User Controller', () => {
 });
 
 describe('User Controller', () => {
-  describe('getUsers test', () => {
+  describe('listUsers test', () => {
     it('should return a list of users', async () => {
       const users = [
         {
@@ -50,35 +126,9 @@ describe('User Controller', () => {
         json: jest.fn(),
       };
       jest.spyOn(userServices, 'listUsers').mockResolvedValue(users);
-      await userController.getUsers(req, res);
+      await userController.listUsers(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(users);
-    });
-  });
-  describe('postUser test', () => {
-    it('should create a new user', async () => {
-      const reqBody = {
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        password: '12345',
-      };
-      const newUser = {
-        id: 1,
-        ...reqBody,
-      };
-      const req = {
-        body: {
-          ...reqBody,
-        },
-      };
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn(),
-      };
-      jest.spyOn(userServices, 'createUser').mockResolvedValue(newUser);
-      await userController.postUser(req, res);
-      expect(res.status).toHaveBeenCalledWith(201);
-      expect(res.json).toHaveBeenCalledWith(newUser);
     });
   });
   describe('deleteUser test', () => {
@@ -104,6 +154,83 @@ describe('User Controller', () => {
       expect(res.json).toHaveBeenCalledWith({
         message: 'User deleted',
       });
+    });
+  });
+  describe('function updateUser', () => {
+    it('Should update user details', async () => {
+      const mockReq = {
+        params: {
+          id: '1',
+        },
+        body: {
+          name: 'John Doe',
+          email: 'JohnDoe@mckinsey.com',
+          current_engagement_ids: ['1', '2', '3', '4'],
+        },
+      };
+      const mockRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      const resolvedValue = {
+        user_id: '1',
+        name: 'John Doe',
+        email: 'JohnDoe@mckinsey.com',
+        fmno: '123456',
+        current_engagement_ids: ['1', '2', '3', '4'],
+        case_study_ids: ['1', '2'],
+        skills: ['node, react'],
+        role: 'intern',
+        guild: 'swe',
+        past_engagement_ids: ['1', '2'],
+        createdAt: '2022-01-17T04:33:12.000Z',
+        updatedAt: '2022-01-17T04:33:12.000Z',
+      };
+      jest.spyOn(userServices, 'updateUser').mockResolvedValue(resolvedValue);
+      await userController.updateUser(mockReq, mockRes);
+      expect(mockRes.status).toHaveBeenCalledWith(200);
+      expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
+    });
+    it('Should return 404 if user not found', async () => {
+      const mockReq = {
+        params: {
+          id: '1',
+        },
+        body: {
+          name: 'John Doe',
+          email: 'JohnDoe@mckinsey.com',
+          current_engagement_ids: ['1', '2', '3', '4'],
+        },
+      };
+      const mockRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      const resolvedValue = null;
+      jest.spyOn(userServices, 'updateUser').mockResolvedValue(resolvedValue);
+      await userController.updateUser(mockReq, mockRes);
+      expect(mockRes.status).toHaveBeenCalledWith(404);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'User not found' });
+    });
+    it('Should return 500 if something went wrong', async () => {
+      const mockReq = {
+        params: {
+          id: '1',
+        },
+        body: {
+          name: 'John Doe',
+          email: 'JohnDoe@mckinsey.com',
+          current_engagement_ids: ['1', '2', '3', '4'],
+        },
+      };
+      const mockRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      jest.spyOn(userServices, 'updateUser').mockRejectedValue(new Error('Something went wrong'));
+      await userController.updateUser(mockReq, mockRes);
+      expect(mockRes.status).toHaveBeenCalledWith(500);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Something went wrong' });
     });
   });
 });

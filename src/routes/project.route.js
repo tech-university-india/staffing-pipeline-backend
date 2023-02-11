@@ -1,9 +1,10 @@
 const express = require('express');
-const { getProject, listProjects, deleteProject } = require('../controllers/project.controller');
+const projectController = require('../controllers/project.controller');
+const authMiddlewares = require('../middlewares/request.validator');
 const projectRouter = express.Router();
 
-projectRouter.route('/').get(listProjects);
-
-projectRouter.route('/:id').get(getProject).delete(deleteProject);
+projectRouter.get('/', authMiddlewares.reqAuthValidator, projectController.listProjects);
+projectRouter.get('/:id', authMiddlewares.reqAuthValidator, projectController.getProject);
+projectRouter.get('/:id', authMiddlewares.reqAuthValidator, projectController.deleteProject);
 
 module.exports = projectRouter;

@@ -1,26 +1,41 @@
-// require user model
-const { users } = require('../models');
+const HttpError = require('../utils/httpError');
+const bcrypt = require('bcrypt');
+const db = require('../models');
 
 const listUsers = async () => {
-  const allUsers = await users.findAll();
-  return allUsers;
+  try {
+    const allUsers = await db.users.findAll();
+    return allUsers;
+  } catch (error) {
+    console.log(error);
+    throw new HttpError(error.message, 500);
+  }
 };
+
 const createUser = async userDetails => {
-  const newUser = await users.create(userDetails);
-  return newUser;
+  try {
+    const newUser = await db.users.create(userDetails);
+    return newUser;
+  } catch (error) {
+    throw new HttpError(error.message, 400);
+  }
 };
 
-const deleteUser = async userId => {
-  const deletedUser = await users.destroy({
-    where: {
-      user_id: userId,
-    },
-  });
-  return deletedUser;
+const updateUser = async (userId, userDetails) => {
+  const user = await users.findOne({ where: { user_id: id } });
+  if (!user) {
+    return null;
+  }
+  for (let key in userDetails) {
+    user[key] = userDetails[key];
+  }
+  await user.save();
+  return user;
 };
-
 module.exports = {
   listUsers,
   createUser,
-  deleteUser,
+  updateUser,
 };
+
+
