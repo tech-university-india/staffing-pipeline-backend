@@ -6,7 +6,7 @@ const uuidType = Joi.string().uuid({
   version: ['uuidv4', 'uuidv1'],
 });
 
-const updateCaseStudyIdSchema = Joi.object({
+const CaseStudyIdSchema = Joi.object({
   id: uuidType.required(),
 });
 
@@ -20,9 +20,9 @@ const updateCaseStudyBodySchema = Joi.object({
   engagement_id: Joi.array().items(uuidType),
 });
 
-const updateCaseStudyIdValidator = (req, res, next) => {
+const CaseStudyIdValidator = (req, res, next) => {
   try {
-    const { error } = updateCaseStudyIdSchema.validate(req.params);
+    const { error } = CaseStudyIdSchema.validate(req.params);
     if (error) {
       throw new HttpError(error.message, 400);
     }
@@ -53,6 +53,6 @@ const updateCaseStudyBodyValidator = (req, res, next) => {
 };
 
 module.exports = {
-  updateCaseStudyIdValidator,
+  CaseStudyIdValidator,
   updateCaseStudyBodyValidator,
 };

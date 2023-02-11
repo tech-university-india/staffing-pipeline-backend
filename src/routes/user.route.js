@@ -14,5 +14,4 @@ router.post('/users', authMiddlewares.reqAuthValidator, userControllers.createUs
 router.delete('/users/:id', authMiddlewares.reqAuthValidator, userControllers.deleteUser);
 router.put('/users/:id', updateIdValidator, updateBodyValidator, userControllers.updateUser);
 
-
 module.exports = router;
