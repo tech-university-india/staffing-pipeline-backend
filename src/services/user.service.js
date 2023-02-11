@@ -19,8 +19,17 @@ const deleteUser = async userId => {
   return deletedUser;
 };
 
+const updateUser = async (userId, userDetails) => {
+  const user = await users.findOne({ where: { user_id: id } });
+  for (let key in userDetails) {
+    user[key] = userDetails[key];
+  }
+  await user.save();
+  return user;
+};
 module.exports = {
   listUsers,
   createUser,
   deleteUser,
+  updateUser,
 };
