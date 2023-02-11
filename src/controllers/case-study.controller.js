@@ -14,6 +14,20 @@ const updateCaseStudyController = async (req, res) => {
   }
 };
 
+const deleteCaseStudyController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedCaseStudy = await updateCaseStudyServices.deleteCaseStudy(id);
+    if (!deletedCaseStudy) return res.status(404).json({ message: 'CaseStudy not found' });
+    res.status(200).json(deletedCaseStudy);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Something went wrong',
+    });
+  }
+};
+
 module.exports = {
   updateCaseStudyController,
+  deleteCaseStudyController,
 };
