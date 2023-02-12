@@ -11,18 +11,18 @@ const listProjects = async () => {
 };
 
 const deleteProject = async id => {
-  const { user_ids } = await engagements.findOne({
+  const { userIds } = await engagements.findOne({
     where: {
-      engagement_id: id,
+      engagementId: id,
     },
   });
-  const user = await user_ids.map(async uid => {
+  const user = await userIds.map(async uid => {
     const user_data = await users.findOne({
       where: {
-        user_id: uid,
+        userId: uid,
       },
     });
-    user_data.dataValues.current_engagement_ids = user_data.dataValues.current_engagement_ids.filter(
+    user_data.dataValues.currentEngagementIds = user_data.dataValues.currentEngagementIds.filter(
       element => element !== id
     );
     return user_data.dataValues;
@@ -31,11 +31,11 @@ const deleteProject = async id => {
   getUserData.map(async userElement => {
     const user_data = await users.update(
       {
-        current_engagement_ids: userElement.current_engagement_ids,
+        currentEngagementIds: userElement.currentEngagementIds,
       },
       {
         where: {
-          user_id: userElement.user_id,
+          userId: userElement.userId,
         },
       }
     );
@@ -44,7 +44,7 @@ const deleteProject = async id => {
   await Promise.all(getUserData);
   await engagements.destroy({
     where: {
-      engagement_id: id,
+      engagementId: id,
     },
   });
 };
