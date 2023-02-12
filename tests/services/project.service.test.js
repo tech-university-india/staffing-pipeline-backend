@@ -1,5 +1,5 @@
 const { engagements, users } = require('../../src/models');
-const projectServices = require('../../src/services/project.service');
+const projectService = require('../../src/services/project.service');
 
 describe('Engagement Services', () => {
   it('should return the engagement details of the provided id from the database', async () => {
@@ -10,7 +10,7 @@ describe('Engagement Services', () => {
         caseStudyIds: ['23', '34', '56'],
       },
     ]);
-    const project = await projectServices.getProject();
+    const project = await projectService.getProject();
     expect(project).toEqual([
       {
         engagementId: 1223,
@@ -38,7 +38,7 @@ describe('Engagement Services', () => {
         caseStudyIds: ['23', '34', '56'],
       },
     ]);
-    const projectData = await projectServices.listProjects();
+    const projectData = await projectService.listProjects();
     expect(projectData).toEqual([
       {
         engagementId: 1223,
@@ -78,7 +78,7 @@ describe('Engagement Services', () => {
     jest.spyOn(users, 'update').mockResolvedValue(mockUsers);
     jest.spyOn(engagements, 'destroy').mockResolvedValue(null);
 
-    const project = await projectServices.deleteProject(2);
+    const project = await projectService.deleteProject(2);
     expect(project).toEqual(undefined);
   });
 });
