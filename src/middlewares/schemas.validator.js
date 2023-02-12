@@ -1,9 +1,27 @@
 const Joi = require('joi');
 
 const userIdSchema = Joi.object({
-  user_id: Joi.string()
+  userId: Joi.string()
     .required()
     .regex(/^[0-9]*$/),
 }).required();
 
-module.exports = { userIdSchema };
+const uuidType = Joi.string().uuid({
+  version: ['uuidv4', 'uuidv1'],
+});
+
+const userSchema = Joi.object({
+  name: Joi.string().min(3).max(30).required(),
+  email: Joi.string().email().required(),
+  fmno: Joi.number().integer().required(),
+  skillId: uuidType.required(),
+  caseStudyId: uuidType.required(),
+  studyId: uuidType.required(),
+  roleId: uuidType.required(),
+  guildId: uuidType.required(),
+});
+const loginReqSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+});
+module.exports = { userSchema, loginReqSchema, userIdSchema };
