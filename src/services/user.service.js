@@ -12,17 +12,8 @@ const listUsers = async () => {
   }
 };
 
-const createUser = async userDetails => {
-  try {
-    const newUser = await db.users.create(userDetails);
-    return newUser;
-  } catch (error) {
-    throw new HttpError(error.message, 400);
-  }
-};
-
 const updateUser = async (userId, userDetails) => {
-  const user = await users.findOne({ where: { user_id: id } });
+  const user = await db.users.findOne({ where: { userId } });
   if (!user) {
     return null;
   }
@@ -32,8 +23,24 @@ const updateUser = async (userId, userDetails) => {
   await user.save();
   return user;
 };
+
+const createUser = async userDetails => {
+  const newUser = await users.create(userDetails);
+  return newUser;
+};
+
+const deleteUser = async userId => {
+  const deletedUser = await users.destroy({
+    where: {
+      user_id: userId,
+    },
+  });
+  return deletedUser;
+};
+
 module.exports = {
   listUsers,
-  createUser,
   updateUser,
+  createUser,
+  deleteUser,
 };
