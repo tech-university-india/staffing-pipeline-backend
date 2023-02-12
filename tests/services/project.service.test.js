@@ -1,4 +1,4 @@
-const { engagements } = require('../../src/models');
+const {engagements} = require('../../src/models');
 const getProjectServices = require('../../src/services/project.service');
 
 describe('Engagement Services', () => {
