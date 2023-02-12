@@ -1,10 +1,10 @@
-const updateCaseStudyServices = require('../services/case-study.service');
+const caseStudyServices = require('../services/case-study.service');
 
 const updateCaseStudyController = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    const updatedCaseStudy = await updateCaseStudyServices.updateCaseStudy(id, body);
+    const updatedCaseStudy = await caseStudyServices.updateCaseStudy(id, body);
     if (!updatedCaseStudy) return res.status(404).json({ message: 'Case study not found' });
     res.status(200).json(updatedCaseStudy);
   } catch (error) {
@@ -17,7 +17,7 @@ const updateCaseStudyController = async (req, res) => {
 const deleteCaseStudyController = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedCaseStudy = await updateCaseStudyServices.deleteCaseStudy(id);
+    const deletedCaseStudy = await caseStudyServices.deleteCaseStudy(id);
     if (!deletedCaseStudy) return res.status(404).json({ message: 'Case study not found' });
     res.status(200).json(deletedCaseStudy);
   } catch (error) {

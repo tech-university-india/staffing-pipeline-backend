@@ -20,7 +20,7 @@ const updateCaseStudyBodySchema = Joi.object({
   engagement_id: Joi.array().items(uuidType),
 });
 
-const CaseStudyIdValidator = (req, res, next) => {
+const caseStudyIdValidator = (req, res, next) => {
   try {
     const { error } = CaseStudyIdSchema.validate(req.params);
     if (error) {
@@ -53,6 +53,6 @@ const updateCaseStudyBodyValidator = (req, res, next) => {
 };
 
 module.exports = {
-  CaseStudyIdValidator,
+  caseStudyIdValidator,
   updateCaseStudyBodyValidator,
 };

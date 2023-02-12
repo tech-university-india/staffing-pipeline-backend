@@ -8,14 +8,14 @@ const router = express.Router();
 router.put(
   '/:id',
   authMiddlewares.reqAuthValidator,
-  caseStudyValidator.CaseStudyIdValidator,
+  caseStudyValidator.caseStudyIdValidator,
   caseStudyValidator.updateCaseStudyBodyValidator,
   updateCaseStudyController
 );
 router.delete(
   '/:id',
   authMiddlewares.reqAuthValidator,
-  caseStudyValidator.CaseStudyIdValidator,
+  caseStudyValidator.caseStudyIdValidator,
   deleteCaseStudyController
 );
 
