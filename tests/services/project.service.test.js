@@ -59,18 +59,19 @@ describe('Engagement Services', () => {
   });
   it('should delete engagement of the given id from the database', async () => {
     const mockEngagement = {
-      user_ids: [1, 2, 3],
+      userIds: [1, 2, 3],
     };
     const mockUser = {
       dataValues: {
-        current_engagement_ids: [12, 13],
+        currentEngagementIds: [12, 13],
       },
+
       map: jest.fn(),
     };
     const mockUsers = {
       dataValues: {
-        user_id: 22,
-        current_engagement_ids: [122, 154],
+        userId: 22,
+        currentEngagementIds: [122, 154],
       },
     };
     jest.spyOn(users, 'findOne').mockResolvedValue(mockUser);
