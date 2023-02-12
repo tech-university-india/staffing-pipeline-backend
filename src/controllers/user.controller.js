@@ -40,4 +40,3 @@ const updateUser = async (req, res) => {
 };
 
 module.exports = { listUsers, createUser, deleteUser, updateUser };
-
