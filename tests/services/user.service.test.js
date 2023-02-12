@@ -3,7 +3,7 @@ const userServices = require('../../src/services/user.service');
 // require users models
 const { users } = require('../../src/models');
 // require NotFoundError
-const { NotFoundError } = require('../../errors/httpError');
+const { NotFoundError } = require('../../src/utils/httpError');
 
 describe('User Services', () => {
   describe('function getAllUsers', () => {
