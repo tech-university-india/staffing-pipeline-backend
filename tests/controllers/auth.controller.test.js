@@ -1,7 +1,7 @@
 const authController = require('../../src/controllers/auth.controller');
 const authServices = require('../../src/services/auth.service');
 const LoginError = require('../../src/utils/loginError');
-const HttpError = require('../../src/utils/httpError');
+const { HttpError } = require('../../src/utils/httpError');
 describe('Check Authentication Controller', () => {
   it('check createUserLogin function which should create the user and status returned is 201', async () => {
     jest.spyOn(authServices, 'setUserCredentials').mockResolvedValue({
@@ -57,13 +57,12 @@ describe('Check Authentication Controller', () => {
     });
   });
   it('check createUserLogin function which should throw http error with message cannot create the user and status 500 if there is error in database insert', async () => {
-    jest.spyOn(authServices, 'setUserCredentials').mockImplementation(() => {
-      throw new HttpError('cannot create the user', 500);
-    });
+    const error = new HttpError('Cannot create the user', 500);
+    jest.spyOn(authServices, 'setUserCredentials').mockRejectedValue(error);
 
     const mockRes = {
-      json: jest.fn(),
       status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
     };
 
     await authController.createUserLogin(
@@ -76,10 +75,7 @@ describe('Check Authentication Controller', () => {
       mockRes
     );
     expect(mockRes.status).toBeCalledWith(500);
-    expect(mockRes.json).toBeCalledWith({
-      error: 'cannot create the user',
-      success: false,
-    });
+    expect(mockRes.json).toBeCalledWith({ success: false, error: 'Cannot create the user' });
   });
   it('should verify the email and password and return token', async () => {
     jest.spyOn(authServices, 'validateUserAndReturnToken').mockResolvedValue({
