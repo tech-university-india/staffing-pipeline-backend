@@ -7,7 +7,7 @@ const projectRouter = express.Router();
 projectRouter.route('/').get(authMiddlewares.reqAuthValidator, projectController.listProjects);
 projectRouter
   .route('/:id')
-  .get('/:id', authMiddlewares.reqAuthValidator, projectController.getProject)
+  .get(authMiddlewares.reqAuthValidator, projectController.getProject)
   .put(authMiddlewares.reqAuthValidator, projectMiddlewares.validateProject, projectController.updateProject);
 
 module.exports = projectRouter;

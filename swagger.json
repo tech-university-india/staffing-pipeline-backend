@@ -53,6 +53,23 @@
           }
         }
       }
+    },
+    "/projects":{
+      "put":{
+        "description":"",
+        "parameters":[],
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "404": {
+            "description": "Project not found or User not found"
+          },
+          "400":{
+            "description": "Invalid Body Fields"
+          }
+        }
+      }
     }
   }
 }
