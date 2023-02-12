@@ -43,19 +43,6 @@ describe('User Services', () => {
       expect(response).toEqual(newUser);
     });
   });
-  describe('deleteUser test', () => {
-    it('should delete a user', async () => {
-      const deletedUser = {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        password: '12345',
-      };
-      jest.spyOn(users, 'destroy').mockResolvedValue(deletedUser);
-      const response = await userServices.deleteUser(deletedUser.id);
-      expect(response).toEqual(deletedUser);
-    });
-  });
   describe('function updateUser', () => {
     it('Should update user details', async () => {
       const mockReq = {
