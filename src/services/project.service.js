@@ -1,5 +1,5 @@
 const { engagements } = require('../models');
-const users = require('../models/users');
+const { users } = require('../models');
 const HttpError = require('../utils/httpError');
 
 const getProject = async id => {
