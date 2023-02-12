@@ -53,7 +53,7 @@ describe('CaseStudyController', () => {
       jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue(resolvedValue);
       await updateCaseStudy.updateCaseStudyController(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(404);
-      expect(mockRes.json).toHaveBeenCalledWith({ message: 'CaseStudy not found' });
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Case study not found' });
     });
     it('Should return 500 if something went wrong', async () => {
       const mockReq = {
@@ -117,7 +117,7 @@ describe('CaseStudyController', () => {
       jest.spyOn(updateCaseStudyServices, 'deleteCaseStudy').mockResolvedValue(resolvedValue);
       await updateCaseStudy.deleteCaseStudyController(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(404);
-      expect(mockRes.json).toHaveBeenCalledWith({ message: 'CaseStudy not found' });
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Case study not found' });
     });
     it('Should return 500 if something went wrong', async () => {
       const mockReq = {
