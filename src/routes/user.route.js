@@ -3,7 +3,7 @@ const express = require('express');
 const validator = require('../middlewares/request.validator');
 // require schemas
 const schemas = require('../middlewares/schemas.validator');
-const { updateIdValidator, updateBodyValidator } = require('../middlewares/user.update.validator');
+const { updateIdValidator, updateBodyValidator } = require('../middlewares/user.validator');
 
 const userControllers = require('../controllers/user.controller');
 const authMiddlewares = require('../middlewares/request.validator');
