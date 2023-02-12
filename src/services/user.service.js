@@ -32,10 +32,39 @@ const updateUser = async (userId, userDetails) => {
   await user.save();
   return user;
 };
+
+const deleteProjectFromUser = async (userIds, id) => {
+  const user = await userIds.map(async uid => {
+    const userData = await db.users.findOne({
+      where: {
+        userId: uid,
+      },
+    });
+    userData.dataValues.currentEngagementIds = userData.dataValues.currentEngagementIds.filter(
+      element => element !== id
+    );
+    return userData.dataValues;
+  });
+  const getUserData = await Promise.all(user);
+  getUserData.map(async userElement => {
+    const userData = await db.users.update(
+      {
+        currentEngagementIds: userElement.currentEngagementIds,
+      },
+      {
+        where: {
+          userId: userElement.userId,
+        },
+      }
+    );
+    return userData;
+  });
+  await Promise.all(getUserData);
+};
+
 module.exports = {
   listUsers,
   createUser,
   updateUser,
+  deleteProjectFromUser,
 };
-
-

@@ -1,4 +1,5 @@
-const { engagements, users } = require('../models');
+const { engagements } = require('../models');
+const { deleteProjectFromUser } = require('./user.service');
 
 const getProject = async id => {
   const engagement = await engagements.findByPk(id);
@@ -16,32 +17,7 @@ const deleteProject = async id => {
       engagementId: id,
     },
   });
-  const user = await userIds.map(async uid => {
-    const userData = await users.findOne({
-      where: {
-        userId: uid,
-      },
-    });
-    userData.dataValues.currentEngagementIds = userData.dataValues.currentEngagementIds.filter(
-      element => element !== id
-    );
-    return userData.dataValues;
-  });
-  const getUserData = await Promise.all(user);
-  getUserData.map(async userElement => {
-    const userData = await users.update(
-      {
-        currentEngagementIds: userElement.currentEngagementIds,
-      },
-      {
-        where: {
-          userId: userElement.userId,
-        },
-      }
-    );
-    return userData;
-  });
-  await Promise.all(getUserData);
+  deleteProjectFromUser(userIds, id);
   await engagements.destroy({
     where: {
       engagementId: id,
