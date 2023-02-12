@@ -1,9 +1,5 @@
-// require user.service.js
 const userServices = require('../../src/services/user.service');
-// require users models
 const { users } = require('../../src/models');
-// require NotFoundError
-const { NotFoundError } = require('../../src/utils/HttpError');
 
 describe('User Services', () => {
   describe('function getAllUsers', () => {
