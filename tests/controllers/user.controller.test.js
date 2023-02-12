@@ -82,7 +82,7 @@ describe('User Controller', () => {
     it('Should return all users', async () => {
       const mockReq = {};
       const mockRes = {
-        status: jest.fn(),
+        status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
       const resolvedValue = [

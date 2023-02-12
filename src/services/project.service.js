@@ -1,6 +1,7 @@
 const { engagements } = require('../models');
 const { users } = require('../models');
 const HttpError = require('../utils/httpError');
+const { getUserByPk, addCurrentEngagement } = require('./user.service');
 
 const getProject = async id => {
   const engagement = await engagements.findByPk(id);
@@ -19,24 +20,10 @@ const updateProject = async (id, body) => {
   }
   for (let key in body) {
     if (key === 'userIds') {
-      const allUsers = await Promise.all(
-        body['userIds'].map(async userId => {
-          const user = await users.findByPk(userId);
-          if (!user) {
-            throw new HttpError(`User: ${userId} not found`, 404);
-          }
-          return user;
-        })
-      );
-      await Promise.all(
-        allUsers.map(user => {
-          if (user.currentEngagementIds.includes(engagement.engagementId)) {
-            return user;
-          }
-          user.currentEngagementIds.push(engagement.engagementId);
-          return user.save();
-        })
-      );
+      //get all users
+      const allUsers = await Promise.all(body['userIds'].map(async userId => getUserByPk(userId)));
+      //add engagementId to all users
+      await Promise.all(allUsers.map(user => addCurrentEngagement(user.userId, engagement.engagementId)));
     }
     engagement[key] = body[key];
   }
