@@ -17,19 +17,19 @@ const deleteProject = async id => {
     },
   });
   const user = await userIds.map(async uid => {
-    const user_data = await users.findOne({
+    const userData = await users.findOne({
       where: {
         userId: uid,
       },
     });
-    user_data.dataValues.currentEngagementIds = user_data.dataValues.currentEngagementIds.filter(
+    userData.dataValues.currentEngagementIds = userData.dataValues.currentEngagementIds.filter(
       element => element !== id
     );
-    return user_data.dataValues;
+    return userData.dataValues;
   });
   const getUserData = await Promise.all(user);
   getUserData.map(async userElement => {
-    const user_data = await users.update(
+    const userData = await users.update(
       {
         currentEngagementIds: userElement.currentEngagementIds,
       },
@@ -39,7 +39,7 @@ const deleteProject = async id => {
         },
       }
     );
-    return user_data;
+    return userData;
   });
   await Promise.all(getUserData);
   await engagements.destroy({
