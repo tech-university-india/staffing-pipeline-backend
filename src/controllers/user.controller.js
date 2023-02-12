@@ -10,6 +10,7 @@ const listUsers = async (req, res) => {
     });
   }
 };
+
 const createUser = async (req, res) => {
   try {
     const newUser = await userServices.createUser(req.body);
@@ -19,10 +20,6 @@ const createUser = async (req, res) => {
       error: error.message,
     });
   }
-};
-const deleteUser = async (req, res) => {
-  await userServices.deleteUser(req.params.id);
-  res.status(200).json({ message: 'User deleted' });
 };
 
 const updateUser = async (req, res) => {
@@ -39,5 +36,4 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { listUsers, createUser, deleteUser, updateUser };
-
+module.exports = { listUsers, createUser, updateUser };
