@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Engagements.init(
     {
-      engagement_id: {
+      engagementId: {
         type: DataTypes.STRING,
         primaryKey: true,
       },
