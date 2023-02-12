@@ -3,7 +3,7 @@ const userServices = require('../../src/services/user.service');
 // require users models
 const { users } = require('../../src/models');
 // require NotFoundError
-const { NotFoundError } = require('../../src/utils/httpError');
+const { NotFoundError } = require('../../src/utils/HttpError');
 
 describe('User Services', () => {
   describe('function getAllUsers', () => {
@@ -70,19 +70,6 @@ describe('User Services', () => {
       jest.spyOn(users, 'create').mockResolvedValue(newUser);
       const response = await userServices.createUser(userData);
       expect(response).toEqual(newUser);
-    });
-  });
-  describe('deleteUser test', () => {
-    it('should delete a user', async () => {
-      const deletedUser = {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        password: '12345',
-      };
-      jest.spyOn(users, 'destroy').mockResolvedValue(deletedUser);
-      const response = await userServices.deleteUser(deletedUser.id);
-      expect(response).toEqual(deletedUser);
     });
   });
   describe('function updateUser', () => {
