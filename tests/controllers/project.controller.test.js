@@ -99,4 +99,35 @@ describe('Engagements Controllers', () => {
       error: 'Internal Server error!!',
     });
   });
+  it('Should update the project', async () => {
+    const mockId = 1223;
+    const mockEngagement = {
+      engagementId: 1223,
+      name: 'Test Project',
+      tags: ['tag1', 'tag2', 'tag3'],
+      skills: ['skill1', 'skill2', 'skill3'],
+      guild: 'Swe',
+      userIds: ['1', '2', '3'],
+      caseStudyIds: ['23', '34', '56'],
+      status: 'active',
+      startDate: '2020-01-01',
+      endDate: '2020-01-01',
+      image: 'https://www.google.com',
+      save: jest.fn(),
+    };
+    const mockReq = {
+      params: {
+        id: mockId,
+      },
+      body: mockEngagement,
+    };
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+    jest.spyOn(getProjectServices, 'updateProject').mockResolvedValue(mockEngagement);
+    await getProjectControllers.updateProject(mockReq, mockRes);
+    expect(mockRes.status).toBeCalledWith(200);
+    expect(mockRes.json).toBeCalledWith(mockEngagement);
+  });
 });
