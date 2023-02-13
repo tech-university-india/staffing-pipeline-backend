@@ -6,6 +6,10 @@
   git init 
   git remove add origin https://github.com/tech-university-india/staffing-pipeline-backend
   git pull origin main
+```
+
+## Script file to execute db actions and start server
+```
   sh setup.sh
 ```
 
