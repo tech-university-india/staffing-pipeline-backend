@@ -31,8 +31,16 @@ const updateUser = async (userId, userDetails) => {
   await user.save();
   return user;
 };
+const deleteUser = async userId => {
+  await users.destroy({
+    where: {
+      userId,
+    },
+  });
+};
 module.exports = {
   listUsers,
   createUser,
   updateUser,
+  deleteUser,
 };
