@@ -1,16 +1,19 @@
 # Staffing Pipeline
 
-## Commands to execute
+## Local Development
 
+### Clone Repository
 ```
-  git init 
-  git remote add origin https://github.com/tech-university-india/staffing-pipeline-backend
-  git pull origin main
+git clone git@github.com:tech-university-india/staffing-pipeline-backend.git
 ```
 
-## Script file to execute db actions and start server
+### Setup and start server
 ```
   sh setup.sh
+```
+### Reset Database and start server
+```
+  sh resetdb.sh
 ```
 
 ## Description
