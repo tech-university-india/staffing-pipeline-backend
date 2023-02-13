@@ -1,5 +1,14 @@
 # Staffing Pipeline
 
+## Commands to execute
+
+```
+  git init 
+  git remove add origin https://github.com/tech-university-india/staffing-pipeline-backend
+  git pull origin main
+  sh setup.sh
+```
+
 ## Description
 
 This is a mini project conducted in parallel with Code Academy 2023. This is a portal which allows the Mckinsey employees to:
