@@ -4,7 +4,7 @@ const userServices = require('../../src/services/user.service');
 const { users } = require('../../src/models');
 
 describe('User Services', () => {
-  describe('function getAllUsers', () => {
+  describe('function listUsers', () => {
     it('Should return an array of users', async () => {
       const resolvedValue = [
         {
