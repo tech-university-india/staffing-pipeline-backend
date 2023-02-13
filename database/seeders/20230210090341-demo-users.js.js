@@ -35,7 +35,6 @@ module.exports = {
           image: null,
           updated_at: new Date(),
           created_at: new Date(),
-          
         },
       ],
       {}

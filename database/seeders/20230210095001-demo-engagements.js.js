@@ -18,7 +18,6 @@ module.exports = {
         image: null,
         updated_at: new Date(),
         created_at: new Date(),
-        
       },
       {
         engagement_id: 'be753dd4-7a33-449a-956a-a359b13282f3',
@@ -34,7 +33,6 @@ module.exports = {
         image: null,
         updated_at: new Date(),
         created_at: new Date(),
-        
       },
     ]);
   },
