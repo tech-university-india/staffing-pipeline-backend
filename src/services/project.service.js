@@ -17,7 +17,7 @@ const deleteProject = async id => {
       engagementId: id,
     },
   });
-  deleteProjectFromUser(userIds, id);
+  await deleteProjectFromUser(userIds, id);
   await engagements.destroy({
     where: {
       engagementId: id,

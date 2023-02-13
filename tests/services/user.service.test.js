@@ -88,4 +88,23 @@ describe('User Services', () => {
       expect(result).toEqual(resolvedValue);
     });
   });
+  describe('function deleteFromUser', () => {
+    it('should delete engagement of the given id from the database', async () => {
+      const mockUser = {
+        userIds: [11, 23],
+        dataValues: {
+          currentEngagementIds: [12, 13],
+        },
+        map: jest.fn(),
+      };
+      const mockUsers = {
+        userId: 22,
+        currentEngagementIds: [122, 154],
+      };
+      jest.spyOn(users, 'findOne').mockResolvedValue(mockUser);
+      jest.spyOn(users, 'update').mockResolvedValue(mockUsers);
+      const project = await userServices.deleteProjectFromUser(mockUser.userIds, 2);
+      expect(project).toEqual(undefined);
+    });
+  });
 });
