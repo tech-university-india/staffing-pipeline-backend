@@ -1,10 +1,10 @@
 const HttpError = require('../utils/httpError');
 const bcrypt = require('bcrypt');
-const { users } = require('../models');
+const db = require('../models');
 
 const listUsers = async () => {
   try {
-    const allUsers = await users.findAll();
+    const allUsers = await db.users.findAll();
     return allUsers;
   } catch (error) {
     console.log(error);
@@ -13,7 +13,7 @@ const listUsers = async () => {
 };
 
 const getUserByPk = async userId => {
-  const user = await users.findByPk(userId);
+  const user = await db.users.findByPk(userId);
   if (!user) {
     throw new HttpError('User not found', 404);
   }
@@ -21,7 +21,7 @@ const getUserByPk = async userId => {
 };
 
 const updateUser = async (userId, userDetails) => {
-  const user = await users.findOne({ where: { userId } });
+  const user = await db.users.findOne({ where: { userId } });
   if (!user) {
     return null;
   }
@@ -42,12 +42,12 @@ const addCurrentEngagement = async (userId, engagementId) => {
 };
 
 const createUser = async userDetails => {
-  const newUser = await users.create(userDetails);
+  const newUser = await db.users.create(userDetails);
   return newUser;
 };
 
 const deleteUser = async userId => {
-  const deletedUser = await users.destroy({
+  const deletedUser = await db.users.destroy({
     where: {
       user_id: userId,
     },
