@@ -32,11 +32,12 @@ const updateUser = async (userId, userDetails) => {
   return user;
 };
 const deleteUser = async userId => {
-  await users.destroy({
+  const deletedRows = db.users.destroy({
     where: {
       userId,
     },
   });
+  return deletedRows;
 };
 module.exports = {
   listUsers,
