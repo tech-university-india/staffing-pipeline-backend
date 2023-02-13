@@ -41,6 +41,16 @@ const addCurrentEngagement = async (userId, engagementId) => {
   return user;
 };
 
+const removeCurrentEngagement = async (userId, engagementId) => {
+  const user = await getUserByPk(userId);
+  if (user.currentEngagementIds.includes(engagementId)) {
+    user.currentEngagementIds = user.currentEngagementIds.filter(id => id !== engagementId);
+    await user.save();
+  }
+  return user;
+};
+
+
 const createUser = async userDetails => {
   const newUser = await db.users.create(userDetails);
   return newUser;
@@ -62,4 +72,5 @@ module.exports = {
   createUser,
   deleteUser,
   addCurrentEngagement,
+  removeCurrentEngagement,
 };
