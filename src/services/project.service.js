@@ -20,8 +20,6 @@ const updateProject = async (id, body) => {
   }
   for (let key in body) {
     if (key === 'userIds') {
-      //get all users
-      // const allUsers = await Promise.all(body['userIds'].map(async userId => getUserByPk(userId)));
       const usersAlreadyInEngagement = await Promise.all(engagement.userIds.map(async userId => getUserByPk(userId)));
       // remove engagementId for users removed from engagement
       usersAlreadyInEngagement.forEach(async user => {
@@ -30,7 +28,7 @@ const updateProject = async (id, body) => {
         }
       });
       //add engagementId to all users
-      await Promise.all(allUsers.map(user => addCurrentEngagement(user.userId, engagement.engagementId)));
+      await Promise.all(engagement['userIds'].map(userId => addCurrentEngagement(userId, engagement.engagementId)));
       //remove engagementId from all users not in body
     }
     engagement[key] = body[key];

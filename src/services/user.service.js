@@ -50,7 +50,6 @@ const removeCurrentEngagement = async (userId, engagementId) => {
   return user;
 };
 
-
 const createUser = async userDetails => {
   const newUser = await db.users.create(userDetails);
   return newUser;
