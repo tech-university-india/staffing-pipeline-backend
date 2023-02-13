@@ -4,7 +4,7 @@
 
 ```
   git init 
-  git remove add origin https://github.com/tech-university-india/staffing-pipeline-backend
+  git remote add origin https://github.com/tech-university-india/staffing-pipeline-backend
   git pull origin main
 ```
 
