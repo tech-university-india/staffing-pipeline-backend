@@ -1,8 +1,7 @@
 const express = require('express');
 
-// require schemas
-const schemas = require('../middlewares/schemas.validator');
-const { updateIdValidator, updateBodyValidator } = require('../middlewares/user.validator');
+const { updateIdValidator, updateBodyValidator } = require('../middlewares/user.update.validator');
+
 
 const userControllers = require('../controllers/user.controller');
 const authMiddlewares = require('../middlewares/request.validator');
