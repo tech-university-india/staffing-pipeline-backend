@@ -8,23 +8,32 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
-
+  test:  
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Setup Node.js 18.x
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 18.x
         cache: 'npm'
-    - run: npm install jest
-    - run: npm test
-    - run: npm install -g eslint @babel/eslint-parser eslint-config-prettier eslint-plugin-prettier prettier prettier-eslint-cli
-    - run: npm run format
+        
+    - name: Install dependencies for testing
+      run: npm install jest
+    - name: Run unit tests
+      run: npm test
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+
+    - name: Install dependencies for linting
+      run: npm install -g eslint @babel/eslint-parser eslint-config-prettier eslint-plugin-prettier prettier prettier-eslint-cli
+    - name: Run eslint check
+      run: npx eslint ./  
