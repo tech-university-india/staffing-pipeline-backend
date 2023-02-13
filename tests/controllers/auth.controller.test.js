@@ -57,13 +57,12 @@ describe('Check Authentication Controller', () => {
     });
   });
   it('check createUserLogin function which should throw http error with message cannot create the user and status 500 if there is error in database insert', async () => {
-    jest.spyOn(authServices, 'setUserCredentials').mockImplementation(() => {
-      throw new HttpError('cannot create the user', 500);
-    });
+    const err = new HttpError('cannot create the user', 500);
+    jest.spyOn(authServices, 'setUserCredentials').mockRejectedValue(err);
 
     const mockRes = {
-      json: jest.fn(),
       status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
     };
 
     await authController.createUserLogin(
