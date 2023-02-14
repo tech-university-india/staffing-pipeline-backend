@@ -1,6 +1,6 @@
 const userController = require('../../src/controllers/user.controller');
 const userServices = require('../../src/services/user.service');
-const HttpError = require('../../src/utils/httpError');
+const HttpError = require('../../src/utils/httpError.js');
 describe('User Controller', () => {
   describe('function createUser', () => {
     it('should create the user and status returned is 201', async () => {

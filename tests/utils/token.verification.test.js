@@ -1,5 +1,5 @@
 const db = require('../../src/models');
-const LoginError = require('../../src/utils/loginError');
+const LoginError = require('../../src/utils/loginError.js');
 const tokenVerification = require('../../src/utils/token.verification');
 const jwt = require('jsonwebtoken');
 describe('Check tokenVerification Util', () => {
