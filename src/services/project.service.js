@@ -1,5 +1,4 @@
 const { engagements } = require('../models');
-const { deleteProjectFromUser } = require('./user.service');
 
 const getProject = async id => {
   const engagement = await engagements.findByPk(id);
@@ -11,13 +10,16 @@ const listProjects = async () => {
   return allProjects;
 };
 
-const deleteProject = async id => {
-  const { userIds } = await engagements.findOne({
+const getUsersFromEngagement = async id => {
+  const engagement = await engagements.findOne({
     where: {
       engagementId: id,
     },
   });
-  await deleteProjectFromUser(userIds, id);
+  return engagement.userIds;
+};
+
+const deleteProjectFromEngagement = async id => {
   await engagements.destroy({
     where: {
       engagementId: id,
@@ -25,4 +27,4 @@ const deleteProject = async id => {
   });
 };
 
-module.exports = { getProject, listProjects, deleteProject };
+module.exports = { getProject, listProjects, deleteProjectFromEngagement, getUsersFromEngagement };
