@@ -1,7 +1,7 @@
 const authController = require('../../src/controllers/auth.controller');
 const authServices = require('../../src/services/auth.service');
 const LoginError = require('../../src/utils/loginError');
-const HttpError = require('../../src/utils/httpError');
+const { HttpError } = require('../../src/utils/httpError');
 describe('Check Authentication Controller', () => {
   it('check createUserLogin function which should create the user and status returned is 201', async () => {
     jest.spyOn(authServices, 'setUserCredentials').mockResolvedValue({
@@ -37,8 +37,8 @@ describe('Check Authentication Controller', () => {
     });
 
     const mockRes = {
-      json: jest.fn(),
       status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
     };
 
     await authController.createUserLogin(

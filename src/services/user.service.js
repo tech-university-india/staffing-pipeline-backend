@@ -1,13 +1,26 @@
-const HttpError = require('../utils/httpError');
+// require user model
+
+const CustomErrors = require('../utils/httpError');
 const db = require('../models');
 
+const getUser = async userId => {
+  const user = await db.users.findOne({
+    where: {
+      userId,
+    },
+  });
+  if (!user) {
+    throw new CustomErrors.NotFoundError('User not found');
+  }
+  return user;
+};
 const listUsers = async () => {
   try {
     const allUsers = await db.users.findAll();
     return allUsers;
   } catch (error) {
     console.log(error);
-    throw new HttpError(error.message, 500);
+    throw new CustomErrors.HttpError(error.message, 500);
   }
 };
 
@@ -16,7 +29,7 @@ const createUser = async userDetails => {
     const newUser = await db.users.create(userDetails);
     return newUser;
   } catch (error) {
-    throw new HttpError(error.message, 400);
+    throw new CustomErrors.HttpError(error.message, 400);
   }
 };
 
@@ -44,6 +57,7 @@ const deleteUser = async userId => {
 module.exports = {
   listUsers,
   createUser,
+  getUser,
   updateUser,
   deleteUser,
 };

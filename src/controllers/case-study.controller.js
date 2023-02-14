@@ -1,10 +1,13 @@
+
 const caseStudyServices = require('../services/case-study.service');
 
 const updateCaseStudyController = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
+    
     const updatedCaseStudy = await caseStudyServices.updateCaseStudy(id, body);
+    
     if (!updatedCaseStudy) return res.status(404).json({ message: 'Case study not found' });
     res.status(200).json(updatedCaseStudy);
   } catch (error) {

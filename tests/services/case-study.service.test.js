@@ -31,6 +31,7 @@ describe('Case Study Services', () => {
       expect(result).toEqual(resolvedValue);
     });
   });
+
   describe('function deleteCaseStudy', () => {
     it('Should delete case study', async () => {
       const mockReq = {
@@ -55,4 +56,5 @@ describe('Case Study Services', () => {
       expect(result).toEqual(resolvedValue);
     });
   });
+
 });
