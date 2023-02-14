@@ -63,6 +63,7 @@ const deleteProjectFromUser = async (userIds, id) => {
     userData.dataValues.currentEngagementIds = userData.dataValues.currentEngagementIds.filter(
       element => element !== id
     );
+    userData.dataValues.pastEngagementIds = userData.dataValues.pastEngagementIds.filter(element => element !== id);
     return userData.dataValues;
   });
   const getUserData = await Promise.all(user);
@@ -70,6 +71,7 @@ const deleteProjectFromUser = async (userIds, id) => {
     const userData = await db.users.update(
       {
         currentEngagementIds: userElement.currentEngagementIds,
+        pastEngagementIds: userElement.pastEngagementIds,
       },
       {
         where: {

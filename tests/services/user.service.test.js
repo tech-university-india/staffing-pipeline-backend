@@ -138,12 +138,14 @@ describe('User Services', () => {
         userIds: [11, 23],
         dataValues: {
           currentEngagementIds: [12, 13],
+          pastEngagementIds: [12, 13],
         },
         map: jest.fn(),
       };
       const mockUsers = {
         userId: 22,
         currentEngagementIds: [122, 154],
+        pastEngagementIds: [12, 13],
       };
       jest.spyOn(users, 'findOne').mockResolvedValue(mockUser);
       jest.spyOn(users, 'update').mockResolvedValue(mockUsers);

@@ -1,4 +1,5 @@
 const projectService = require('../services/project.service');
+const userService = require('../services/user.service');
 
 const getProject = async (req, res) => {
   try {
@@ -30,14 +31,14 @@ const listProjects = async (req, res) => {
 const deleteProject = async (req, res) => {
   try {
     const { id } = req.params;
-    await projectService.deleteProject(id);
-    res.status(200).send('engagement has been deleted');
+    const userIds = await projectService.getUsersFromEngagement(id);
+    await userService.deleteProjectFromUser(userIds, id);
+    await projectService.deleteProjectFromEngagement(id);
+    res.status(200).json({ message: 'engagement has been deleted' });
   } catch (error) {
-    {
-      res.status(500).json({
-        error: error.message,
-      });
-    }
+    res.status(500).json({
+      error: error.message,
+    });
   }
 };
 

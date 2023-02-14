@@ -1,5 +1,6 @@
 const projectController = require('../../src/controllers/project.controller');
 const projectService = require('../../src/services/project.service');
+const userService = require('../../src/services/user.service');
 
 describe('Engagements Controllers', () => {
   it('should return the engagement details of the provided id', async () => {
@@ -101,20 +102,22 @@ describe('Engagements Controllers', () => {
   });
 
   it('should delete engagement of the provided id', async () => {
-    jest.spyOn(projectService, 'deleteProject').mockResolvedValue('engagement has been deleted');
+    jest.spyOn(projectService, 'getUsersFromEngagement').mockResolvedValue('engagement has been deleted');
+    jest.spyOn(userService, 'deleteProjectFromUser').mockResolvedValue('engagement has been deleted');
+    jest.spyOn(projectService, 'deleteProjectFromEngagement').mockResolvedValue('engagement has been deleted');
     const mockReq = {
       params: jest.fn(),
     };
     const mockRes = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     await projectController.deleteProject(mockReq, mockRes);
     expect(mockRes.status).toBeCalledWith(200);
-    expect(mockRes.send).toBeCalledWith('engagement has been deleted');
+    expect(mockRes.json).toBeCalledWith({ message: 'engagement has been deleted' });
   });
   it('should return error', async () => {
-    jest.spyOn(projectService, 'deleteProject').mockRejectedValue(new Error('Internal Server error!!'));
+    jest.spyOn(projectService, 'getUsersFromEngagement').mockRejectedValue(new Error('Internal Server error!!'));
     const mockReq = {
       params: jest.fn(),
     };
