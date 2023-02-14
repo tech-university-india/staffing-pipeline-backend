@@ -1,14 +1,26 @@
-const HttpError = require('../utils/httpError');
-const bcrypt = require('bcrypt');
+// require user model
+
+const CustomErrors = require('../utils/httpError');
 const db = require('../models');
 
+const getUser = async userId => {
+  const user = await db.users.findOne({
+    where: {
+      userId,
+    },
+  });
+  if (!user) {
+    throw new CustomErrors.NotFoundError('User not found');
+  }
+  return user;
+};
 const listUsers = async () => {
   try {
     const allUsers = await db.users.findAll();
     return allUsers;
   } catch (error) {
     console.log(error);
-    throw new HttpError(error.message, 500);
+    throw new CustomErrors.HttpError(error.message, 500);
   }
 };
 
@@ -18,6 +30,14 @@ const getUserByPk = async userId => {
     throw new HttpError('User not found', 404);
   }
   return user;
+};
+const createUser = async userDetails => {
+  try {
+    const newUser = await db.users.create(userDetails);
+    return newUser;
+  } catch (error) {
+    throw new CustomErrors.HttpError(error.message, 400);
+  }
 };
 
 const updateUser = async (userId, userDetails) => {
@@ -50,21 +70,17 @@ const removeCurrentEngagement = async (userId, engagementId) => {
   return user;
 };
 
-const createUser = async userDetails => {
-  const newUser = await db.users.create(userDetails);
-  return newUser;
-};
-
 const deleteUser = async userId => {
-  const deletedUser = await db.users.destroy({
+  const deletedRows = db.users.destroy({
     where: {
-      user_id: userId,
+      userId,
     },
   });
-  return deletedUser;
+  return deletedRows;
 };
 
 module.exports = {
+  getUser,
   listUsers,
   getUserByPk,
   updateUser,

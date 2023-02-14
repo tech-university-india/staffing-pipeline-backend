@@ -1,15 +1,28 @@
 const userServices = require('../services/user.service');
-const listUsers = async (req, res) => {
+const { NotFoundError } = require('../../src/utils/httpError');
+
+const listUsers = async (_, res) => {
+  const allUsers = await userServices.listUsers();
+  res.status(200);
+  res.json(allUsers);
+};
+const getUser = async (req, res) => {
+  const { userId } = req.params;
   try {
-    console.log('listUsers called');
-    const allUsers = await userServices.listUsers();
-    res.status(200).json(allUsers);
+    const user = await userServices.getUser(userId);
+    res.status(200);
+    res.json(user);
   } catch (error) {
-    res.status(error.statusCode).json({
-      error: error.message,
-    });
+    if (error instanceof NotFoundError) {
+      res.status(error.code);
+      res.json({ message: error.message });
+    } else {
+      res.status(500);
+      res.json({ message: 'Internal Server Error' });
+    }
   }
 };
+
 const createUser = async (req, res) => {
   try {
     const newUser = await userServices.createUser(req.body);
@@ -21,10 +34,13 @@ const createUser = async (req, res) => {
   }
 };
 const deleteUser = async (req, res) => {
-  await userServices.deleteUser(req.params.id);
-  res.status(200).json({ message: 'User deleted' });
+  try {
+    await userServices.deleteUser(req.params.id);
+    res.status(200).json({ message: 'User deleted' });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong.' });
+  }
 };
-
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -39,4 +55,4 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { listUsers, createUser, deleteUser, updateUser };
+module.exports = { listUsers, createUser, deleteUser, updateUser, getUser };
