@@ -156,12 +156,6 @@ describe('User Controller', () => {
     });
     describe('function deleteUser', () => {
       it('should delete a user', async () => {
-        const deletedUser = {
-          id: 1,
-          name: 'John Doe',
-          email: 'john@gmail.com',
-          password: '12345',
-        };
         const mockReq = {
           params: {
             user_id: '1',
