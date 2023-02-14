@@ -18,7 +18,6 @@ module.exports = {
         image: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg',
         updated_at: new Date(),
         created_at: new Date(),
-        
       },
       {
         engagement_id: 'be753dd4-7a33-449a-956a-a359b13282f3',
@@ -34,7 +33,6 @@ module.exports = {
         image: 'https://dwglogo.com/wp-content/uploads/2017/09/1460px-React_logo-1024x704.png',
         updated_at: new Date(),
         created_at: new Date(),
-        
       },
     ]);
   },
