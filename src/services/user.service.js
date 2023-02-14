@@ -1,4 +1,4 @@
-const HttpError = require('../utils/httpError');
+const HttpError = require('../utils/httpError.js');
 const bcrypt = require('bcrypt');
 const db = require('../models');
 

@@ -1,7 +1,7 @@
 const authController = require('../../src/controllers/auth.controller');
 const authServices = require('../../src/services/auth.service');
 const LoginError = require('../../src/utils/loginError');
-const HttpError = require('../../src/utils/httpError');
+const HttpError = require('../../src/utils/httpError.js');
 describe('Check Authentication Controller', () => {
   it('check createUserLogin function which should create the user and status returned is 201', async () => {
     jest.spyOn(authServices, 'setUserCredentials').mockResolvedValue({
