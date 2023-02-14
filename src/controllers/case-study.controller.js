@@ -1,6 +1,6 @@
 const caseStudyServices = require('../services/case-study.service');
 
-const updateCaseStudyController = async (req, res) => {
+const updateCaseStudy = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
@@ -16,7 +16,7 @@ const updateCaseStudyController = async (req, res) => {
   }
 };
 
-const deleteCaseStudyController = async (req, res) => {
+const deleteCaseStudy = async (req, res) => {
   try {
     const { id } = req.params;
     const deletedCaseStudy = await caseStudyServices.deleteCaseStudy(id);
@@ -30,6 +30,6 @@ const deleteCaseStudyController = async (req, res) => {
 };
 
 module.exports = {
-  updateCaseStudyController,
-  deleteCaseStudyController,
+  updateCaseStudy,
+  deleteCaseStudy,
 };

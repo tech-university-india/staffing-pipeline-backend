@@ -2,7 +2,7 @@ const express = require('express');
 
 const authMiddlewares = require('../middlewares/request.validator');
 const caseStudyValidator = require('../middlewares/case-study.validator');
-const { updateCaseStudyController, deleteCaseStudyController } = require('../controllers/case-study.controller');
+const { updateCaseStudy, deleteCaseStudy } = require('../controllers/case-study.controller');
 
 const router = express.Router();
 
@@ -11,13 +11,8 @@ router.put(
   authMiddlewares.reqAuthValidator,
   caseStudyValidator.caseStudyIdValidator,
   caseStudyValidator.updateCaseStudyBodyValidator,
-  updateCaseStudyController
+  updateCaseStudy
 );
-router.delete(
-  '/:id',
-  authMiddlewares.reqAuthValidator,
-  caseStudyValidator.caseStudyIdValidator,
-  deleteCaseStudyController
-);
+router.delete('/:id', authMiddlewares.reqAuthValidator, caseStudyValidator.caseStudyIdValidator, deleteCaseStudy);
 
 module.exports = router;

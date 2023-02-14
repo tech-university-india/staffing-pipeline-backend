@@ -30,7 +30,7 @@ describe('CaseStudyController', () => {
         updatedAt: '2022-01-17T04:33:12.000Z',
       };
       jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue(resolvedValue);
-      await updateCaseStudy.updateCaseStudyController(mockReq, mockRes);
+      await updateCaseStudy.updateCaseStudy(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(200);
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
     });
@@ -51,7 +51,7 @@ describe('CaseStudyController', () => {
       };
       const resolvedValue = null;
       jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue(resolvedValue);
-      await updateCaseStudy.updateCaseStudyController(mockReq, mockRes);
+      await updateCaseStudy.updateCaseStudy(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(404);
       expect(mockRes.json).toHaveBeenCalledWith({ message: 'Case study not found' });
     });
@@ -71,7 +71,7 @@ describe('CaseStudyController', () => {
         json: jest.fn(),
       };
       jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockRejectedValue(new Error('Something went wrong'));
-      await updateCaseStudy.updateCaseStudyController(mockReq, mockRes);
+      await updateCaseStudy.updateCaseStudy(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(500);
       expect(mockRes.json).toHaveBeenCalledWith({ message: 'Something went wrong' });
     });
@@ -99,7 +99,7 @@ describe('CaseStudyController', () => {
         updatedAt: '2022-01-17T04:33:12.000Z',
       };
       jest.spyOn(updateCaseStudyServices, 'deleteCaseStudy').mockResolvedValue(resolvedValue);
-      await updateCaseStudy.deleteCaseStudyController(mockReq, mockRes);
+      await updateCaseStudy.deleteCaseStudy(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(200);
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
     });
@@ -115,7 +115,7 @@ describe('CaseStudyController', () => {
       };
       const resolvedValue = null;
       jest.spyOn(updateCaseStudyServices, 'deleteCaseStudy').mockResolvedValue(resolvedValue);
-      await updateCaseStudy.deleteCaseStudyController(mockReq, mockRes);
+      await updateCaseStudy.deleteCaseStudy(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(404);
       expect(mockRes.json).toHaveBeenCalledWith({ message: 'Case study not found' });
     });
@@ -130,7 +130,7 @@ describe('CaseStudyController', () => {
         json: jest.fn(),
       };
       jest.spyOn(updateCaseStudyServices, 'deleteCaseStudy').mockRejectedValue(new Error('Something went wrong'));
-      await updateCaseStudy.deleteCaseStudyController(mockReq, mockRes);
+      await updateCaseStudy.deleteCaseStudy(mockReq, mockRes);
       expect(mockRes.status).toHaveBeenCalledWith(500);
       expect(mockRes.json).toHaveBeenCalledWith({ message: 'Something went wrong' });
     });
