@@ -75,5 +75,4 @@ module.exports = {
   updateUser,
   deleteUser,
   deleteProjectFromUser,
-
 };
