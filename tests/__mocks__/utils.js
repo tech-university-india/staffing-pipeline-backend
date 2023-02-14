@@ -26,6 +26,11 @@ const route = {
     },
     success: true,
   },
+  jwtResolvedValue: {
+    email: 'promit.revar2211@gmail.com',
+    iat: 1675968809,
+    exp: 1675972409,
+  },
 };
 
 module.exports = {
