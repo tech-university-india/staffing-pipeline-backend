@@ -1,4 +1,4 @@
-const HttpError = require('../utils/httpError');
+const HttpError = require('../utils/HttpError');
 const db = require('../models');
 
 const listUsers = async () => {
