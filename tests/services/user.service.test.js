@@ -4,7 +4,7 @@ const userServices = require('../../src/services/user.service');
 const { users } = require('../../src/models');
 
 describe('User Services', () => {
-  describe('function getAllUsers', () => {
+  describe('function listUsers', () => {
     it('Should return an array of users', async () => {
       const resolvedValue = [
         {
@@ -27,7 +27,35 @@ describe('User Services', () => {
       expect(result).toEqual(resolvedValue);
     });
   });
-  describe('createUser test', () => {
+  describe('function deleteUser', () => {
+    it('should delete an user', async () => {
+      const deletedUser = {
+        id: 1,
+        name: 'John Doe',
+        email: 'john@gmail.com',
+        password: '12345',
+      };
+      jest.spyOn(users, 'destroy').mockResolvedValue(deletedUser);
+      const response = await userServices.deleteUser(deletedUser.id);
+      expect(response).toEqual(deletedUser);
+    });
+    it('should delete an user', async () => {
+      const deletedUser = {
+        id: 1,
+        name: 'John Doe',
+        email: 'john@gmail.com',
+        password: '12345',
+      };
+      jest.spyOn(users, 'destroy').mockResolvedValue(deletedUser);
+      await userServices.deleteUser(deletedUser.id);
+      expect(users.destroy).toHaveBeenCalledWith({
+        where: {
+          userId: deletedUser.id,
+        },
+      });
+    });
+  });
+  describe('function createUser', () => {
     it('should create a new user', async () => {
       const userData = {
         name: 'John Doe',
@@ -41,19 +69,6 @@ describe('User Services', () => {
       jest.spyOn(users, 'create').mockResolvedValue(newUser);
       const response = await userServices.createUser(userData);
       expect(response).toEqual(newUser);
-    });
-  });
-  describe('deleteUser test', () => {
-    it('should delete a user', async () => {
-      const deletedUser = {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        password: '12345',
-      };
-      jest.spyOn(users, 'destroy').mockResolvedValue(deletedUser);
-      const response = await userServices.deleteUser(deletedUser.id);
-      expect(response).toEqual(deletedUser);
     });
   });
   describe('function updateUser', () => {

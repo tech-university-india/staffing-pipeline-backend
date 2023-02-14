@@ -1,5 +1,4 @@
 const HttpError = require('../utils/httpError');
-const bcrypt = require('bcrypt');
 const db = require('../models');
 
 const listUsers = async () => {
@@ -22,7 +21,7 @@ const createUser = async userDetails => {
 };
 
 const updateUser = async (userId, userDetails) => {
-  const user = await users.findOne({ where: { user_id: id } });
+  const user = await db.users.findOne({ where: { userId } });
   if (!user) {
     return null;
   }
@@ -31,6 +30,14 @@ const updateUser = async (userId, userDetails) => {
   }
   await user.save();
   return user;
+};
+const deleteUser = async userId => {
+  const deletedRows = db.users.destroy({
+    where: {
+      userId,
+    },
+  });
+  return deletedRows;
 };
 
 const deleteProjectFromUser = async (userIds, id) => {
@@ -66,5 +73,7 @@ module.exports = {
   listUsers,
   createUser,
   updateUser,
+  deleteUser,
   deleteProjectFromUser,
+
 };
