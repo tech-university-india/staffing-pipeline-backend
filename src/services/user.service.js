@@ -67,8 +67,8 @@ const deleteProjectFromUsers = async (userIds, id) => {
     userData.dataValues.pastEngagementIds = userData.dataValues.pastEngagementIds.filter(element => element !== id);
     return userData.dataValues;
   });
-  const getUserData = await Promise.all(users);
-  getUserData.map(async user => {
+  const updatedUsers = await Promise.all(users);
+  updatedUsers.map(async user => {
     const userData = await db.users.update(
       {
         currentEngagementIds: user.currentEngagementIds,
@@ -82,7 +82,7 @@ const deleteProjectFromUsers = async (userIds, id) => {
     );
     return userData;
   });
-  await Promise.all(getUserData);
+  await Promise.all(updatedUsers);
 };
 
 module.exports = {
