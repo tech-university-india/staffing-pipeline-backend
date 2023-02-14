@@ -7,6 +7,16 @@ const route = {
     headers: {
       authorization: undefined,
     },
+    body: {
+      email: 'promit.revar2211@gmail.com',
+      password: 'test',
+    },
+  },
+  invalidMockReq: {
+    body: {
+      email: '',
+      password: 'test',
+    },
   },
   resolvedValue: {
     data: {
