@@ -1,9 +1,9 @@
-const projectServices = require('../services/project.service');
+const projectService = require('../services/project.service');
 
 const getProject = async (req, res) => {
   try {
     const { id } = req.params;
-    const project = await projectServices.getProject(id);
+    const project = await projectService.getProject(id);
     res.status(200).json(project);
   } catch (error) {
     {
@@ -16,7 +16,7 @@ const getProject = async (req, res) => {
 
 const listProjects = async (req, res) => {
   try {
-    const allProjects = await projectServices.listProjects();
+    const allProjects = await projectService.listProjects();
     res.status(200).json(allProjects);
   } catch (error) {
     {
@@ -30,7 +30,7 @@ const listProjects = async (req, res) => {
 const deleteProject = async (req, res) => {
   try {
     const { id } = req.params;
-    await projectServices.deleteProject(id);
+    await projectService.deleteProject(id);
     res.status(200).send('engagement has been deleted');
   } catch (error) {
     {
