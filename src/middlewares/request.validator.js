@@ -1,5 +1,5 @@
 const tokenValidationUtil = require('../utils/token.verification');
-const validator = (schema, propery) => (req, res, next) => {
+const validate = (schema, propery) => (req, res, next) => {
   const { error } = schema.validate(req[propery]);
   if (error) {
     res.status(400);
@@ -29,4 +29,4 @@ const reqAuthValidator = async (req, res, next) => {
     }
   }
 };
-module.exports = { validator, reqAuthValidator };
+module.exports = { validate, reqAuthValidator };
