@@ -10,16 +10,7 @@ const listProjects = async () => {
   return allProjects;
 };
 
-const getUsersFromEngagement = async id => {
-  const engagement = await engagements.findOne({
-    where: {
-      engagementId: id,
-    },
-  });
-  return engagement.userIds;
-};
-
-const deleteProjectFromEngagement = async id => {
+const deleteProject = async id => {
   await engagements.destroy({
     where: {
       engagementId: id,
@@ -27,4 +18,4 @@ const deleteProjectFromEngagement = async id => {
   });
 };
 
-module.exports = { getProject, listProjects, deleteProjectFromEngagement, getUsersFromEngagement };
+module.exports = { getProject, listProjects, deleteProject };

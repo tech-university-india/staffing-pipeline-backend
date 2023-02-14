@@ -149,7 +149,7 @@ describe('User Services', () => {
       };
       jest.spyOn(users, 'findOne').mockResolvedValue(mockUser);
       jest.spyOn(users, 'update').mockResolvedValue(mockUsers);
-      const project = await userServices.deleteProjectFromUser(mockUser.userIds, 2);
+      const project = await userServices.deleteProjectFromUsers(mockUser.userIds, 2);
       expect(project).toEqual(undefined);
     });
   });

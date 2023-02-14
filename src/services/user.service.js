@@ -54,7 +54,7 @@ const deleteUser = async userId => {
   return deletedRows;
 };
 
-const deleteProjectFromUser = async (userIds, id) => {
+const deleteProjectFromUsers = async (userIds, id) => {
   const user = await userIds.map(async uid => {
     const userData = await db.users.findOne({
       where: {
@@ -91,5 +91,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
-  deleteProjectFromUser,
+  deleteProjectFromUsers,
 };

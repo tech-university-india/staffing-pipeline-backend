@@ -62,17 +62,8 @@ describe('Engagement Services', () => {
     const mockEngagement = {
       userIds: [1, 2, 3],
     };
-    jest.spyOn(engagements, 'findOne').mockResolvedValue(mockEngagement);
-    const project = await projectService.getUsersFromEngagement(2);
-    expect(project).toEqual(mockEngagement.userIds);
-  });
-
-  it('should delete engagement of the given id from the database', async () => {
-    const mockEngagement = {
-      userIds: [1, 2, 3],
-    };
     jest.spyOn(engagements, 'destroy').mockResolvedValue(mockEngagement);
-    const project = await projectService.deleteProjectFromEngagement(2);
+    const project = await projectService.deleteProject(2);
     expect(project).toEqual(undefined);
   });
 });
