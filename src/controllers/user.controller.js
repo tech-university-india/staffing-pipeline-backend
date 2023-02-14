@@ -22,6 +22,7 @@ const getUser = async (req, res) => {
     }
   }
 };
+
 const createUser = async (req, res) => {
   try {
     const newUser = await userServices.createUser(req.body);
@@ -33,10 +34,13 @@ const createUser = async (req, res) => {
   }
 };
 const deleteUser = async (req, res) => {
-  await userServices.deleteUser(req.params.id);
-  res.status(200).json({ message: 'User deleted' });
+  try {
+    await userServices.deleteUser(req.params.id);
+    res.status(200).json({ message: 'User deleted' });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong.' });
+  }
 };
-
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
