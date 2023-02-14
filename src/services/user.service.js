@@ -1,5 +1,4 @@
-const HttpError = require('../utils/httpError.js');
-const bcrypt = require('bcrypt');
+const HttpError = require('../utils/httpError');
 const db = require('../models');
 
 const listUsers = async () => {
