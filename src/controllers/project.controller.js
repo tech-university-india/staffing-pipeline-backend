@@ -1,4 +1,5 @@
 const projectServices = require('../services/project.service');
+const HttpError = require('../utils/httpError');
 
 const getProject = async (req, res) => {
   try {

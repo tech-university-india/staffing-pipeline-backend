@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const HttpError = require('../utils/HttpError');
+const HttpError = require('../utils/httpError');
 
 const projectSchema = Joi.object({
   name: Joi.string().min(3).max(30),

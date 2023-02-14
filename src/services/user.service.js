@@ -57,7 +57,7 @@ const createUser = async userDetails => {
 const deleteUser = async userId => {
   const deletedUser = await db.users.destroy({
     where: {
-      user_id: userId,
+      userId,
     },
   });
   return deletedUser;
