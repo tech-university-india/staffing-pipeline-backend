@@ -1,134 +1,47 @@
 const projectController = require('../../src/controllers/project.controller');
 const projectService = require('../../src/services/project.service');
 const userService = require('../../src/services/user.service');
+const mockData = require('../__mocks__/project');
 
 describe('Engagements Controllers', () => {
   it('should return the engagement details of the provided id', async () => {
-    jest.spyOn(projectService, 'getProject').mockResolvedValue([
-      {
-        engagementId: 1223,
-        userIds: ['1', '2', '3'],
-        caseStudyIds: ['23', '34', '56'],
-      },
-    ]);
-    const mockReq = {
-      params: jest.fn(),
-    };
-    const mockRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    await projectController.getProject(mockReq, mockRes);
-    expect(mockRes.status).toBeCalledWith(200);
-    expect(mockRes.json).toBeCalledWith([
-      {
-        engagementId: 1223,
-        userIds: ['1', '2', '3'],
-        caseStudyIds: ['23', '34', '56'],
-      },
-    ]);
+    jest.spyOn(projectService, 'getProject').mockResolvedValue([mockData.project.resolvedValue]);
+    await projectController.getProject(mockData.project.mockReq, mockData.project.mockRes);
+    expect(mockData.project.mockRes.status).toBeCalledWith(200);
+    expect(mockData.project.mockRes.json).toBeCalledWith([mockData.project.resolvedValue]);
   });
   it('should return error', async () => {
-    jest.spyOn(projectService, 'getProject').mockRejectedValue(new Error('Internal Server error!!'));
-    const mockReq = {
-      params: jest.fn(),
-    };
-    const mockRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    await projectController.getProject(mockReq, mockRes);
-    expect(mockRes.status).toBeCalledWith(500);
-    expect(mockRes.json).toBeCalledWith({
-      error: 'Internal Server error!!',
-    });
+    jest.spyOn(projectService, 'getProject').mockRejectedValue(new Error(mockData.project.errorMessage));
+    await projectController.getProject(mockData.project.mockReq, mockData.project.mockRes);
+    expect(mockData.project.mockRes.status).toBeCalledWith(500);
+    expect(mockData.project.mockRes.json).toBeCalledWith({ error: mockData.project.errorMessage });
   });
 
   it('should return list of all projects', async () => {
-    jest.spyOn(projectService, 'listProjects').mockResolvedValue([
-      {
-        engagementId: 1223,
-        userIds: ['771', '882', '93'],
-        caseStudyIds: ['263', '364', '586'],
-      },
-      {
-        engagementId: 1223,
-        userIds: ['41', '62', '38'],
-        caseStudyIds: ['23', '34', '56'],
-      },
-      {
-        engagementId: 1223,
-        userIds: ['41', '72', '96'],
-        caseStudyIds: ['235', '364', '576'],
-      },
-    ]);
-    const mockReq = {};
-    const mockRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    await projectController.listProjects(mockReq, mockRes);
-    expect(mockRes.status).toBeCalledWith(200);
-    expect(mockRes.json).toBeCalledWith([
-      {
-        engagementId: 1223,
-        userIds: ['771', '882', '93'],
-        caseStudyIds: ['263', '364', '586'],
-      },
-      {
-        engagementId: 1223,
-        userIds: ['41', '62', '38'],
-        caseStudyIds: ['23', '34', '56'],
-      },
-      {
-        engagementId: 1223,
-        userIds: ['41', '72', '96'],
-        caseStudyIds: ['235', '364', '576'],
-      },
-    ]);
+    jest.spyOn(projectService, 'listProjects').mockResolvedValue(mockData.allProjects.data);
+    await projectController.listProjects(mockData.allProjects.mockReq, mockData.allProjects.mockRes);
+    expect(mockData.allProjects.mockRes.status).toBeCalledWith(200);
+    expect(mockData.allProjects.mockRes.json).toBeCalledWith(mockData.allProjects.data);
   });
   it('should return error', async () => {
-    jest.spyOn(projectService, 'listProjects').mockRejectedValue(new Error('Internal Server error!!'));
-    const mockReq = {};
-    const mockRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    await projectController.listProjects(mockReq, mockRes);
-    expect(mockRes.status).toBeCalledWith(500);
-    expect(mockRes.json).toBeCalledWith({
-      error: 'Internal Server error!!',
-    });
+    jest.spyOn(projectService, 'listProjects').mockRejectedValue(new Error(mockData.allProjects.errorMessage));
+    await projectController.listProjects(mockData.allProjects.mockReq, mockData.allProjects.mockRes);
+    expect(mockData.allProjects.mockRes.status).toBeCalledWith(500);
+    expect(mockData.allProjects.mockRes.json).toBeCalledWith({ error: mockData.allProjects.errorMessage });
   });
 
   it('should delete engagement of the provided id', async () => {
     jest.spyOn(projectService, 'getProject').mockResolvedValue('engagement has been deleted');
     jest.spyOn(userService, 'deleteProjectFromUsers').mockResolvedValue('engagement has been deleted');
     jest.spyOn(projectService, 'deleteProject').mockResolvedValue('engagement has been deleted');
-    const mockReq = {
-      params: jest.fn(),
-    };
-    const mockRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    await projectController.deleteProject(mockReq, mockRes);
-    expect(mockRes.status).toBeCalledWith(200);
-    expect(mockRes.json).toBeCalledWith({ message: 'engagement has been deleted' });
+    await projectController.deleteProject(mockData.todelete.mockReq, mockData.todelete.mockRes);
+    expect(mockData.todelete.mockRes.status).toBeCalledWith(200);
+    expect(mockData.todelete.mockRes.json).toBeCalledWith({ message: 'engagement has been deleted' });
   });
   it('should return error', async () => {
-    jest.spyOn(projectService, 'getProject').mockRejectedValue(new Error('Internal Server error!!'));
-    const mockReq = {
-      params: jest.fn(),
-    };
-    const mockRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    await projectController.deleteProject(mockReq, mockRes);
-    expect(mockRes.status).toBeCalledWith(500);
-    expect(mockRes.json).toBeCalledWith({
-      error: 'Internal Server error!!',
-    });
+    jest.spyOn(projectService, 'getProject').mockRejectedValue(new Error(mockData.todelete.errorMessage));
+    await projectController.deleteProject(mockData.todelete.mockReq, mockData.todelete.mockRes);
+    expect(mockData.todelete.mockRes.status).toBeCalledWith(500);
+    expect(mockData.todelete.mockRes.json).toBeCalledWith({ error: mockData.todelete.errorMessage });
   });
 });
