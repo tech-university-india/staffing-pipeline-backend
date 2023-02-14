@@ -56,5 +56,4 @@ describe('Case Study Services', () => {
       expect(result).toEqual(resolvedValue);
     });
   });
-
 });

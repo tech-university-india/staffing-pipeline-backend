@@ -5,7 +5,7 @@ const deleteCaseStudy = async id => {
   if (!deletedCaseStudy) return null;
   await deletedCaseStudy.destroy();
   return deletedCaseStudy;
-}
+};
 
 const updateCaseStudy = async (id, body) => {
   const caseStudy = await case_studies.findOne({ where: { case_study_id: id } });
@@ -15,7 +15,6 @@ const updateCaseStudy = async (id, body) => {
   }
   await caseStudy.save();
   return caseStudy;
-
 };
 
 module.exports = {

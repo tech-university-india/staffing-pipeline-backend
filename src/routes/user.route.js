@@ -1,5 +1,7 @@
 const express = require('express');
 
+const requestValidator = require('../middlewares/request.validator');
+const schemas = require('../middlewares/schemas.validator');
 const { updateIdValidator, updateBodyValidator } = require('../middlewares/user.validator');
 
 const userControllers = require('../controllers/user.controller');

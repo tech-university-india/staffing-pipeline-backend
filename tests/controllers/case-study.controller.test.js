@@ -135,5 +135,4 @@ describe('CaseStudyController', () => {
       expect(mockRes.json).toHaveBeenCalledWith({ message: 'Something went wrong' });
     });
   });
-
 });
