@@ -1,5 +1,5 @@
 const userServices = require('../services/user.service');
-const { NotFoundError } = require('../../src/utils/HttpError');
+const { NotFoundError } = require('../../src/utils/httpError');
 
 const listUsers = async (_, res) => {
   const allUsers = await userServices.listUsers();

@@ -1,7 +1,6 @@
 // require user model
 
-const CustomErrors = require('../utils/HttpError');
-const HttpError = require('../utils/httpError');
+const CustomErrors = require('../utils/httpError');
 const db = require('../models');
 
 const getUser = async userId => {
@@ -21,7 +20,7 @@ const listUsers = async () => {
     return allUsers;
   } catch (error) {
     console.log(error);
-    throw new HttpError(error.message, 500);
+    throw new CustomErrors.HttpError(error.message, 500);
   }
 };
 
@@ -30,7 +29,7 @@ const createUser = async userDetails => {
     const newUser = await db.users.create(userDetails);
     return newUser;
   } catch (error) {
-    throw new HttpError(error.message, 400);
+    throw new CustomErrors.HttpError(error.message, 400);
   }
 };
 
