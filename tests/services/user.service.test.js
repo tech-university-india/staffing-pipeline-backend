@@ -4,26 +4,11 @@ const userServices = require('../../src/services/user.service');
 const { users } = require('../../src/models');
 // require NotFoundError
 const { NotFoundError } = require('../../src/utils/httpError');
-
+const mockdata = require('../__mocks__/user');
 describe('User Services', () => {
   describe('function listUsers', () => {
     it('Should return an array of users', async () => {
-      const resolvedValue = [
-        {
-          user_id: '1',
-          name: 'john doe',
-          email: 'johndoe@mckinsey.com',
-          fmno: '123456',
-          current_engagement_ids: ['1', '2'],
-          case_study_ids: ['1', '2'],
-          skills: ['node, react'],
-          role: 'intern',
-          guild: 'swe',
-          past_engagement_ids: ['1', '2'],
-          createdAt: '2022-01-17T04:33:12.000Z',
-          updatedAt: '2022-01-17T04:33:12.000Z',
-        },
-      ];
+      const resolvedValue = [mockdata.getUser.resolvedValue];
       jest.spyOn(users, 'findAll').mockResolvedValue(resolvedValue);
       const result = await userServices.listUsers();
       expect(result).toEqual(resolvedValue);
@@ -31,20 +16,7 @@ describe('User Services', () => {
   });
   describe('function getOneUser', () => {
     it('Should return a user object with given user_id', async () => {
-      const resolvedValue = {
-        user_id: '1',
-        name: 'john doe',
-        email: 'johndoe@mckinsey.com',
-        fmno: '123456',
-        current_engagement_ids: ['1', '2'],
-        case_study_ids: ['1', '2'],
-        skills: ['node, react'],
-        role: 'intern',
-        guild: 'swe',
-        past_engagement_ids: ['1', '2'],
-        createdAt: '2022-01-17T04:33:12.000Z',
-        updatedAt: '2022-01-17T04:33:12.000Z',
-      };
+      const resolvedValue = mockdata.getUser.resolvedValue;
       jest.spyOn(users, 'findOne').mockResolvedValue(resolvedValue);
       const result = await userServices.getUser('1');
       expect(result).toEqual(resolvedValue);
@@ -58,98 +30,39 @@ describe('User Services', () => {
   });
   describe('function deleteUser', () => {
     it('should delete an user', async () => {
-      const deletedUser = {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        password: '12345',
-      };
-      jest.spyOn(users, 'destroy').mockResolvedValue(deletedUser);
-      const response = await userServices.deleteUser(deletedUser.id);
-      expect(response).toEqual(deletedUser);
+      jest.spyOn(users, 'destroy').mockResolvedValue(mockdata.deleteUser.deletedUser);
+      const response = await userServices.deleteUser(mockdata.deleteUser.deletedUser.id);
+      expect(response).toEqual(mockdata.deleteUser.deletedUser);
     });
     it('should delete an user', async () => {
-      const deletedUser = {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        password: '12345',
-      };
-      jest.spyOn(users, 'destroy').mockResolvedValue(deletedUser);
-      await userServices.deleteUser(deletedUser.id);
-      expect(users.destroy).toHaveBeenCalledWith({
-        where: {
-          userId: deletedUser.id,
-        },
-      });
+      jest.spyOn(users, 'destroy').mockResolvedValue(mockdata.deleteUser.deletedUser);
+      const response = await userServices.deleteUser(mockdata.deleteUser.deletedUser.id);
+      expect(response).toEqual(mockdata.deleteUser.deletedUser);
     });
   });
   describe('function createUser', () => {
     it('should create a new user', async () => {
-      const userData = {
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        password: '12345',
-      };
-      const newUser = {
-        id: 1,
-        ...userData,
-      };
-      jest.spyOn(users, 'create').mockResolvedValue(newUser);
-      const response = await userServices.createUser(userData);
-      expect(response).toEqual(newUser);
+      jest.spyOn(users, 'create').mockResolvedValue(mockdata.createUser.newUser);
+      const response = await userServices.createUser(mockdata.createUser.newUser);
+      expect(response).toEqual(mockdata.createUser.newUser);
     });
   });
   describe('function updateUser', () => {
     it('Should update user details', async () => {
-      const mockReq = {
-        params: {
-          id: '1',
-        },
-        body: {
-          name: 'John Doe',
-          email: 'JohnDoe@mckinsey.com',
-          current_engagement_ids: ['1', '2', '3', '4'],
-        },
-      };
-      const resolvedValue = {
-        user_id: '1',
-        name: 'John Doe',
-        email: 'JohnDoe@mckinsey.com',
-        fmno: '123456',
-        current_engagement_ids: ['1', '2', '3', '4'],
-        case_study_ids: ['1', '2'],
-        skills: ['node, react'],
-        role: 'intern',
-        guild: 'swe',
-        past_engagement_ids: ['1', '2'],
-        createdAt: '2022-01-17T04:33:12.000Z',
-        updatedAt: '2022-01-17T04:33:12.000Z',
-        save: jest.fn(),
-      };
+      const resolvedValue = { ...mockdata.updateUser.resolvedValue, save: jest.fn() };
       jest.spyOn(users, 'findOne').mockResolvedValue(resolvedValue);
-      const result = await userServices.updateUser(mockReq.params.id, mockReq.body);
+      const result = await userServices.updateUser(
+        mockdata.updateUser.mockReq.params.id,
+        mockdata.updateUser.mockReq.body
+      );
       expect(result).toEqual(resolvedValue);
     });
   });
   describe('function deleteFromUser', () => {
     it('should delete engagement of the given id from the database', async () => {
-      const mockUser = {
-        userIds: [11, 23],
-        dataValues: {
-          currentEngagementIds: [12, 13],
-          pastEngagementIds: [12, 13],
-        },
-        map: jest.fn(),
-      };
-      const mockUsers = {
-        userId: 22,
-        currentEngagementIds: [122, 154],
-        pastEngagementIds: [12, 13],
-      };
-      jest.spyOn(users, 'findOne').mockResolvedValue(mockUser);
-      jest.spyOn(users, 'update').mockResolvedValue(mockUsers);
-      const project = await userServices.deleteProjectFromUsers(mockUser.userIds, 2);
+      jest.spyOn(users, 'findOne').mockResolvedValue(mockdata.deleteUser.mockUser);
+      jest.spyOn(users, 'update').mockResolvedValue(mockdata.deleteUser.mockUsers);
+      const project = await userServices.deleteProjectFromUsers(mockdata.deleteUser.mockUser.userIds, 2);
       expect(project).toEqual(undefined);
     });
   });
