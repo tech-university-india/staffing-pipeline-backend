@@ -17,7 +17,22 @@ const updateCaseStudy = async (id, body) => {
   return caseStudy;
 };
 
+const setProjectAsNull = async id => {
+  const result = await case_studies.update(
+    {
+      engagementId: null,
+    },
+    {
+      where: {
+        engagementId: id,
+      },
+    }
+  );
+  return result;
+};
+
 module.exports = {
   updateCaseStudy,
   deleteCaseStudy,
+  setProjectAsNull,
 };
