@@ -7,7 +7,7 @@ const updateCaseStudy = async (id, body) => {
   for (let key in body) {
     caseStudy[key] = body[key];
   }
-  logger.info("insert updated caseStudy to the Database");
+  logger.info('insert updated caseStudy to the Database');
   await caseStudy.save();
   return caseStudy;
 };

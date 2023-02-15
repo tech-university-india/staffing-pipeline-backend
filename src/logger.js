@@ -1,1 +1,1 @@
-module.exports = require('pino')({})
+module.exports = require('pino')({});

@@ -18,11 +18,11 @@ const getUser = async userId => {
 };
 const listUsers = async () => {
   try {
-    logger.info("Get all users from the Database");
+    logger.info('Get all users from the Database');
     const allUsers = await db.users.findAll();
     return allUsers;
   } catch (error) {
-    logger.info("error in getting all the users from the database");
+    logger.info('error in getting all the users from the database');
     console.log(error);
     throw new CustomErrors.HttpError(error.message, 500);
   }
@@ -30,20 +30,20 @@ const listUsers = async () => {
 
 const createUser = async userDetails => {
   try {
-    logger.info("create user in the database");
+    logger.info('create user in the database');
     const newUser = await db.users.create(userDetails);
     return newUser;
   } catch (error) {
-    logger.info("Error in creating user");
+    logger.info('Error in creating user');
     throw new CustomErrors.HttpError(error.message, 400);
   }
 };
 
 const updateUser = async (userId, userDetails) => {
-  logger.info("update user in database with user_id: "+userId);
+  logger.info('update user in database with user_id: ' + userId);
   const user = await db.users.findOne({ where: { userId } });
   if (!user) {
-    logger.info("No user in database exists with user_id: "+userId);
+    logger.info('No user in database exists with user_id: ' + userId);
     return null;
   }
   for (let key in userDetails) {
@@ -54,7 +54,7 @@ const updateUser = async (userId, userDetails) => {
 };
 
 const deleteUser = async userId => {
-  logger.info("Delete user from database with user_id: "+userId);
+  logger.info('Delete user from database with user_id: ' + userId);
   const deletedRows = db.users.destroy({
     where: {
       userId,
