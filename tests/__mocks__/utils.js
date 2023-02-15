@@ -1,3 +1,5 @@
+let testEmail = 'johndoe@mckinsey.com';
+let testName = 'John Doe';
 const route = {
   mockRes: {
     json: jest.fn(),
@@ -8,7 +10,7 @@ const route = {
       authorization: undefined,
     },
     body: {
-      email: 'promit.revar2211@gmail.com',
+      email: testEmail,
       password: 'test',
     },
   },
@@ -21,8 +23,8 @@ const route = {
   resolvedValue: {
     data: {
       user_id: '9a492c13-85e8-4b26-9339-a5d037664d1a',
-      name: 'Promit Revar',
-      email: 'promit.revar2211@gmail.com',
+      name: testName,
+      email: testEmail,
       fmno: null,
       current_engagement_ids: null,
       case_study_ids: null,
@@ -37,7 +39,7 @@ const route = {
     success: true,
   },
   jwtResolvedValue: {
-    email: 'promit.revar2211@gmail.com',
+    email: testEmail,
     iat: 1675968809,
     exp: 1675972409,
   },
