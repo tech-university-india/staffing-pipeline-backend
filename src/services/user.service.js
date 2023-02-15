@@ -71,7 +71,7 @@ const removeCurrentEngagement = async (userId, engagementId) => {
 };
 
 const deleteUser = async userId => {
-  const deletedRows = db.users.destroy({
+  const deletedUser = await db.users.destroy({
     where: {
       userId,
     },
