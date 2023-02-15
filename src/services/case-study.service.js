@@ -1,5 +1,13 @@
 const { case_studies } = require('../models');
 const logger = require('../logger');
+
+const deleteCaseStudy = async id => {
+  const deletedCaseStudy = await case_studies.findOne({ where: { case_study_id: id } });
+  if (!deletedCaseStudy) return null;
+  await deletedCaseStudy.destroy();
+  return deletedCaseStudy;
+};
+
 const updateCaseStudy = async (id, body) => {
   logger.info(`get case_study data from database for the id: ${id}`);
   const caseStudy = await case_studies.findOne({ where: { case_study_id: id } });
@@ -14,4 +22,5 @@ const updateCaseStudy = async (id, body) => {
 
 module.exports = {
   updateCaseStudy,
+  deleteCaseStudy,
 };

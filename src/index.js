@@ -22,6 +22,7 @@ const swaggerDocument = require('../swagger.json');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+const accessLogStream = fs.createWriteStream(path.join(__dirname + '/../', 'access.log'), { flags: 'a' });
 // middlewares
 app.use(express.json());
 app.use('/api', router);

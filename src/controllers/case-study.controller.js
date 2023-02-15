@@ -5,7 +5,9 @@ const updateCaseStudyController = async (req, res) => {
     logger.info('call the updateCaseStudy service');
     const { id } = req.params;
     const { body } = req;
-    const updatedCaseStudy = await updateCaseStudy.updateCaseStudy(id, body);
+
+    const updatedCaseStudy = await caseStudyServices.updateCaseStudy(id, body);
+
     if (!updatedCaseStudy) return res.status(404).json({ message: 'Case study not found' });
     res.status(200).json(updatedCaseStudy);
   } catch (error) {
@@ -16,6 +18,20 @@ const updateCaseStudyController = async (req, res) => {
   }
 };
 
+const deleteCaseStudy = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedCaseStudy = await caseStudyServices.deleteCaseStudy(id);
+    if (!deletedCaseStudy) return res.status(404).json({ message: 'Case study not found' });
+    res.status(200).json(deletedCaseStudy);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Something went wrong',
+    });
+  }
+};
+
 module.exports = {
-  updateCaseStudyController,
+  updateCaseStudy,
+  deleteCaseStudy,
 };
