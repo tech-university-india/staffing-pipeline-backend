@@ -1,8 +1,12 @@
-// require joi
 const Joi = require('joi');
+
 const uuidType = Joi.string().uuid({
   version: ['uuidv4', 'uuidv1'],
 });
+
+const userIdSchema = Joi.object({
+  userId: uuidType.required(),
+}).required();
 
 const userSchema = Joi.object({
   name: Joi.string().min(3).max(30).required(),
@@ -18,4 +22,4 @@ const loginReqSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
 });
-module.exports = { userSchema, loginReqSchema };
+module.exports = { userSchema, loginReqSchema, userIdSchema };

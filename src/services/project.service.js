@@ -10,4 +10,12 @@ const listProjects = async () => {
   return allProjects;
 };
 
-module.exports = { getProject, listProjects };
+const deleteProject = async id => {
+  await engagements.destroy({
+    where: {
+      engagementId: id,
+    },
+  });
+};
+
+module.exports = { getProject, listProjects, deleteProject };
