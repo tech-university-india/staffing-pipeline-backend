@@ -32,6 +32,6 @@ const deleteCaseStudy = async (req, res) => {
 };
 
 module.exports = {
-  updateCaseStudy,
+  updateCaseStudyController,
   deleteCaseStudy,
 };

@@ -5,20 +5,20 @@ describe('CaseStudyController', () => {
   describe('updateCaseStudyController', () => {
     it('should update caseStudy details', async () => {
       jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue(mockData.update.resolvedValue);
-      await updateCaseStudy.updateCaseStudy(mockData.update.mockReq, mockData.update.mockRes);
+      await updateCaseStudy.updateCaseStudyController(mockData.update.mockReq, mockData.update.mockRes);
       expect(mockData.update.mockRes.status).toHaveBeenCalledWith(200);
       expect(mockData.update.mockRes.json).toHaveBeenCalledWith(mockData.update.resolvedValue);
     });
     it('Should return 404 if caseStudy not found', async () => {
       const resolvedValue = null;
       jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue(resolvedValue);
-      await updateCaseStudy.updateCaseStudy(mockData.update.mockReq, mockData.update.mockRes);
+      await updateCaseStudy.updateCaseStudyController(mockData.update.mockReq, mockData.update.mockRes);
       expect(mockData.update.mockRes.status).toHaveBeenCalledWith(404);
       expect(mockData.update.mockRes.json).toHaveBeenCalledWith({ message: 'Case study not found' });
     });
     it('Should return 500 if something went wrong', async () => {
       jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockRejectedValue(new Error('Something went wrong'));
-      await updateCaseStudy.updateCaseStudy(mockData.update.mockReq, mockData.update.mockRes);
+      await updateCaseStudy.updateCaseStudyController(mockData.update.mockReq, mockData.update.mockRes);
       expect(mockData.update.mockRes.status).toHaveBeenCalledWith(500);
       expect(mockData.update.mockRes.json).toHaveBeenCalledWith({ message: 'Something went wrong' });
     });
