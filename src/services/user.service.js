@@ -79,6 +79,37 @@ const deleteUser = async userId => {
   return deletedRows;
 };
 
+const deleteProjectFromUsers = async (userIds, id) => {
+  const users = await userIds.map(async uid => {
+    const userData = await db.users.findOne({
+      where: {
+        userId: uid,
+      },
+    });
+    userData.dataValues.currentEngagementIds = userData.dataValues.currentEngagementIds.filter(
+      element => element !== id
+    );
+    userData.dataValues.pastEngagementIds = userData.dataValues.pastEngagementIds.filter(element => element !== id);
+    return userData.dataValues;
+  });
+  const updatedUsers = await Promise.all(users);
+  updatedUsers.map(async user => {
+    const userData = await db.users.update(
+      {
+        currentEngagementIds: user.currentEngagementIds,
+        pastEngagementIds: user.pastEngagementIds,
+      },
+      {
+        where: {
+          userId: user.userId,
+        },
+      }
+    );
+    return userData;
+  });
+  await Promise.all(updatedUsers);
+};
+
 module.exports = {
   getUser,
   listUsers,
@@ -88,4 +119,5 @@ module.exports = {
   deleteUser,
   addCurrentEngagement,
   removeCurrentEngagement,
+  deleteProjectFromUsers,
 };

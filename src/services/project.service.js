@@ -36,4 +36,12 @@ const updateProject = async (id, body) => {
   await engagement.save();
   return engagement;
 };
-module.exports = { getProject, listProjects, updateProject };
+const deleteProject = async id => {
+  await engagements.destroy({
+    where: {
+      engagementId: id,
+    },
+  });
+};
+
+module.exports = { getProject, listProjects, deleteProject, updateProject };

@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Engagements.init(
     {
-      engagementId: DataTypes.STRING,
+      engagementId: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+      },
       name: DataTypes.STRING,
       tags: DataTypes.ARRAY(DataTypes.STRING),
       skills: DataTypes.ARRAY(DataTypes.STRING),
