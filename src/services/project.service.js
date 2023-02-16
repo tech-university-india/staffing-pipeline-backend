@@ -1,8 +1,8 @@
 const { engagements } = require('../models');
 const CustomErrors = require('../utils/httpError');
 
-const getProject = async id => {
-  const engagement = await engagements.findByPk(id);
+const getProject = async projectId => {
+  const engagement = await engagements.findByPk(projectId);
   if (!engagement) {
     throw new CustomErrors.NotFoundError('Engagement not found');
   }
@@ -19,10 +19,10 @@ const listProjects = async () => {
   }
 };
 
-const deleteProject = async id => {
+const deleteProject = async projectId => {
   await engagements.destroy({
     where: {
-      engagementId: id,
+      engagementId: projectId,
     },
   });
 };

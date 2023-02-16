@@ -34,7 +34,7 @@ describe('Engagements Controllers', () => {
   it('should delete engagement of the provided id', async () => {
     jest.spyOn(projectService, 'getProject').mockResolvedValue('engagement has been deleted');
     jest.spyOn(userService, 'deleteProjectFromUsers').mockResolvedValue('engagement has been deleted');
-    jest.spyOn(caseStudyService, 'setProjectAsNull').mockResolvedValue('engagement has been deleted');
+    jest.spyOn(caseStudyService, 'removeProjectFromCaseStudy').mockResolvedValue('engagement has been deleted');
     jest.spyOn(projectService, 'deleteProject').mockResolvedValue('engagement has been deleted');
     await projectController.deleteProject(mockData.todelete.mockReq, mockData.todelete.mockRes);
     expect(mockData.todelete.mockRes.status).toBeCalledWith(200);

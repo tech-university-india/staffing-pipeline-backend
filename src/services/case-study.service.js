@@ -17,14 +17,14 @@ const updateCaseStudy = async (id, body) => {
   return caseStudy;
 };
 
-const setProjectAsNull = async id => {
+const removeProjectFromCaseStudy = async projectId => {
   const result = await case_studies.update(
     {
       engagementId: null,
     },
     {
       where: {
-        engagementId: id,
+        engagementId: projectId,
       },
     }
   );
@@ -34,5 +34,5 @@ const setProjectAsNull = async id => {
 module.exports = {
   updateCaseStudy,
   deleteCaseStudy,
-  setProjectAsNull,
+  removeProjectFromCaseStudy,
 };

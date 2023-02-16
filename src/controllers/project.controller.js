@@ -34,7 +34,7 @@ const deleteProject = async (req, res) => {
     const { id } = req.params;
     const { userIds } = await projectService.getProject(id);
     await userService.deleteProjectFromUsers(userIds, id);
-    await caseStudyService.setProjectAsNull(id);
+    await caseStudyService.removeProjectFromCaseStudy(id);
     await projectService.deleteProject(id);
     res.status(200).json({ message: 'engagement has been deleted' });
   } catch (error) {
