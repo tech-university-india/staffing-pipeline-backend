@@ -17,12 +17,13 @@ const listProjects = async () => {
     const allProjects = await db.engagements.findAll();
     return allProjects;
   } catch (error) {
-    console.log(error);
+    logger.error({ error: error, text: 'error in fetching all the engagements from the database' });
     throw new CustomErrors.HttpError(error.message, 500);
   }
 };
 
 const deleteProject = async projectId => {
+  logger.info('deleteing project with ProjectId: ' + projectId);
   await db.engagements.destroy({
     where: {
       engagementId: projectId,

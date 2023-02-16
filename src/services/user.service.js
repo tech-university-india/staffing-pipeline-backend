@@ -11,7 +11,7 @@ const getUser = async userId => {
     },
   });
   if (!user) {
-    logger.info(`No user with user_id: ${userId}`);
+    logger.error(`No user with user_id: ${userId}`);
     throw new CustomErrors.NotFoundError('User not found');
   }
   return user;
@@ -22,8 +22,7 @@ const listUsers = async () => {
     const allUsers = await db.users.findAll();
     return allUsers;
   } catch (error) {
-    logger.info('error in getting all the users from the database');
-    console.log(error);
+    logger.error(error);
     throw new CustomErrors.HttpError(error.message, 500);
   }
 };
@@ -34,7 +33,7 @@ const createUser = async userDetails => {
     const newUser = await db.users.create(userDetails);
     return newUser;
   } catch (error) {
-    logger.info('Error in creating user');
+    logger.error(error);
     throw new CustomErrors.HttpError(error.message, 400);
   }
 };

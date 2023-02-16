@@ -17,11 +17,11 @@ const validateUserAndReturnToken = async data => {
 
       return { data: user.dataValues, token: token, success: true, message: 'Login successful' };
     } else {
-      logger.info('password is not correct');
+      logger.error('password is not correct');
       throw new LoginError('Invalid credentials', 401);
     }
   } else {
-    logger.info(`no such user was found with email: ${email}`);
+    logger.error(`no such user was found with email: ${email}`);
     throw new LoginError('No such user found', 404);
   }
 };
@@ -32,7 +32,7 @@ const setUserCredentials = async credentials => {
   logger.info(`get the user data from database auth table by passing email: ${email}`);
   const user = await db.auth.findOne({ where: { email: email } });
   if (user) {
-    logger.info(`user already exists with email: ${email}`);
+    logger.error(`user already exists with email: ${email}`);
     throw new HttpError('User already exists', 400);
   }
   logger.info(`create user with email: ${email} and password: ${password}`);
@@ -41,7 +41,7 @@ const setUserCredentials = async credentials => {
   if (result) {
     return result;
   } else {
-    logger.info('user not created');
+    logger.error('user not created');
     throw new HttpError('cannot create the user', 500);
   }
 };
