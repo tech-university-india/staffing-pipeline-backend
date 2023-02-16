@@ -8,12 +8,6 @@
 git clone git@github.com:tech-university-india/staffing-pipeline-backend.git
 ```
 
-**Clone Repository with Https**
-
-```
-git clone https://github.com/tech-university-india/staffing-pipeline-backend.git
-```
-
 **Setup and Start Server**
 
 ```
