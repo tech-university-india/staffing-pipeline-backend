@@ -22,7 +22,7 @@ const updateCaseStudy = async (id, body) => {
 };
 
 const removeProjectFromCaseStudy = async projectId => {
-  logger.info("Remove project from casestudy service");
+  logger.info('Remove project from casestudy service');
   const result = await db.case_studies.update(
     {
       engagementId: null,
