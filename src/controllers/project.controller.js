@@ -1,5 +1,9 @@
-const projectServices = require('../services/project.service');
+
 const logger = require('../logger');
+const projectService = require('../services/project.service');
+const userService = require('../services/user.service');
+const caseStudyService = require('../services/case-study.service');
+
 const getProject = async (req, res) => {
   try {
     const { id } = req.params;
@@ -36,6 +40,7 @@ const deleteProject = async (req, res) => {
     const { id } = req.params;
     const { userIds } = await projectService.getProject(id);
     await userService.deleteProjectFromUsers(userIds, id);
+    await caseStudyService.removeProjectFromCaseStudy(id);
     await projectService.deleteProject(id);
     res.status(200).json({ message: 'engagement has been deleted' });
   } catch (error) {
