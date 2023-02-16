@@ -2,16 +2,20 @@
 
 ## Local Development
 
-**Clone Repository**
+**Clone Repository with SSH**
+
 ```
 git clone git@github.com:tech-university-india/staffing-pipeline-backend.git
 ```
 
 **Setup and Start Server**
+
 ```
   sh setup.sh
 ```
+
 **Reset Database and Start Server**
+
 ```
   sh resetdb.sh
 ```
