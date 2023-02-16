@@ -35,7 +35,33 @@ const deleteCaseStudy = async (req, res) => {
   }
 };
 
+const getCaseStudy = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const caseStudy = await caseStudyServices.getCaseStudy(id);
+    if (!caseStudy) throw new Error('Case study not found');
+    res.status(200).json(caseStudy);
+  } catch (error) {
+    res.status(404).json({
+      message: error.message,
+    });
+  }
+};
+
+const listCaseStudies = async (req, res) => {
+  try {
+    const allCaseStudies = await caseStudyServices.listCaseStudies();
+    res.status(200).json(allCaseStudies);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Something went wrong',
+    });
+  }
+};
+
 module.exports = {
   updateCaseStudy,
   deleteCaseStudy,
+  getCaseStudy,
+  listCaseStudies,
 };

@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add altering commands here.
      *
@@ -12,7 +12,7 @@ module.exports = {
     await queryInterface.removeConstraint('case_studies', 'engagement_id_fk');
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add reverting commands here.
      *
@@ -28,5 +28,5 @@ module.exports = {
         field: 'engagement_id',
       },
     });
-  }
+  },
 };

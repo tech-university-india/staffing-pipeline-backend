@@ -36,8 +36,22 @@ const removeProjectFromCaseStudy = async projectId => {
   return result;
 };
 
+const getCaseStudy = async id => {
+  const caseStudy = await db.case_studies.findOne({ where: { case_study_id: id } });
+  return caseStudy;
+};
+
+const listCaseStudies = async () => {
+  console.log('here');
+  const allCaseStudies = await db.case_studies.findAll();
+  console.log(allCaseStudies);
+  return allCaseStudies;
+};
+
 module.exports = {
   updateCaseStudy,
   deleteCaseStudy,
   removeProjectFromCaseStudy,
+  getCaseStudy,
+  listCaseStudies,
 };
