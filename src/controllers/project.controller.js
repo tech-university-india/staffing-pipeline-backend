@@ -40,8 +40,23 @@ const updateProject = async (req, res) => {
     const { id } = req.params;
     const { body } = req;
     const updatedProject = await projectServices.updateProject(id, body);
+    if (body['userIds']) {
+      const usersAlreadyInEngagement = await Promise.all(
+        updatedProject.userIds.map(async userId => userService.getUserByPk(userId))
+      );
+      usersAlreadyInEngagement.forEach(async user => {
+        if (!body['userIds'].includes(user.userId)) {
+          await userService.removeCurrentEngagement(user.userId, updatedProject.engagementId);
+        }
+      });
+      await Promise.all(
+        body['userIds'].map(userId => userService.addCurrentEngagement(userId, updatedProject.engagementId))
+      );
+      updatedProject['userIds'] = body['userIds'];
+    }
     res.status(200).json(updatedProject);
   } catch (error) {
+    console.log(error);
     if (error instanceof HttpError) {
       res.status(error.statusCode).json({
         error: error.message,

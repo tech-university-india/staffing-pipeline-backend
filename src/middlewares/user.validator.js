@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const HttpError = require('../utils/httpError.js');
+const { HttpError } = require('../utils/httpError.js');
 
 const uuidType = Joi.string().uuid({
   version: ['uuidv4', 'uuidv1'],

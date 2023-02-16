@@ -3,6 +3,7 @@ const projectService = require('../../src/services/project.service');
 const userService = require('../../src/services/user.service');
 const caseStudyService = require('../../src/services/case-study.service');
 const mockData = require('../__mocks__/project');
+const mockDataUser = require('../__mocks__/user');
 
 describe('Engagements Controllers', () => {
   it('should return the engagement details of the provided id', async () => {
@@ -48,7 +49,10 @@ describe('Engagements Controllers', () => {
   });
   it('Should update the project', async () => {
     jest.spyOn(projectService, 'updateProject').mockResolvedValue(mockData.project.resolvedValue);
-    await projectController.updateProject(mockData.project.mockReq, mockData.project.mockRes);
+    jest.spyOn(userService, 'getUserByPk').mockResolvedValue(mockDataUser.getUser.resolvedValue);
+    jest.spyOn(userService, 'addCurrentEngagement').mockResolvedValue(mockDataUser.getUser.resolvedValue);
+    jest.spyOn(userService, 'removeCurrentEngagement').mockResolvedValue(mockDataUser.getUser.resolvedValue);
+    await projectController.updateProject(mockData.toUpdate.mockReq, mockData.project.mockRes);
     expect(mockData.project.mockRes.status).toBeCalledWith(200);
     expect(mockData.project.mockRes.json).toBeCalledWith(mockData.project.resolvedValue);
   });

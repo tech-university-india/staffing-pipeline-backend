@@ -1,5 +1,5 @@
 const { engagements } = require('../models');
-const HttpError = require('../utils/httpError');
+const { HttpError } = require('../utils/httpError');
 const { getUserByPk, addCurrentEngagement, removeCurrentEngagement } = require('./user.service');
 const db = require('../models');
 const logger = require('../logger');
@@ -31,18 +31,6 @@ const updateProject = async (id, body) => {
     throw new HttpError('Project not found', 404);
   }
   for (let key in body) {
-    if (key === 'userIds') {
-      const usersAlreadyInEngagement = await Promise.all(engagement.userIds.map(async userId => getUserByPk(userId)));
-      // remove engagementId for users removed from engagement
-      usersAlreadyInEngagement.forEach(async user => {
-        if (!body['userIds'].includes(user.userId)) {
-          await removeCurrentEngagement(user.userId, engagement.engagementId);
-        }
-      });
-      //add engagementId to all users
-      await Promise.all(engagement['userIds'].map(userId => addCurrentEngagement(userId, engagement.engagementId)));
-      //remove engagementId from all users not in body
-    }
     engagement[key] = body[key];
   }
   await engagement.save();

@@ -61,8 +61,11 @@ const updateUser = async (userId, userDetails) => {
 
 const addCurrentEngagement = async (userId, engagementId) => {
   const user = await getUserByPk(userId);
+  console.log(user.dataValues);
   if (!user.currentEngagementIds.includes(engagementId)) {
-    user.currentEngagementIds.push(engagementId);
+    console.log('here adding engagementId', engagementId);
+    user.currentEngagementIds = [...user.currentEngagementIds, engagementId];
+    console.log(user);
     await user.save();
   }
   return user;
