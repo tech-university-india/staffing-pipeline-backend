@@ -40,7 +40,7 @@ const createUser = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
   try {
-    logger.info('deleting the user with UserId: ' + req.params.id);
+    logger.info('deleting the user with id: ' + req.params.id);
     await userServices.deleteUser(req.params.id);
     res.status(200).json({ message: 'User deleted' });
   } catch (error) {
@@ -52,7 +52,7 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    logger.info('updating user with userId: ' + req.params.userId);
+    logger.info('updating user with id: ' + req.params.userId);
     const updatedUser = await userServices.updateUser(id, body);
     if (!updatedUser) res.status(404).json({ message: 'User not found' });
     res.status(200).json(updatedUser);

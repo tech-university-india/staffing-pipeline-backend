@@ -23,7 +23,7 @@ const listProjects = async () => {
 };
 
 const deleteProject = async projectId => {
-  logger.info('deleteing project with ProjectId: ' + projectId);
+  logger.info('deleteing project with id: ' + projectId);
   await db.engagements.destroy({
     where: {
       engagementId: projectId,

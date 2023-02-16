@@ -2,7 +2,7 @@ const caseStudyServices = require('../services/case-study.service');
 const logger = require('../logger');
 const updateCaseStudy = async (req, res) => {
   try {
-    logger.info('updating CaseStudy with id: ' + req.params.id);
+    logger.info('updating casestudy with id: ' + req.params.id);
     const { id } = req.params;
     const { body } = req;
 

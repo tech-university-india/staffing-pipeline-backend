@@ -2,7 +2,7 @@ const authServices = require('../services/auth.service');
 const logger = require('../logger');
 const loginController = async (req, res) => {
   try {
-    logger.info('call the validateUserAndReturnToken service');
+    logger.info('fetching token and validating user');
     const validate = await authServices.validateUserAndReturnToken(req.body);
     res.status(200).json({ token: validate.token, success: true });
   } catch (error) {

@@ -16,13 +16,13 @@ const updateCaseStudy = async (id, body) => {
   for (let key in body) {
     caseStudy[key] = body[key];
   }
-  logger.info('insert updated caseStudy to the Database');
+  logger.info('insert updated caseStudy to the database');
   await caseStudy.save();
   return caseStudy;
 };
 
 const removeProjectFromCaseStudy = async projectId => {
-  logger.info('Remove project from casestudy service');
+  logger.info('remove project from casestudy service');
   const result = await db.case_studies.update(
     {
       engagementId: null,

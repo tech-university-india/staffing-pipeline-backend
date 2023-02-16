@@ -6,7 +6,7 @@ const caseStudyService = require('../services/case-study.service');
 const getProject = async (req, res) => {
   try {
     const { id } = req.params;
-    logger.info('fetching Project By ProjectId: ' + id);
+    logger.info('fetching project by id: ' + id);
     const project = await projectServices.getProject(id);
     res.status(200).json(project);
   } catch (error) {
@@ -36,7 +36,7 @@ const listProjects = async (req, res) => {
 
 const deleteProject = async (req, res) => {
   try {
-    logger.info('deleting project with projectId: ' + req.params.id);
+    logger.info('deleting project with id: ' + req.params.id);
     const { id } = req.params;
     const { userIds } = await projectServices.getProject(id);
     await userService.deleteProjectFromUsers(userIds, id);

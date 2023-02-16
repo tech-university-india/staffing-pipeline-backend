@@ -9,10 +9,10 @@ const validateUserAndReturnToken = async data => {
   logger.info(`get the user data from database auth table by passing email: ${email}`);
   const user = await db.auth.findOne({ where: { email: email } });
   if (user) {
-    logger.info('check if password is correct by comparing entered password with the one present in Database');
+    logger.info('check if password is correct by comparing entered password with the one present in database');
     const isPasswordCorrect = await bcrypt.compare(password, user.dataValues.password);
     if (isPasswordCorrect) {
-      logger.info('Generate JWT token and return');
+      logger.info('generate jwt token and return');
       const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
       return { data: user.dataValues, token: token, success: true, message: 'Login successful' };

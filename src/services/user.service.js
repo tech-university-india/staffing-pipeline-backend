@@ -4,21 +4,21 @@ const CustomErrors = require('../utils/httpError');
 const db = require('../models');
 const logger = require('../logger');
 const getUser = async userId => {
-  logger.info(`get user from database with user_id: ${userId}`);
+  logger.info(`get user from database with id: ${userId}`);
   const user = await db.users.findOne({
     where: {
       userId,
     },
   });
   if (!user) {
-    logger.error(`No user with user_id: ${userId}`);
+    logger.error(`no user with id: ${userId}`);
     throw new CustomErrors.NotFoundError('User not found');
   }
   return user;
 };
 const listUsers = async () => {
   try {
-    logger.info('Get all users from the Database');
+    logger.info('get all users from the database');
     const allUsers = await db.users.findAll();
     return allUsers;
   } catch (error) {
@@ -39,10 +39,10 @@ const createUser = async userDetails => {
 };
 
 const updateUser = async (userId, userDetails) => {
-  logger.info('update user in database with user_id: ' + userId);
+  logger.info('update user in database with id: ' + userId);
   const user = await db.users.findOne({ where: { userId } });
   if (!user) {
-    logger.info('No user in database exists with user_id: ' + userId);
+    logger.info('no user in database exists with id: ' + userId);
     return null;
   }
   for (let key in userDetails) {
@@ -53,7 +53,7 @@ const updateUser = async (userId, userDetails) => {
 };
 
 const deleteUser = async userId => {
-  logger.info('Delete user from database with user_id: ' + userId);
+  logger.info('delete user from database with id: ' + userId);
   const deletedRows = db.users.destroy({
     where: {
       userId,
