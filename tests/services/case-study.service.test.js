@@ -24,7 +24,7 @@ describe('Case Study Services', () => {
   });
 });
 
-describe('function setProjectAsNull', () => {
+describe('function removeProjectFromCaseStudy', () => {
   it('Should set engagement id as null in case study entity', async () => {
     const resolvedValue = { ...mockData.update.resolvedValue, update: jest.fn() };
     jest.spyOn(case_studies, 'update').mockResolvedValue(resolvedValue);
