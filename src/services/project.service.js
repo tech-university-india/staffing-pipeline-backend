@@ -1,10 +1,10 @@
-const { engagements } = require('../models');
-
+const db = require('../models');
+const logger = require('../logger');
 const CustomErrors = require('../utils/httpError');
 
 const getProject = async projectId => {
-  logger.info(`find engagement data for the id: ${id}`);
-  const engagement = await engagements.findByPk(projectId);
+  logger.info(`find engagement data for the id: ${projectId}`);
+  const engagement = await db.engagements.findByPk(projectId);
   if (!engagement) {
     throw new CustomErrors.NotFoundError('Engagement not found');
   }
@@ -14,7 +14,7 @@ const getProject = async projectId => {
 const listProjects = async () => {
   try {
     logger.info('get all the engagements from the database');
-    const allProjects = await engagements.findAll();
+    const allProjects = await db.engagements.findAll();
     return allProjects;
   } catch (error) {
     console.log(error);
@@ -23,7 +23,7 @@ const listProjects = async () => {
 };
 
 const deleteProject = async projectId => {
-  await engagements.destroy({
+  await db.engagements.destroy({
     where: {
       engagementId: projectId,
     },
