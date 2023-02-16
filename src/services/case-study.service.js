@@ -17,7 +17,22 @@ const updateCaseStudy = async (id, body) => {
   return caseStudy;
 };
 
+const removeProjectFromCaseStudy = async projectId => {
+  const result = await case_studies.update(
+    {
+      engagementId: null,
+    },
+    {
+      where: {
+        engagementId: projectId,
+      },
+    }
+  );
+  return result;
+};
+
 module.exports = {
   updateCaseStudy,
   deleteCaseStudy,
+  removeProjectFromCaseStudy,
 };
