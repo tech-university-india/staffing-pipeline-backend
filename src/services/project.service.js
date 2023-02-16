@@ -1,6 +1,5 @@
 const { engagements } = require('../models');
 const { HttpError } = require('../utils/httpError');
-const { getUserByPk, addCurrentEngagement, removeCurrentEngagement } = require('./user.service');
 const db = require('../models');
 const logger = require('../logger');
 const CustomErrors = require('../utils/httpError');
