@@ -43,4 +43,13 @@ describe('Case Study Services', () => {
       expect(caseStudy).toEqual(mockCaseStudy);
     });
   });
+
+  describe('function removeProjectFromCaseStudy', () => {
+    it('Should set engagement id as null in case study entity', async () => {
+      const resolvedValue = { ...mockData.update.resolvedValue, update: jest.fn() };
+      jest.spyOn(case_studies, 'update').mockResolvedValue(resolvedValue);
+      const result = await updateCaseStudyServices.removeProjectFromCaseStudy(mockData.update.mockReq.params.id);
+      expect(result).toEqual(resolvedValue);
+    });
+  });
 });

@@ -7,49 +7,251 @@
   },
   "host": "localhost:8000",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": [
+    "http"
+  ],
   "paths": {
-    "/login": {
+    "/users": {
+      "get": {
+        "description": "retrieves all users from the database",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": [
+                {
+                  "userId": "a90c610c-1bd5-40c4-8b01-fdd7708f3730",
+                  "name": "john Doe",
+                  "email": "johndoe@mckinsey.com",
+                  "fmno": "328060",
+                  "currentEngagementIds": [
+                    "d87ffb9b-06f2-4adb-8b6b-140995d97b04"
+                  ],
+                  "caseStudyIds": [
+                    "9225cf89-97f7-4ec8-8c36-54c68842a2e6"
+                  ],
+                  "skills": [
+                    "React",
+                    "Node",
+                    "GoLang"
+                  ],
+                  "role": "engineer 1",
+                  "guild": "product",
+                  "pastEngagementIds": null,
+                  "image": "https://cdn-icons-png.flaticon.com/512/64/64572.png",
+                  "createdAt": "2023-02-15T04:55:57.645Z",
+                  "updatedAt": "2023-02-15T04:55:57.645Z"
+                },
+                {
+                  "userId": "8efb2eef-b1fe-4124-bef1-6a1dcab02f85",
+                  "name": "Jane Doe",
+                  "email": "janedoe@mckinsey.com",
+                  "fmno": "328560",
+                  "currentEngagementIds": [
+                    "be753dd4-7a33-449a-956a-a359b13282f3"
+                  ],
+                  "caseStudyIds": [
+                    "7de2e0b9-a1f4-465f-b2bd-b94316cd24bc"
+                  ],
+                  "skills": [
+                    "React",
+                    "Node",
+                    "Java",
+                    "Python",
+                    "C++"
+                  ],
+                  "role": "junior engineer",
+                  "guild": "swe",
+                  "pastEngagementIds": null,
+                  "image": "https://cdn-icons-png.flaticon.com/512/64/64572.png",
+                  "createdAt": "2023-02-15T04:55:57.645Z",
+                  "updatedAt": "2023-02-15T04:55:57.645Z"
+                }
+              ]
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": "invalid token"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "examples": {
+              "application/json": {
+                "error": "invalid token"
+              }
+            }
+          }
+        }
+      },
       "post": {
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "description": "retrieves the user with given 'userId' from the database",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "userId": "a90c610c-1bd5-40c4-8b01-fdd7708f3730",
+                "name": "john Doe",
+                "email": "johndoe@mckinsey.com",
+                "fmno": "328060",
+                "currentEngagementIds": [
+                  "d87ffb9b-06f2-4adb-8b6b-140995d97b04"
+                ],
+                "caseStudyIds": [
+                  "9225cf89-97f7-4ec8-8c36-54c68842a2e6"
+                ],
+                "skills": [
+                  "React",
+                  "Node",
+                  "GoLang"
+                ],
+                "role": "engineer 1",
+                "guild": "product",
+                "pastEngagementIds": null,
+                "image": "https://cdn-icons-png.flaticon.com/512/64/64572.png",
+                "createdAt": "2023-02-15T04:55:57.645Z",
+                "updatedAt": "2023-02-15T04:55:57.645Z"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "examples": {
+              "application/json": {
+                "message": "\"userId\" must be a valid GUID"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "examples": {
+              "application/json": {
+                "message": "User not found"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": "invalid token"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "examples": {
+              "application/json": {
+                "error": "invalid token"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
           "401": {
             "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/users": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
-      "post": {
+      "put": {
         "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
-        }
-      }
-    },
-    "/users/register": {
-      "post": {
-        "description": "",
-        "parameters": [],
+        ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

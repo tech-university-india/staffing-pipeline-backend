@@ -1,4 +1,4 @@
-const LoginError = require('./loginError');
+const LoginError = require('./loginError.js');
 const jwt = require('jsonwebtoken');
 const db = require('../models');
 const verifyToken = async token => {

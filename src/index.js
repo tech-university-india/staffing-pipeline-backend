@@ -4,6 +4,7 @@ const router = require('./routes/user.route');
 const authRouter = require('./routes/login.route');
 require('dotenv').config();
 const projectRouter = require('./routes/project.route');
+const caseStudiesRouter = require('./routes/case-study.route');
 
 //add swagger documentation
 const swaggerUi = require('swagger-ui-express');
@@ -29,6 +30,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //for the engagements
 app.use('/api/projects', projectRouter);
+app.use('/api/case-studies', caseStudiesRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

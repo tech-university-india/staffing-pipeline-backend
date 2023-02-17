@@ -1,5 +1,6 @@
 const caseStudyServices = require('../services/case-study.service');
 
+
 const createCaseStudy = async (req, res) => {
   try {
     const caseStudy = await caseStudyServices.createCaseStudy(req.body);
@@ -12,14 +13,21 @@ const createCaseStudy = async (req, res) => {
 
 const updateCaseStudy = async (req, res) => {
   try {
+
+const logger = require('../logger');
+const updateCaseStudy = async (req, res) => {
+  try {
+    logger.info('updating casestudy with id: ' + req.params.id);
+
     const { id } = req.params;
     const { body } = req;
 
     const updatedCaseStudy = await caseStudyServices.updateCaseStudy(id, body);
 
-    if (!updatedCaseStudy) return res.status(404).json({ message: 'Case study not found' });
+    if (!updatedCaseStudy) res.status(404).json({ message: 'Case study not found' });
     res.status(200).json(updatedCaseStudy);
   } catch (error) {
+    logger.error(error);
     res.status(500).json({
       message: 'Something went wrong',
     });
@@ -28,11 +36,15 @@ const updateCaseStudy = async (req, res) => {
 
 const deleteCaseStudy = async (req, res) => {
   try {
+    logger.info('deleting case study with id: ' + req.params.id);
     const { id } = req.params;
     const deletedCaseStudy = await caseStudyServices.deleteCaseStudy(id);
-    if (!deletedCaseStudy) return res.status(404).json({ message: 'Case study not found' });
+    if (!deletedCaseStudy) {
+      res.status(404).json({ message: 'Case study not found' });
+    }
     res.status(200).json(deletedCaseStudy);
   } catch (error) {
+    logger.error(error);
     res.status(500).json({
       message: 'Something went wrong',
     });
