@@ -1,12 +1,11 @@
-const { case_studies, users, engagements } = require('../models');
+const { case_studies } = require('../models');
+const userService = require('./user.service');
 
 const updateUserFk = async (collaboratorsIds, caseStudyId) => {
   for (let collabId of collaboratorsIds) {
-    const user = await users.findByPk(collabId);
-    //console.log(user);
-    //console.log('dsfdsf');
+    user = userService.getUser(collabId);
     user.dataValues['case_studies_ids'].push(caseStudyId);
-    user.save();
+    userService.updateUser(collabId, user);
   }
 };
 
@@ -15,22 +14,41 @@ const updateEngagementFk = async (engagementId, caseStudyId) => {
   console.log(engagement);
   engagement['caseStudyIds'].push(caseStudyId);
   engagement.save();
+  // Will refactor after updateProject is merged
 };
 
 const createCaseStudy = async caseStudy => {
-  //console.log(caseStudy);
   const newCaseStudy = await case_studies.create(caseStudy);
-  //console.log(newCaseStudy);
   const { caseStudyId, collaboratorsIds, engagementId } = newCaseStudy.dataValues;
 
   // update users case_study_ids
   updateUserFk(collaboratorsIds, caseStudyId);
 
-  console.log(engagementId);
   // update engagements case_study_ids
   updateEngagementFk(engagementId, caseStudyId);
 
   return newCaseStudy;
 };
 
-module.exports = { createCaseStudy };
+const deleteCaseStudy = async id => {
+  const deletedCaseStudy = await case_studies.findOne({ where: { case_study_id: id } });
+  if (!deletedCaseStudy) return null;
+  await deletedCaseStudy.destroy();
+  return deletedCaseStudy;
+};
+
+const updateCaseStudy = async (id, body) => {
+  const caseStudy = await case_studies.findOne({ where: { case_study_id: id } });
+  if (!caseStudy) return null;
+  for (let key in body) {
+    caseStudy[key] = body[key];
+  }
+  await caseStudy.save();
+  return caseStudy;
+};
+
+module.exports = {
+  updateCaseStudy,
+  deleteCaseStudy,
+  createCaseStudy,
+};
