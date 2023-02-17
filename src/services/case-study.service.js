@@ -3,34 +3,23 @@ const userService = require('./user.service');
 const db = require('../models');
 const logger = require('../logger');
 
-const updateUserFk = async (collaboratorsIds, caseStudyId) => {
-  logger.info(`adding case study with id: ${caseStudyId} into users with ids: ${collaboratorsIds}`);
-  for (let collabId of collaboratorsIds) {
-    user = userService.getUser(collabId);
-    user.dataValues['case_studies_ids'].push(caseStudyId);
-    userService.updateUser(collabId, user);
-  }
-};
-
-const updateEngagementFk = async (engagementId, caseStudyId) => {
-  logger.info(`adding case study with id: ${caseStudyId} into engagement with id: ${engagementId}`);
-  const engagement = await engagements.findByPk(engagementId);
-  console.log(engagement);
-  engagement['caseStudyIds'].push(caseStudyId);
-  engagement.save();
-  // Will refactor after updateProject is merged
-};
-
 const createCaseStudy = async caseStudy => {
   logger.info('insert new case study into database');
   const newCaseStudy = await case_studies.create(caseStudy);
   const { caseStudyId, collaboratorsIds, engagementId } = newCaseStudy.dataValues;
 
   // update users case_study_ids
-  updateUserFk(collaboratorsIds, caseStudyId);
+  for (let collabId of collaboratorsIds) {
+    user = userService.getUser(collabId);
+    user.dataValues['case_studies_ids'].push(caseStudyId);
+    userService.updateUser(collabId, user);
+  }
 
   // update engagements case_study_ids
-  updateEngagementFk(engagementId, caseStudyId);
+  const engagement = await engagements.findByPk(engagementId);
+  engagement['caseStudyIds'].push(caseStudyId);
+  engagement.save();
+  // Will refactor after the api is merged
 
   return newCaseStudy;
 };
