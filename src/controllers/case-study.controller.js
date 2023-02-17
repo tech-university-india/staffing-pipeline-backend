@@ -2,10 +2,11 @@ const caseStudyServices = require('../services/case-study.service');
 
 const createCaseStudy = async (req, res) => {
   try {
+    logger.info('creating a new case study');
     const caseStudy = await caseStudyServices.createCaseStudy(req.body);
     res.status(201).json(caseStudy);
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({ message: 'Something went wrong', success: false });
   }
 };

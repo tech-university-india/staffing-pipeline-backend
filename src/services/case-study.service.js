@@ -4,6 +4,7 @@ const db = require('../models');
 const logger = require('../logger');
 
 const updateUserFk = async (collaboratorsIds, caseStudyId) => {
+  logger.info(`adding case study with id: ${caseStudyId} into users with ids: ${collaboratorsIds}`);
   for (let collabId of collaboratorsIds) {
     user = userService.getUser(collabId);
     user.dataValues['case_studies_ids'].push(caseStudyId);
@@ -12,6 +13,7 @@ const updateUserFk = async (collaboratorsIds, caseStudyId) => {
 };
 
 const updateEngagementFk = async (engagementId, caseStudyId) => {
+  logger.info(`adding case study with id: ${caseStudyId} into engagement with id: ${engagementId}`);
   const engagement = await engagements.findByPk(engagementId);
   console.log(engagement);
   engagement['caseStudyIds'].push(caseStudyId);
@@ -20,6 +22,7 @@ const updateEngagementFk = async (engagementId, caseStudyId) => {
 };
 
 const createCaseStudy = async caseStudy => {
+  logger.info('insert new case study into database');
   const newCaseStudy = await case_studies.create(caseStudy);
   const { caseStudyId, collaboratorsIds, engagementId } = newCaseStudy.dataValues;
 
