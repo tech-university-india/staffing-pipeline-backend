@@ -64,8 +64,8 @@ describe('CaseStudyController', () => {
       jest.spyOn(caseStudiesServices, 'createCaseStudy').mockRejectedValue(new Error());
 
       await caseStudiesController.createCaseStudy(mockReq, mockRes);
-      expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.json).toHaveBeenCalledWith({ message: 'Something went wrong', success: false });
+      expect(mockRes.status).toHaveBeenCalledWith(500);
+      expect(mockRes.json).toHaveBeenCalledWith({ message: 'Something went wrong', success: false });
     });
   });
 });
