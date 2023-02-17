@@ -1,6 +1,5 @@
 const caseStudyServices = require('../services/case-study.service');
 
-
 const createCaseStudy = async (req, res) => {
   try {
     const caseStudy = await caseStudyServices.createCaseStudy(req.body);
@@ -10,9 +9,6 @@ const createCaseStudy = async (req, res) => {
     res.status(500).json({ message: 'Something went wrong', success: false });
   }
 };
-
-const updateCaseStudy = async (req, res) => {
-  try {
 
 const logger = require('../logger');
 const updateCaseStudy = async (req, res) => {
