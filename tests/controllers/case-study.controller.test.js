@@ -59,17 +59,11 @@ describe('CaseStudyController', () => {
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
     });
     it('should throw an internal server error', async () => {
+      const { mockReq, mockRes } = mockData.create;
+
       jest.spyOn(caseStudiesServices, 'createCaseStudy').mockRejectedValue(new Error());
 
-      const req = {
-        body: jest.fn(),
-      };
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn(),
-      };
-
-      await caseStudiesController.createCaseStudy(req, res);
+      await caseStudiesController.createCaseStudy(mockReq, mockRes);
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ message: 'Something went wrong', success: false });
     });
