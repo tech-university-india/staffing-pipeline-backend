@@ -72,7 +72,9 @@ const deleteProjectFromUsers = async (userIds, id) => {
     userData.dataValues.currentEngagementIds = userData.dataValues.currentEngagementIds.filter(
       element => element !== id
     );
-    userData.dataValues.pastEngagementIds = userData.dataValues.pastEngagementIds.filter(element => element !== id);
+    userData.dataValues.pastEngagementIds = userData.dataValues.pastEngagementIds
+      ? userData.dataValues.pastEngagementIds.filter(element => element !== id)
+      : undefined;
     return userData.dataValues;
   });
   const updatedUsers = await Promise.all(users);
