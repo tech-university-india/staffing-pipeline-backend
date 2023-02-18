@@ -27,13 +27,6 @@ const listUsers = async () => {
   }
 };
 
-const getUserByPk = async userId => {
-  const user = await db.users.findByPk(userId);
-  if (!user) {
-    throw new HttpError('User not found', 404);
-  }
-  return user;
-};
 const createUser = async userDetails => {
   try {
     logger.info('create user in the database');
@@ -60,19 +53,17 @@ const updateUser = async (userId, userDetails) => {
 };
 
 const addCurrentEngagement = async (userId, engagementId) => {
-  const user = await getUserByPk(userId);
-  console.log(user.dataValues);
+  logger.info(`adding engagement : ${engagementId} to user: ${userId}`);
+  const user = await getUser(userId);
   if (!user.currentEngagementIds.includes(engagementId)) {
-    console.log('here adding engagementId', engagementId);
     user.currentEngagementIds = [...user.currentEngagementIds, engagementId];
-    console.log(user);
     await user.save();
   }
   return user;
 };
 
 const removeCurrentEngagement = async (userId, engagementId) => {
-  const user = await getUserByPk(userId);
+  const user = await getUser(userId);
   if (user.currentEngagementIds.includes(engagementId)) {
     user.currentEngagementIds = user.currentEngagementIds.filter(id => id !== engagementId);
     await user.save();
@@ -124,7 +115,6 @@ const deleteProjectFromUsers = async (userIds, id) => {
 module.exports = {
   getUser,
   listUsers,
-  getUserByPk,
   updateUser,
   createUser,
   deleteUser,

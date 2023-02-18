@@ -37,15 +37,17 @@ const listProjects = async (req, res) => {
 
 const updateProject = async (req, res) => {
   try {
+    logger.info('updating project:' + req.params.id);
     const { id } = req.params;
     const { body } = req;
     const updatedProject = await projectServices.updateProject(id, body);
     if (body['userIds']) {
       const usersAlreadyInEngagement = await Promise.all(
-        updatedProject.userIds.map(async userId => userService.getUserByPk(userId))
+        updatedProject.userIds.map(async userId => userService.getUser(userId))
       );
       usersAlreadyInEngagement.forEach(async user => {
         if (!body['userIds'].includes(user.userId)) {
+          logger.info(`removing engagementId: ${updatedProject.engagementId} from user: ${user.userId}`);
           await userService.removeCurrentEngagement(user.userId, updatedProject.engagementId);
         }
       });
@@ -56,7 +58,6 @@ const updateProject = async (req, res) => {
     }
     res.status(200).json(updatedProject);
   } catch (error) {
-    console.log(error);
     if (error instanceof HttpError) {
       res.status(error.statusCode).json({
         error: error.message,
