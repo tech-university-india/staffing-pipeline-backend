@@ -6,21 +6,6 @@ const logger = require('../logger');
 const createCaseStudy = async caseStudy => {
   logger.info('insert new case study into database');
   const newCaseStudy = await case_studies.create(caseStudy);
-  const { caseStudyId, collaboratorsIds, engagementId } = newCaseStudy.dataValues;
-
-  // update users case_study_ids
-  for (let collabId of collaboratorsIds) {
-    user = userService.getUser(collabId);
-    user.dataValues['case_studies_ids'].push(caseStudyId);
-    userService.updateUser(collabId, user);
-  }
-
-  // update engagements case_study_ids
-  const engagement = await engagements.findByPk(engagementId);
-  engagement['caseStudyIds'].push(caseStudyId);
-  engagement.save();
-  // Will refactor after the api is merged
-
   return newCaseStudy;
 };
 
