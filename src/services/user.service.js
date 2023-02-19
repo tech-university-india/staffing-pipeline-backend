@@ -52,6 +52,25 @@ const updateUser = async (userId, userDetails) => {
   return user;
 };
 
+const addCurrentEngagement = async (userId, engagementId) => {
+  logger.info(`adding engagement : ${engagementId} to user: ${userId}`);
+  const user = await getUser(userId);
+  if (!user.currentEngagementIds.includes(engagementId)) {
+    user.currentEngagementIds = [...user.currentEngagementIds, engagementId];
+    await user.save();
+  }
+  return user;
+};
+
+const removeCurrentEngagement = async (userId, engagementId) => {
+  const user = await getUser(userId);
+  if (user.currentEngagementIds.includes(engagementId)) {
+    user.currentEngagementIds = user.currentEngagementIds.filter(id => id !== engagementId);
+    await user.save();
+  }
+  return user;
+};
+
 const deleteUser = async userId => {
   logger.info('delete user from database with id: ' + userId);
   const deletedRows = db.users.destroy({
@@ -72,7 +91,9 @@ const deleteProjectFromUsers = async (userIds, id) => {
     userData.dataValues.currentEngagementIds = userData.dataValues.currentEngagementIds.filter(
       element => element !== id
     );
-    userData.dataValues.pastEngagementIds = userData.dataValues.pastEngagementIds.filter(element => element !== id);
+    userData.dataValues.pastEngagementIds = userData.dataValues.pastEngagementIds
+      ? userData.dataValues.pastEngagementIds.filter(element => element !== id)
+      : undefined;
     return userData.dataValues;
   });
   const updatedUsers = await Promise.all(users);
@@ -94,10 +115,12 @@ const deleteProjectFromUsers = async (userIds, id) => {
 };
 
 module.exports = {
-  listUsers,
-  createUser,
   getUser,
+  listUsers,
   updateUser,
+  createUser,
   deleteUser,
+  addCurrentEngagement,
+  removeCurrentEngagement,
   deleteProjectFromUsers,
 };
