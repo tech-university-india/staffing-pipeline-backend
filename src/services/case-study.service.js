@@ -37,12 +37,13 @@ const removeProjectFromCaseStudy = async projectId => {
 };
 
 const getCaseStudy = async id => {
+  logger.info('find case study with the given id');
   const caseStudy = await db.case_studies.findOne({ where: { case_study_id: id } });
   return caseStudy;
 };
 
 const listCaseStudies = async () => {
-  console.log('here');
+  logger.info('get all the case studies from the database');
   const allCaseStudies = await db.case_studies.findAll();
   console.log(allCaseStudies);
   return allCaseStudies;

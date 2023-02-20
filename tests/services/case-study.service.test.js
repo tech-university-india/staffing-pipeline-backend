@@ -22,6 +22,22 @@ describe('Case Study Services', () => {
       expect(result).toEqual(resolvedValue);
     });
   });
+
+  describe('function getCaseStudy', () => {
+    it('Should get case study by id', async () => {
+      jest.spyOn(case_studies, 'findOne').mockResolvedValue([mockData.toGet.resolvedValue]);
+      const result = await updateCaseStudyServices.getCaseStudy();
+      expect(result).toEqual([mockData.toGet.resolvedValue]);
+    });
+  });
+
+  describe('function listCaseStudy', () => {
+    it('should return list of all case studies from the database', async () => {
+      jest.spyOn(case_studies, 'findAll').mockResolvedValue([mockData.toList.resolvedValue]);
+      const result = await updateCaseStudyServices.listCaseStudies();
+      expect(result).toEqual([mockData.toList.resolvedValue]);
+    });
+  });
 });
 
 describe('function removeProjectFromCaseStudy', () => {
