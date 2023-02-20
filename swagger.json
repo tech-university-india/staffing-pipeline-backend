@@ -227,6 +227,210 @@
           }
         }
       }
+    },
+    "/projects": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "404": {
+            "description": "Project not found or User not found"
+          },
+          "400": {
+            "description": "Invalid Body Fields"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": [
+                {
+                  "engagement_id": "d87ffb9b-06f2-4adb-8b6b-140995d97b04",
+                  "name": "Staffing",
+                  "tags": [
+                    "urgent"
+                  ],
+                  " skills": [
+                    "Node",
+                    "Angular",
+                    "Python"
+                  ],
+                  "guild": "swe",
+                  "user_ids": [
+                    "a90c610c-1bd5-40c4-8b01-fdd7708f3730"
+                  ],
+                  " case_study_ids": [
+                    "9225cf89-97f7-4ec8-8c36-54c68842a2e6"
+                  ],
+                  "status": "ongoing",
+                  " start_date": "2023-02-15",
+                  "end_date": "2023-03-15",
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
+                  "createdAt": "2023-02-15T04:55:57.645Z",
+                  "updatedAt": "2023-02-15T04:55:57.645Z"
+                },
+                {
+                  "engagement_id": "d87ffb9b-06f2-4abbhdb-8b6b-140995d97b04",
+                  "name": "Staffing-pipeline",
+                  "tags": [
+                    "urgent"
+                  ],
+                  " skills": [
+                    "Node",
+                    "Python"
+                  ],
+                  "guild": "swe",
+                  "user_ids": [
+                    "a90c610c-1bd5-4mnm0c4-8b01-fdd7708f3730"
+                  ],
+                  " case_study_ids": [
+                    "9225cf89-97f7-4ec8-8c36-54c68842a2e6"
+                  ],
+                  "status": "ongoing",
+                  "start_date": "2023-02-15",
+                  "end_date": "2023-03-15",
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
+                  "createdAt": "2023-02-15T04:55:57.645Z",
+                  "updatedAt": "2023-02-15T04:55:57.645Z"
+                }
+              ]
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": "invalid token"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "engagement_id": "d87ffb9b-06f2-4abbhdb-8b6b-140995d97b04",
+                "name": "Staffing-pipeline",
+                "tags": [
+                  "urgent"
+                ],
+                " skills": [
+                  "Node",
+                  "Python"
+                ],
+                "guild": "swe",
+                "user_ids": [
+                  "a90c610c-1bd5-4mnm0c4-8b01-fdd7708f3730"
+                ],
+                " case_study_ids": [
+                  "9225cf89-97f7-4ec8-8c36-54c68842a2e6"
+                ],
+                "status": "ongoing",
+                "start_date": "2023-02-15",
+                "end_date": "2023-03-15",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg",
+                "createdAt": "2023-02-15T04:55:57.645Z",
+                "updatedAt": "2023-02-15T04:55:57.645Z"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": "invalid token"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "message": "engagement has been deleted"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": "invalid token"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   }
 }

@@ -10,6 +10,13 @@ const project = {
     engagementId: 1223,
     userIds: ['1', '2', '3'],
     caseStudyIds: ['23', '34', '56'],
+    save: jest.fn(),
+  },
+  editedProject: {
+    engagementId: 1223,
+    userIds: ['1', '2'],
+    caseStudyIds: ['23', '34', '56'],
+    save: jest.fn(),
   },
   errorMessage: 'Internal Server error!!',
 };
@@ -51,8 +58,21 @@ const todelete = {
     userIds: [1, 2, 3],
   },
 };
+
+const toUpdate = {
+  mockReq: {
+    params: jest.fn(),
+    body: project.resolvedValue,
+  },
+  mockRes: {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  },
+  errorMessage: 'Internal Server error!!',
+};
 module.exports = {
   project,
   allProjects,
   todelete,
+  toUpdate,
 };

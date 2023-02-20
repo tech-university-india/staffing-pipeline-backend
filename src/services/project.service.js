@@ -1,3 +1,5 @@
+const { engagements } = require('../models');
+const { HttpError } = require('../utils/httpError');
 const db = require('../models');
 const logger = require('../logger');
 const CustomErrors = require('../utils/httpError');
@@ -22,6 +24,18 @@ const listProjects = async () => {
   }
 };
 
+const updateProject = async (id, body) => {
+  const engagement = await engagements.findByPk(id);
+  if (!engagement) {
+    throw new HttpError('Project not found', 404);
+  }
+  for (let key in body) {
+    engagement[key] = body[key];
+  }
+  await engagement.save();
+  return engagement;
+};
+
 const deleteProject = async projectId => {
   logger.info('deleteing project with id: ' + projectId);
   await db.engagements.destroy({
@@ -31,4 +45,4 @@ const deleteProject = async projectId => {
   });
 };
 
-module.exports = { getProject, listProjects, deleteProject };
+module.exports = { getProject, listProjects, deleteProject, updateProject };

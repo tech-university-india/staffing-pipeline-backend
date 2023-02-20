@@ -1,6 +1,7 @@
-const { engagements } = require('../../src/models');
+const { engagements, users } = require('../../src/models');
 const projectService = require('../../src/services/project.service');
 const mockData = require('../__mocks__/project');
+const mockDataUser = require('../__mocks__/user');
 describe('Engagement Services', () => {
   it('should return the engagement details of the provided id from the database', async () => {
     jest.spyOn(engagements, 'findByPk').mockResolvedValue([mockData.project.resolvedValue]);
@@ -18,5 +19,14 @@ describe('Engagement Services', () => {
     jest.spyOn(engagements, 'destroy').mockResolvedValue([mockData.todelete.mockEnagement]);
     const project = await projectService.deleteProject(2);
     expect(project).toEqual(undefined);
+  });
+  it('should update the project and return the updated project', async () => {
+    jest.spyOn(engagements, 'findByPk').mockResolvedValue(mockData.project.resolvedValue);
+    jest.spyOn(users, 'findByPk').mockResolvedValue(mockDataUser.getUser.resolvedValue);
+    const updatedProject = await projectService.updateProject(
+      mockData.project.resolvedValue.engagementId,
+      mockData.project.editedProject
+    );
+    expect(updatedProject).toEqual(mockData.project.editedProject);
   });
 });
