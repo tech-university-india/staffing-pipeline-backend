@@ -63,12 +63,12 @@
     },
     "/auth/login": {
       "post": {
-        "description": "Add user credentials to the database",
+        "description": "Verify user credentials and return a JWT token",
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "User object that needs to be added to the database",
+            "description": "The request should consist of a JSON object with the email and password of the user",
             "required": true,
             "schema": {
               "type":"object",
