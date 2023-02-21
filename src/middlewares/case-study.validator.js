@@ -13,11 +13,11 @@ const caseStudyIdSchema = Joi.object({
 const updateCaseStudyBodySchema = Joi.object({
   name: Joi.string().min(3).max(30),
   description: Joi.string(),
-  collaborators_ids: Joi.array().items(uuidType),
+  collaboratorsIds: Joi.array().items(uuidType),
   image: Joi.string(),
   box_link: Joi.string(),
   skills: Joi.array().items(Joi.string()),
-  engagement_id: Joi.array().items(uuidType),
+  engagementId: Joi.string(),
 });
 
 const caseStudyIdValidator = (req, res, next) => {

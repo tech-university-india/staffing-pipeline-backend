@@ -45,4 +45,26 @@ const deleteProject = async projectId => {
   });
 };
 
-module.exports = { getProject, listProjects, deleteProject, updateProject };
+const updateCaseStudyInProject = async (oldEngagement, newEngagement, caseStudyId) => {
+  logger.info('updating case study in project');
+  if (oldEngagement) {
+    let engagement = await db.engagements.findOne({ where: { engagementId: oldEngagement } });
+    if (engagement) {
+      // remove the case study from the old engagement
+      let caseStudies = engagement.caseStudyIds;
+      caseStudies = caseStudies.filter(id => id !== caseStudyId);
+      engagement.caseStudyIds = caseStudies;
+      await engagement.save();
+    }
+  }
+  if (newEngagement) {
+    let engagement = await db.engagements.findOne({ where: { engagementId: newEngagement } });
+    if (engagement) {
+      // add the case study to the new engagement
+      engagement.caseStudyIds = [...engagement.caseStudyIds, caseStudyId];
+      await engagement.save();
+      engagement = await db.engagements.findOne({ where: { engagementId: newEngagement } });
+    }
+  }
+};
+module.exports = { getProject, listProjects, deleteProject, updateProject, updateCaseStudyInProject };
