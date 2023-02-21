@@ -133,6 +133,19 @@ const updateCaseStudyInUser = async (oldCollaborators, newCollaborators, caseStu
     collaborator = await db.users.findOne({ where: { userId: newCollaborators[i] } });
   }
 };
+
+const removeCaseStudyFromUser = async (collaborators, caseStudyId) => {
+  for (let i = 0; i < collaborators.length; i++) {
+    let collaborator = await db.users.findOne({ where: { userId: collaborators[i] } });
+    if (!collaborator) continue;
+    let caseStudies = collaborator.caseStudyIds;
+    //use filter to remove the case study id from the array
+    caseStudies = caseStudies.filter(id => id !== caseStudyId);
+    collaborator.caseStudyIds = caseStudies;
+    await collaborator.save();
+  }
+};
+
 module.exports = {
   getUser,
   listUsers,
@@ -143,4 +156,5 @@ module.exports = {
   removeCurrentEngagement,
   deleteProjectFromUsers,
   updateCaseStudyInUser,
+  removeCaseStudyFromUser,
 };

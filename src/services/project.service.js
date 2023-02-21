@@ -67,4 +67,26 @@ const updateCaseStudyInProject = async (oldEngagement, newEngagement, caseStudyI
     }
   }
 };
-module.exports = { getProject, listProjects, deleteProject, updateProject, updateCaseStudyInProject };
+
+const removeCaseStudyFromProject = async (engagementId, caseStudyId) => {
+  logger.info('removing case study from project');
+  if (engagementId) {
+    let engagement = await db.engagements.findOne({ where: { engagementId: engagementId } });
+    if (engagement) {
+      // remove the case study from the old engagement
+      let caseStudies = engagement.caseStudyIds;
+      caseStudies = caseStudies.filter(id => id !== caseStudyId);
+      engagement.caseStudyIds = caseStudies;
+      await engagement.save();
+    }
+  }
+};
+
+module.exports = {
+  getProject,
+  listProjects,
+  deleteProject,
+  updateProject,
+  updateCaseStudyInProject,
+  removeCaseStudyFromProject,
+};

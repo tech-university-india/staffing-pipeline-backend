@@ -7,6 +7,17 @@ const deleteCaseStudy = async id => {
   logger.info('get case_study to be deleted with id: ' + id);
   const deletedCaseStudy = await db.case_studies.findOne({ where: { case_study_id: id } });
   if (!deletedCaseStudy) return null;
+  // update the user table
+  if (deletedCaseStudy.collaboratorsIds) {
+    let collaborators = deletedCaseStudy.collaboratorsIds;
+    await userServices.removeCaseStudyFromUser(collaborators, id);
+  }
+  // update the project table
+  if (deletedCaseStudy.engagementId) {
+    let engagement = deletedCaseStudy.engagementId;
+    await projectServices.removeCaseStudyFromProject(engagement, id);
+  }
+  logger.info('delete case_study from database');
   await deletedCaseStudy.destroy();
   return deletedCaseStudy;
 };
