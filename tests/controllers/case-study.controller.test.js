@@ -4,14 +4,16 @@ const mockData = require('../__mocks__/case-study');
 describe('CaseStudyController', () => {
   describe('updateCaseStudyController', () => {
     it('should update caseStudy details', async () => {
-      jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue(mockData.update.resolvedValue);
+      jest
+        .spyOn(updateCaseStudyServices, 'updateCaseStudy')
+        .mockResolvedValue({ caseStudy: mockData.update.resolvedValue });
       await updateCaseStudy.updateCaseStudy(mockData.update.mockReq, mockData.update.mockRes);
       expect(mockData.update.mockRes.status).toHaveBeenCalledWith(200);
       expect(mockData.update.mockRes.json).toHaveBeenCalledWith(mockData.update.resolvedValue);
     });
     it('Should return 404 if caseStudy not found', async () => {
       const resolvedValue = null;
-      jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue(resolvedValue);
+      jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue({ caseStudy: resolvedValue });
       await updateCaseStudy.updateCaseStudy(mockData.update.mockReq, mockData.update.mockRes);
       expect(mockData.update.mockRes.status).toHaveBeenCalledWith(404);
       expect(mockData.update.mockRes.json).toHaveBeenCalledWith({ message: 'Case study not found' });
@@ -25,14 +27,16 @@ describe('CaseStudyController', () => {
   });
   describe('deleteCaseStudyController', () => {
     it('should delete caseStudy', async () => {
-      jest.spyOn(updateCaseStudyServices, 'deleteCaseStudy').mockResolvedValue(mockData.toDelete.resolvedValue);
+      jest
+        .spyOn(updateCaseStudyServices, 'deleteCaseStudy')
+        .mockResolvedValue({ deletedCaseStudy: mockData.toDelete.resolvedValue });
       await updateCaseStudy.deleteCaseStudy(mockData.toDelete.mockReq, mockData.toDelete.mockRes);
       expect(mockData.toDelete.mockRes.status).toHaveBeenCalledWith(200);
       expect(mockData.toDelete.mockRes.json).toHaveBeenCalledWith(mockData.toDelete.resolvedValue);
     });
     it('Should return 404 if caseStudy not found', async () => {
       const resolvedValue = null;
-      jest.spyOn(updateCaseStudyServices, 'deleteCaseStudy').mockResolvedValue(resolvedValue);
+      jest.spyOn(updateCaseStudyServices, 'deleteCaseStudy').mockResolvedValue({ deletedCaseStudy: resolvedValue });
       await updateCaseStudy.deleteCaseStudy(mockData.toDelete.mockReq, mockData.toDelete.mockRes);
       expect(mockData.toDelete.mockRes.status).toHaveBeenCalledWith(404);
       expect(mockData.toDelete.mockRes.json).toHaveBeenCalledWith({ message: 'Case study not found' });

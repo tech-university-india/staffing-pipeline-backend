@@ -1,7 +1,5 @@
 const db = require('../models');
 const logger = require('../logger');
-const userServices = require('./user.service');
-const projectServices = require('./project.service');
 
 const deleteCaseStudy = async id => {
   logger.info('get case_study to be deleted with id: ' + id);
