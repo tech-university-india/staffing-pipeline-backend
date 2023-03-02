@@ -82,6 +82,16 @@ const removeCaseStudyFromProject = async (engagementId, caseStudyId) => {
   }
 };
 
+const createProject = async body => {
+  try {
+    logger.info('creating project');
+    return await db.engagements.create(body);
+  } catch (error) {
+    logger.error({ error: error, text: 'error in creating an engagement and adding it to the database' });
+    throw new CustomErrors.HttpError(error.message, 500);
+  }
+};
+
 module.exports = {
   getProject,
   listProjects,
@@ -89,4 +99,5 @@ module.exports = {
   updateProject,
   updateCaseStudyInProject,
   removeCaseStudyFromProject,
+  createProject,
 };

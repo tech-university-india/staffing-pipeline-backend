@@ -86,4 +86,28 @@ const deleteProject = async (req, res) => {
   }
 };
 
-module.exports = { getProject, listProjects, deleteProject, updateProject };
+const createProject = async (req, res) => {
+  try {
+    logger.info('creating a new project');
+    const { body } = req;
+    const createdProject = await projectServices.createProject(body);
+    await Promise.all(
+      createdProject.userIds.map(userId => userService.addCurrentEngagement(userId, createdProject.engagementId))
+    );
+    await Promise.all(
+      createdProject.caseStudyIds.map(caseStudyId =>
+        caseStudyService.addCurrentEngagement(caseStudyId, createdProject.engagementId)
+      )
+    );
+    res.status(201).json({
+      data: createdProject,
+    });
+  } catch (error) {
+    logger.error(error);
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { getProject, listProjects, deleteProject, updateProject, createProject };

@@ -29,4 +29,9 @@ describe('Engagement Services', () => {
     );
     expect(updatedProject).toEqual(mockData.project.editedProject);
   });
+  it('should create the project and return the created project', async () => {
+    jest.spyOn(engagements, 'create').mockResolvedValue(mockData.project.resolvedValue);
+    const createdProject = await projectService.updateProject(mockData.project.editedProject);
+    expect(createdProject).toEqual(mockData.project.editedProject);
+  });
 });
