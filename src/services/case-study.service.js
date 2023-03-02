@@ -7,36 +7,26 @@ const deleteCaseStudy = async id => {
   logger.info('get case_study to be deleted with id: ' + id);
   const deletedCaseStudy = await db.case_studies.findOne({ where: { case_study_id: id } });
   if (!deletedCaseStudy) return null;
-  // update the user table
-  if (deletedCaseStudy.collaboratorsIds) {
-    let collaborators = deletedCaseStudy.collaboratorsIds;
-    await userServices.removeCaseStudyFromUser(collaborators, id);
-  }
-  // update the project table
-  if (deletedCaseStudy.engagementId) {
-    let engagement = deletedCaseStudy.engagementId;
-    await projectServices.removeCaseStudyFromProject(engagement, id);
-  }
+  let collaborators = deletedCaseStudy.collaboratorsIds;
+  let engagement = deletedCaseStudy.engagementId;
   logger.info('delete case_study from database');
   await deletedCaseStudy.destroy();
-  return deletedCaseStudy;
+  return {
+    deletedCaseStudy,
+    collaborators,
+    engagement,
+  };
 };
 
 const updateCaseStudy = async (id, body) => {
   logger.info(`get case_study data from database for the id: ${id}`);
   const caseStudy = await db.case_studies.findOne({ where: { case_study_id: id } });
   if (!caseStudy) return null;
-  if (body.collaboratorsIds) {
-    let oldCollaborators = caseStudy.collaboratorsIds;
-    let newCollaborators = body.collaboratorsIds;
-    await userServices.updateCaseStudyInUser(oldCollaborators, newCollaborators, id);
-  }
 
-  if (body.engagementId) {
-    let oldEngagement = caseStudy.engagementId;
-    let newEngagement = body.engagementId;
-    await projectServices.updateCaseStudyInProject(oldEngagement, newEngagement, id);
-  }
+  const oldCollaborators = caseStudy.collaboratorsIds;
+  const newCollaborators = body.collaboratorsIds;
+  const oldEngagement = caseStudy.engagementId;
+  const newEngagement = body.engagementId;
 
   for (let key in body) {
     caseStudy[key] = body[key];
@@ -44,7 +34,13 @@ const updateCaseStudy = async (id, body) => {
 
   logger.info('insert updated caseStudy to the database');
   await caseStudy.save();
-  return caseStudy;
+  return {
+    caseStudy,
+    oldCollaborators,
+    newCollaborators,
+    oldEngagement,
+    newEngagement,
+  };
 };
 
 const removeProjectFromCaseStudy = async projectId => {
