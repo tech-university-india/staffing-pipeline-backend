@@ -32,3 +32,14 @@ describe('function removeProjectFromCaseStudy', () => {
     expect(result).toEqual(resolvedValue);
   });
 });
+describe('function addCurrentEngagement', () => {
+  it('Should add engagementId to caseStudy', async () => {
+    const resolvedValue = { ...mockData.update.resolvedValue, save: jest.fn() };
+    jest.spyOn(case_studies, 'findOne').mockResolvedValue(resolvedValue);
+    const result = await updateCaseStudyServices.addCurrentEngagement(
+      mockData.update.mockReq.params.id,
+      mockData.update.mockReq.params.id
+    );
+    expect(result).toEqual(undefined);
+  });
+});
