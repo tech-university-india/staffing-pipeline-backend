@@ -11,6 +11,114 @@
     "http"
   ],
   "paths": {
+    "/auth/register": {
+      "post": {
+        "description": "Add user credentials to the database",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request should consist of a JSON object with the email and password of the user",
+            "required": true,
+            "schema": {
+              "type":"object",
+              "example": {
+                "email": "janedoe@mckinsey.com",
+                "password": "test"
+            }
+          }
+        }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+              "success":true
+            }
+          }
+          
+          },
+          "400": {
+            "description": "Bad Request",
+            "examples": {
+              "application/json": {
+                
+                  "error": "User already exists",
+                  "success": false
+              
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "examples": {
+              "application/json": {
+                "error": "cannot create the user"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "Verify user credentials and return a JWT token",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request should consist of a JSON object with the email and password of the user",
+            "required": true,
+            "schema": {
+              "type":"object",
+              "example": {
+                "email": "janedoe@mckinsey.com",
+                "password": "test"
+            }
+          }
+        }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWNraW5zZXkuY29tIiwiaWF0IjoxNjc2NzMyNjExLCJleHAiOjE2NzY3MzYyMTF9.XW3gEQWQEEfCDvzPpOt3-k1TmNLD8P6A8NphWQIZzIw",
+                "success": true
+            }
+          }
+          
+          },
+          "400": {
+            "description": "Bad Request",
+            "examples": {
+              "application/json": {
+                "message": "\"email\" must be a valid email"
+            }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                  "message": "Invalid credentials",
+                  "success": false
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "examples": {
+              "application/json": {
+                "message": "No such user found",
+                "success": false
+            }
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "description": "retrieves all users from the database",

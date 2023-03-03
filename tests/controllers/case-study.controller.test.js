@@ -1,12 +1,19 @@
 const updateCaseStudy = require('../../src/controllers/case-study.controller');
 const updateCaseStudyServices = require('../../src/services/case-study.service');
 const mockData = require('../__mocks__/case-study');
+<<<<<<< HEAD
 const caseStudiesController = require('../../src/controllers/case-study.controller');
 const caseStudiesServices = require('../../src/services/case-study.service');
 const userServices = require('../../src/services/user.service');
 const { engagements } = require('../../src/models/');
 
+=======
+const userServices = require('../../src/services/user.service');
+const projectServices = require('../../src/services/project.service');
+>>>>>>> main
 describe('CaseStudyController', () => {
+  jest.spyOn(userServices, 'updateCaseStudyInUser').mockResolvedValue(true);
+  jest.spyOn(projectServices, 'updateCaseStudyInProject').mockResolvedValue(true);
   describe('updateCaseStudyController', () => {
     it('should update caseStudy details', async () => {
       jest.spyOn(updateCaseStudyServices, 'updateCaseStudy').mockResolvedValue(mockData.update.resolvedValue);
@@ -30,6 +37,8 @@ describe('CaseStudyController', () => {
   });
   describe('deleteCaseStudyController', () => {
     it('should delete caseStudy', async () => {
+      jest.spyOn(userServices, 'removeCaseStudyFromUser').mockResolvedValue(true);
+      jest.spyOn(projectServices, 'removeCaseStudyFromProject').mockResolvedValue(true);
       jest.spyOn(updateCaseStudyServices, 'deleteCaseStudy').mockResolvedValue(mockData.toDelete.resolvedValue);
       await updateCaseStudy.deleteCaseStudy(mockData.toDelete.mockReq, mockData.toDelete.mockRes);
       expect(mockData.toDelete.mockRes.status).toHaveBeenCalledWith(200);

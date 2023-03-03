@@ -114,6 +114,44 @@ const deleteProjectFromUsers = async (userIds, id) => {
   await Promise.all(updatedUsers);
 };
 
+const updateCaseStudyInUser = async (caseStudyId, body) => {
+  const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  if (!caseStudy) return;
+  const oldCollaborators = caseStudy.collaboratorsIds;
+  const newCollaborators = body.collaboratorsIds;
+  for (let i = 0; i < oldCollaborators.length; i++) {
+    let collaborator = await db.users.findOne({ where: { userId: oldCollaborators[i] } });
+    if (!collaborator) continue;
+    let caseStudies = collaborator.caseStudyIds;
+    caseStudies = caseStudies.filter(case_study_id => case_study_id !== caseStudyId);
+    collaborator.caseStudyIds = caseStudies;
+    await collaborator.save();
+  }
+
+  for (let i = 0; i < newCollaborators.length; i++) {
+    let collaborator = await db.users.findOne({ where: { userId: newCollaborators[i] } });
+    if (!collaborator) continue;
+    collaborator.caseStudyIds = [...collaborator.caseStudyIds, caseStudyId];
+    await collaborator.save();
+    collaborator = await db.users.findOne({ where: { userId: newCollaborators[i] } });
+  }
+};
+
+const removeCaseStudyFromUser = async caseStudyId => {
+  const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  if (!caseStudy) return;
+  const collaborators = caseStudy.collaboratorsIds;
+  for (let i = 0; i < collaborators.length; i++) {
+    let collaborator = await db.users.findOne({ where: { userId: collaborators[i] } });
+    if (!collaborator) continue;
+    let caseStudies = collaborator.caseStudyIds;
+    //use filter to remove the case study id from the array
+    caseStudies = caseStudies.filter(id => id !== caseStudyId);
+    collaborator.caseStudyIds = caseStudies;
+    await collaborator.save();
+  }
+};
+
 module.exports = {
   getUser,
   listUsers,
@@ -123,4 +161,6 @@ module.exports = {
   addCurrentEngagement,
   removeCurrentEngagement,
   deleteProjectFromUsers,
+  updateCaseStudyInUser,
+  removeCaseStudyFromUser,
 };

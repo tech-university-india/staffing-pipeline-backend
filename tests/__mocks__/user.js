@@ -22,7 +22,7 @@ const testData = [
     email: 'johndoe@mckinsey.com',
     fmno: '123456',
     current_engagement_ids: ['1', '2'],
-    case_study_ids: ['1', '2'],
+    caseStudyIds: ['1', '2'],
     skills: ['node, react'],
     role: 'intern',
     guild: 'swe',

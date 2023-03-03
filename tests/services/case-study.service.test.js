@@ -8,11 +8,11 @@ describe('Case Study Services', () => {
     it('Should update case study details', async () => {
       const resolvedValue = { ...mockData.update.resolvedValue, save: jest.fn() };
       jest.spyOn(case_studies, 'findOne').mockResolvedValue(resolvedValue);
-      const result = await updateCaseStudyServices.updateCaseStudy(
+      const caseStudy = await updateCaseStudyServices.updateCaseStudy(
         mockData.update.mockReq.params.id,
         mockData.update.mockReq.body
       );
-      expect(result).toEqual(resolvedValue);
+      expect(caseStudy).toEqual(resolvedValue);
     });
   });
 
@@ -20,8 +20,8 @@ describe('Case Study Services', () => {
     it('Should delete case study', async () => {
       const resolvedValue = { ...mockData.toDelete.resolvedValue, destroy: jest.fn() };
       jest.spyOn(case_studies, 'findOne').mockResolvedValue(resolvedValue);
-      const result = await updateCaseStudyServices.deleteCaseStudy(mockData.toDelete.mockReq.params.id);
-      expect(result).toEqual(resolvedValue);
+      const deletedCaseStudy = await updateCaseStudyServices.deleteCaseStudy(mockData.toDelete.mockReq.params.id);
+      expect(deletedCaseStudy).toEqual(resolvedValue);
     });
   });
   describe('createCaseStudy', () => {
@@ -51,5 +51,16 @@ describe('Case Study Services', () => {
       const result = await updateCaseStudyServices.removeProjectFromCaseStudy(mockData.update.mockReq.params.id);
       expect(result).toEqual(resolvedValue);
     });
+  });
+});
+describe('function addCurrentEngagement', () => {
+  it('Should add engagementId to caseStudy', async () => {
+    const resolvedValue = { ...mockData.update.resolvedValue, save: jest.fn() };
+    jest.spyOn(case_studies, 'findOne').mockResolvedValue(resolvedValue);
+    const result = await updateCaseStudyServices.addCurrentEngagement(
+      mockData.update.mockReq.params.id,
+      mockData.update.mockReq.params.id
+    );
+    expect(result).toEqual(undefined);
   });
 });
