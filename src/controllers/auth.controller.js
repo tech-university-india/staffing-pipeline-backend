@@ -7,7 +7,7 @@ const loginController = async (req, res) => {
     res.status(200).json({ token: validate.token, success: true });
   } catch (error) {
     logger.error(error);
-    res.status(500).json({ message: error.message, success: false });
+    res.status(error.statusCode).json({ message: error.message, success: false });
   }
 };
 const createUserLogin = async (req, res) => {
@@ -17,7 +17,7 @@ const createUserLogin = async (req, res) => {
     res.status(201).json({ success: true });
   } catch (error) {
     logger.error(error);
-    res.status(500).json({ error: error.message, success: false });
+    res.status(error.statusCode).json({ error: error.message, success: false });
   }
 };
 
