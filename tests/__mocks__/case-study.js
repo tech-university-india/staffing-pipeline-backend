@@ -14,17 +14,15 @@ const update = {
     json: jest.fn(),
   },
   resolvedValue: {
-    caseStudy: {
-      case_study_id: '1',
-      name: 'test',
-      description: 'test',
-      collaborators_ids: ['1', '2'],
-      image: 'test',
-      box_link: 'test',
-      engagement_id: '1',
-      createdAt: '2022-01-17T04:33:12.000Z',
-      updatedAt: '2022-01-17T04:33:12.000Z',
-    },
+    case_study_id: '1',
+    name: 'test',
+    description: 'test',
+    collaborators_ids: ['1', '2'],
+    image: 'test',
+    box_link: 'test',
+    engagement_id: '1',
+    createdAt: '2022-01-17T04:33:12.000Z',
+    updatedAt: '2022-01-17T04:33:12.000Z',
   },
 };
 
@@ -39,17 +37,15 @@ const toDelete = {
     json: jest.fn(),
   },
   resolvedValue: {
-    deletedCaseStudy: {
-      case_study_id: '1',
-      name: 'test',
-      description: 'test',
-      collaborators_ids: ['1', '2'],
-      image: 'test',
-      box_link: 'test',
-      engagement_id: '1',
-      createdAt: '2022-01-17T04:33:12.000Z',
-      updatedAt: '2022-01-17T04:33:12.000Z',
-    },
+    case_study_id: '1',
+    name: 'test',
+    description: 'test',
+    collaborators_ids: ['1', '2'],
+    image: 'test',
+    box_link: 'test',
+    engagement_id: '1',
+    createdAt: '2022-01-17T04:33:12.000Z',
+    updatedAt: '2022-01-17T04:33:12.000Z',
   },
 };
 module.exports = {

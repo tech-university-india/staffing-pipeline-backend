@@ -6,7 +6,7 @@ describe('Case Study Services', () => {
     it('Should update case study details', async () => {
       const resolvedValue = { ...mockData.update.resolvedValue, save: jest.fn() };
       jest.spyOn(case_studies, 'findOne').mockResolvedValue(resolvedValue);
-      const { caseStudy } = await updateCaseStudyServices.updateCaseStudy(
+      const caseStudy = await updateCaseStudyServices.updateCaseStudy(
         mockData.update.mockReq.params.id,
         mockData.update.mockReq.body
       );
@@ -18,7 +18,7 @@ describe('Case Study Services', () => {
     it('Should delete case study', async () => {
       const resolvedValue = { ...mockData.toDelete.resolvedValue, destroy: jest.fn() };
       jest.spyOn(case_studies, 'findOne').mockResolvedValue(resolvedValue);
-      const { deletedCaseStudy } = await updateCaseStudyServices.deleteCaseStudy(mockData.toDelete.mockReq.params.id);
+      const deletedCaseStudy = await updateCaseStudyServices.deleteCaseStudy(mockData.toDelete.mockReq.params.id);
       expect(deletedCaseStudy).toEqual(resolvedValue);
     });
   });

@@ -5,15 +5,8 @@ const deleteCaseStudy = async id => {
   logger.info('get case_study to be deleted with id: ' + id);
   const deletedCaseStudy = await db.case_studies.findOne({ where: { case_study_id: id } });
   if (!deletedCaseStudy) return null;
-  let collaborators = deletedCaseStudy.collaboratorsIds;
-  let engagement = deletedCaseStudy.engagementId;
-  logger.info('delete case_study from database');
   await deletedCaseStudy.destroy();
-  return {
-    deletedCaseStudy,
-    collaborators,
-    engagement,
-  };
+  return deletedCaseStudy;
 };
 
 const updateCaseStudy = async (id, body) => {
@@ -21,24 +14,13 @@ const updateCaseStudy = async (id, body) => {
   const caseStudy = await db.case_studies.findOne({ where: { case_study_id: id } });
   if (!caseStudy) return null;
 
-  const oldCollaborators = caseStudy.collaboratorsIds;
-  const newCollaborators = body.collaboratorsIds;
-  const oldEngagement = caseStudy.engagementId;
-  const newEngagement = body.engagementId;
-
   for (let key in body) {
     caseStudy[key] = body[key];
   }
 
   logger.info('insert updated caseStudy to the database');
   await caseStudy.save();
-  return {
-    caseStudy,
-    oldCollaborators,
-    newCollaborators,
-    oldEngagement,
-    newEngagement,
-  };
+  return caseStudy;
 };
 
 const removeProjectFromCaseStudy = async projectId => {

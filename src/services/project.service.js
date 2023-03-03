@@ -45,8 +45,11 @@ const deleteProject = async projectId => {
   });
 };
 
-const updateCaseStudyInProject = async (oldEngagement, newEngagement, caseStudyId) => {
+const updateCaseStudyInProject = async (caseStudyId, body) => {
   logger.info('updating case study in project');
+  const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  const oldEngagement = caseStudy.engagementId;
+  const newEngagement = body.engagementId;
   if (oldEngagement) {
     let engagement = await db.engagements.findOne({ where: { engagementId: oldEngagement } });
     if (engagement) {
@@ -68,7 +71,10 @@ const updateCaseStudyInProject = async (oldEngagement, newEngagement, caseStudyI
   }
 };
 
-const removeCaseStudyFromProject = async (engagementId, caseStudyId) => {
+const removeCaseStudyFromProject = async caseStudyId => {
+  const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  if (!caseStudy) return;
+  const engagementId = caseStudy.engagementId;
   logger.info('removing case study from project');
   if (engagementId) {
     let engagement = await db.engagements.findOne({ where: { engagementId: engagementId } });

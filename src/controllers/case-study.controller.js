@@ -4,22 +4,13 @@ const userServices = require('../services/user.service');
 const projectServices = require('../services/project.service');
 const updateCaseStudy = async (req, res) => {
   try {
-    logger.info('updating casestudy with id: ' + req.params.id);
+    logger.info('updating caseStudy with id: ' + req.params.id);
     const { id } = req.params;
     const { body } = req;
-
-    const { caseStudy, oldCollaborators, newCollaborators, oldEngagement, newEngagement } =
-      await caseStudyServices.updateCaseStudy(id, body);
-
-    if (newCollaborators) {
-      await userServices.updateCaseStudyInUser(oldCollaborators, newCollaborators, id);
-    }
-
-    if (newEngagement) {
-      await projectServices.updateCaseStudyInProject(oldEngagement, newEngagement, id);
-    }
-
+    const caseStudy = await caseStudyServices.updateCaseStudy(id, body);
     if (!caseStudy) res.status(404).json({ message: 'Case study not found' });
+    await userServices.updateCaseStudyInUser(id, body);
+    await projectServices.updateCaseStudyInProject(id, body);
     res.status(200).json(caseStudy);
   } catch (error) {
     logger.error(error);
@@ -31,19 +22,22 @@ const updateCaseStudy = async (req, res) => {
 
 const deleteCaseStudy = async (req, res) => {
   try {
-    logger.info('deleting case study with id: ' + req.params.id);
-    const { id } = req.params;
-    const { deletedCaseStudy, collaborators, engagement } = await caseStudyServices.deleteCaseStudy(id);
-    if (collaborators) {
-      await userServices.removeCaseStudyFromUser(collaborators, id);
+    try {
+      logger.info('deleting case study with id: ' + req.params.id);
+      const { id } = req.params;
+      await userServices.removeCaseStudyFromUser(id);
+      await projectServices.removeCaseStudyFromProject(id);
+      const deletedCaseStudy = await caseStudyServices.deleteCaseStudy(id);
+      if (!deletedCaseStudy) {
+        res.status(404).json({ message: 'Case study not found' });
+      }
+      res.status(200).json(deletedCaseStudy);
+    } catch (error) {
+      logger.error(error);
+      res.status(500).json({
+        message: 'Something went wrong',
+      });
     }
-    if (engagement) {
-      await projectServices.removeCaseStudyFromProject(engagement, id);
-    }
-    if (!deletedCaseStudy) {
-      res.status(404).json({ message: 'Case study not found' });
-    }
-    res.status(200).json(deletedCaseStudy);
   } catch (error) {
     logger.error(error);
     res.status(500).json({

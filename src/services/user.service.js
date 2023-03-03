@@ -114,12 +114,14 @@ const deleteProjectFromUsers = async (userIds, id) => {
   await Promise.all(updatedUsers);
 };
 
-const updateCaseStudyInUser = async (oldCollaborators, newCollaborators, caseStudyId) => {
+const updateCaseStudyInUser = async (caseStudyId, body) => {
+  const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  const oldCollaborators = caseStudy.collaboratorsIds;
+  const newCollaborators = body.collaboratorsIds;
   for (let i = 0; i < oldCollaborators.length; i++) {
     let collaborator = await db.users.findOne({ where: { userId: oldCollaborators[i] } });
     if (!collaborator) continue;
     let caseStudies = collaborator.caseStudyIds;
-    //use filter to remove the case study id from the array
     caseStudies = caseStudies.filter(id => id !== caseStudyId);
     collaborator.caseStudyIds = caseStudies;
     await collaborator.save();
@@ -134,7 +136,10 @@ const updateCaseStudyInUser = async (oldCollaborators, newCollaborators, caseStu
   }
 };
 
-const removeCaseStudyFromUser = async (collaborators, caseStudyId) => {
+const removeCaseStudyFromUser = async caseStudyId => {
+  const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  if (!caseStudy) return;
+  const collaborators = caseStudy.collaboratorsIds;
   for (let i = 0; i < collaborators.length; i++) {
     let collaborator = await db.users.findOne({ where: { userId: collaborators[i] } });
     if (!collaborator) continue;
