@@ -1,16 +1,12 @@
 const updateCaseStudy = require('../../src/controllers/case-study.controller');
 const updateCaseStudyServices = require('../../src/services/case-study.service');
 const mockData = require('../__mocks__/case-study');
-<<<<<<< HEAD
 const caseStudiesController = require('../../src/controllers/case-study.controller');
 const caseStudiesServices = require('../../src/services/case-study.service');
 const userServices = require('../../src/services/user.service');
 const { engagements } = require('../../src/models/');
-
-=======
-const userServices = require('../../src/services/user.service');
 const projectServices = require('../../src/services/project.service');
->>>>>>> main
+
 describe('CaseStudyController', () => {
   jest.spyOn(userServices, 'updateCaseStudyInUser').mockResolvedValue(true);
   jest.spyOn(projectServices, 'updateCaseStudyInProject').mockResolvedValue(true);
