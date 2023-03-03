@@ -6,7 +6,7 @@ const update = {
     body: {
       name: 'test',
       description: 'test',
-      collaborators_ids: ['1', '2'],
+      collaboratorsIds: ['1', '2'],
     },
   },
   mockRes: {
@@ -17,7 +17,7 @@ const update = {
     case_study_id: '1',
     name: 'test',
     description: 'test',
-    collaborators_ids: ['1', '2'],
+    collaboratorsIds: ['1', '2'],
     image: 'test',
     box_link: 'test',
     engagement_id: '1',

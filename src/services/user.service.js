@@ -122,7 +122,7 @@ const updateCaseStudyInUser = async (caseStudyId, body) => {
     let collaborator = await db.users.findOne({ where: { userId: oldCollaborators[i] } });
     if (!collaborator) continue;
     let caseStudies = collaborator.caseStudyIds;
-    caseStudies = caseStudies.filter(id => id !== caseStudyId);
+    caseStudies = caseStudies.filter(case_study_id => case_study_id !== caseStudyId);
     collaborator.caseStudyIds = caseStudies;
     await collaborator.save();
   }
