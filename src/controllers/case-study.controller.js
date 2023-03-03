@@ -7,10 +7,10 @@ const updateCaseStudy = async (req, res) => {
     logger.info('updating caseStudy with id: ' + req.params.id);
     const { id } = req.params;
     const { body } = req;
-    const caseStudy = await caseStudyServices.updateCaseStudy(id, body);
-    if (!caseStudy) res.status(404).json({ message: 'Case study not found' });
     await userServices.updateCaseStudyInUser(id, body);
     await projectServices.updateCaseStudyInProject(id, body);
+    const caseStudy = await caseStudyServices.updateCaseStudy(id, body);
+    if (!caseStudy) res.status(404).json({ message: 'Case study not found' });
     res.status(200).json(caseStudy);
   } catch (error) {
     logger.error(error);

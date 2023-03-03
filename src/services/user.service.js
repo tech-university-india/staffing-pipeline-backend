@@ -116,6 +116,7 @@ const deleteProjectFromUsers = async (userIds, id) => {
 
 const updateCaseStudyInUser = async (caseStudyId, body) => {
   const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  if (!caseStudy) return;
   const oldCollaborators = caseStudy.collaboratorsIds;
   const newCollaborators = body.collaboratorsIds;
   for (let i = 0; i < oldCollaborators.length; i++) {

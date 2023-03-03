@@ -48,6 +48,7 @@ const deleteProject = async projectId => {
 const updateCaseStudyInProject = async (caseStudyId, body) => {
   logger.info('updating case study in project');
   const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  if (!caseStudy) return;
   const oldEngagement = caseStudy.engagementId;
   const newEngagement = body.engagementId;
   if (oldEngagement) {
