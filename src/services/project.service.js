@@ -45,4 +45,14 @@ const deleteProject = async projectId => {
   });
 };
 
-module.exports = { getProject, listProjects, deleteProject, updateProject };
+const createProject = async body => {
+  try {
+    logger.info('creating project');
+    return await db.engagements.create(body);
+  } catch (error) {
+    logger.error({ error: error, text: 'error in creating an engagement and adding it to the database' });
+    throw new CustomErrors.HttpError(error.message, 500);
+  }
+};
+
+module.exports = { getProject, listProjects, deleteProject, updateProject, createProject };

@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       engagementId: {
         type: DataTypes.STRING,
         primaryKey: true,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: DataTypes.STRING,
       tags: DataTypes.ARRAY(DataTypes.STRING),

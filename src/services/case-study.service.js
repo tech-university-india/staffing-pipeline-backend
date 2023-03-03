@@ -49,10 +49,18 @@ const listCaseStudies = async () => {
   return allCaseStudies;
 };
 
+const addCurrentEngagement = async (caseStudyId, engagementId) => {
+  logger.info(`adding engagement : ${engagementId} to caseStudy: ${caseStudyId}`);
+  const caseStudy = await db.case_studies.findOne({ where: { case_study_id: caseStudyId } });
+  caseStudy.engagementId = engagementId;
+  await caseStudy.save();
+};
+
 module.exports = {
   updateCaseStudy,
   deleteCaseStudy,
   removeProjectFromCaseStudy,
   getCaseStudy,
   listCaseStudies,
+  addCurrentEngagement,
 };
