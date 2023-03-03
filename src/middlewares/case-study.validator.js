@@ -20,6 +20,32 @@ const updateCaseStudyBodySchema = Joi.object({
   engagement_id: Joi.array().items(uuidType),
 });
 
+const createCaseStudySchema = Joi.object({
+  caseStudyId: uuidType.required(),
+  name: Joi.string().min(3).max(30).required(),
+  description: Joi.string(),
+  collaboratorsIds: Joi.array().items(uuidType),
+  image: Joi.string(),
+  boxLink: Joi.string(),
+  engagementId: uuidType,
+});
+
+const createCaseStudyValidator = (req, res, next) => {
+  try {
+    const { error } = createCaseStudySchema.validate(req.body);
+    if (error) {
+      throw new HttpError(error.message, 400);
+    }
+    next();
+  } catch (error) {
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: error.message });
+    }
+  }
+};
+
 const caseStudyIdValidator = (req, res, next) => {
   try {
     const { error } = caseStudyIdSchema.validate(req.params);
@@ -54,5 +80,6 @@ const updateCaseStudyBodyValidator = (req, res, next) => {
 
 module.exports = {
   caseStudyIdValidator,
+  createCaseStudyValidator,
   updateCaseStudyBodyValidator,
 };

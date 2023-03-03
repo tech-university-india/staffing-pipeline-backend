@@ -15,8 +15,6 @@ router.put(
 );
 router.delete('/:id', authMiddlewares.reqAuthValidator, caseStudyValidator.caseStudyIdValidator, deleteCaseStudy);
 
-module.exports = router;
-
-router.post('/', createCaseStudy);
+router.post('/', authMiddlewares.reqAuthValidator, caseStudyValidator.createCaseStudyValidator, createCaseStudy);
 
 module.exports = router;

@@ -3,6 +3,8 @@ const updateCaseStudyServices = require('../../src/services/case-study.service')
 const mockData = require('../__mocks__/case-study');
 const caseStudiesController = require('../../src/controllers/case-study.controller');
 const caseStudiesServices = require('../../src/services/case-study.service');
+const userServices = require('../../src/services/user.service');
+const { engagements } = require('../../src/models/');
 
 describe('CaseStudyController', () => {
   describe('updateCaseStudyController', () => {
@@ -50,15 +52,18 @@ describe('CaseStudyController', () => {
 
   describe('createCaseStudy', () => {
     it('should create a new case study', async () => {
-      const { mockReq, mockRes, resolvedValue } = mockData.create;
+      const { mockReq, mockRes, resolvedValue, mockUser, mockEngagement } = mockData.create;
 
       jest.spyOn(caseStudiesServices, 'createCaseStudy').mockResolvedValue(resolvedValue);
-      jest.spyOn(userServices, 'getUser').mockResolvedValue();
+      jest.spyOn(userServices, 'getUser').mockResolvedValueOnce(mockUser);
+      jest.spyOn(userServices, 'updateUser').mockResolvedValue();
+      jest.spyOn(engagements, 'findByPk').mockResolvedValue(mockEngagement);
 
       await caseStudiesController.createCaseStudy(mockReq, mockRes);
       //expect(mockRes.status).toHaveBeenCalledWith(201);
       expect(mockRes.json).toHaveBeenCalledWith(resolvedValue);
     });
+
     it('should throw an internal server error', async () => {
       const { mockReq, mockRes } = mockData.create;
 
