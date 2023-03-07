@@ -79,4 +79,33 @@ describe('CaseStudyController', () => {
       expect(mockRes.json).toHaveBeenCalledWith({ message: 'Something went wrong', success: false });
     });
   });
+  describe('getCaseStudyController', () => {
+    it('should get case study by id ', async () => {
+      jest.spyOn(updateCaseStudyServices, 'getCaseStudy').mockResolvedValue(mockData.toGet.resolvedValue);
+      await updateCaseStudy.getCaseStudy(mockData.toGet.mockReq, mockData.toGet.mockRes);
+      expect(mockData.toGet.mockRes.status).toHaveBeenCalledWith(200);
+      expect(mockData.toGet.mockRes.json).toHaveBeenCalledWith(mockData.toGet.resolvedValue);
+    });
+    it('Should return 404 if caseStudy not found', async () => {
+      const resolvedValue = null;
+      jest.spyOn(updateCaseStudyServices, 'getCaseStudy').mockResolvedValue(resolvedValue);
+      await updateCaseStudy.getCaseStudy(mockData.toGet.mockReq, mockData.toGet.mockRes);
+      expect(mockData.toGet.mockRes.status).toHaveBeenCalledWith(404);
+      expect(mockData.toGet.mockRes.json).toHaveBeenCalledWith({ message: 'Case study not found' });
+    });
+  });
+  describe('listCaseStudycontroller', () => {
+    it('should return list of case studies ', async () => {
+      jest.spyOn(updateCaseStudyServices, 'listCaseStudies').mockResolvedValue(mockData.toList.resolvedValue);
+      await updateCaseStudy.listCaseStudies(mockData.toList.mockReq, mockData.toList.mockRes);
+      expect(mockData.toList.mockRes.status).toHaveBeenCalledWith(200);
+      expect(mockData.toList.mockRes.json).toHaveBeenCalledWith(mockData.toList.resolvedValue);
+    });
+    it('Should return 500 if something went wrong', async () => {
+      jest.spyOn(updateCaseStudyServices, 'listCaseStudies').mockRejectedValue(new Error('Something went wrong'));
+      await updateCaseStudy.listCaseStudies(mockData.toList.mockReq, mockData.toList.mockRes);
+      expect(mockData.toList.mockRes.status).toHaveBeenCalledWith(500);
+      expect(mockData.toList.mockRes.json).toHaveBeenCalledWith({ message: 'Something went wrong' });
+    });
+  });
 });

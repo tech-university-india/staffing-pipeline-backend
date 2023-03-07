@@ -35,7 +35,6 @@ module.exports = {
           image: 'https://cdn-icons-png.flaticon.com/512/64/64572.png',
           updated_at: new Date(),
           created_at: new Date(),
-
         },
       ],
       {}

@@ -7,9 +7,7 @@
   },
   "host": "localhost:8000",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/auth/register": {
       "post": {
@@ -139,17 +137,9 @@
                   "name": "john Doe",
                   "email": "johndoe@mckinsey.com",
                   "fmno": "328060",
-                  "currentEngagementIds": [
-                    "d87ffb9b-06f2-4adb-8b6b-140995d97b04"
-                  ],
-                  "caseStudyIds": [
-                    "9225cf89-97f7-4ec8-8c36-54c68842a2e6"
-                  ],
-                  "skills": [
-                    "React",
-                    "Node",
-                    "GoLang"
-                  ],
+                  "currentEngagementIds": ["d87ffb9b-06f2-4adb-8b6b-140995d97b04"],
+                  "caseStudyIds": ["9225cf89-97f7-4ec8-8c36-54c68842a2e6"],
+                  "skills": ["React", "Node", "GoLang"],
                   "role": "engineer 1",
                   "guild": "product",
                   "pastEngagementIds": null,
@@ -162,19 +152,9 @@
                   "name": "Jane Doe",
                   "email": "janedoe@mckinsey.com",
                   "fmno": "328560",
-                  "currentEngagementIds": [
-                    "be753dd4-7a33-449a-956a-a359b13282f3"
-                  ],
-                  "caseStudyIds": [
-                    "7de2e0b9-a1f4-465f-b2bd-b94316cd24bc"
-                  ],
-                  "skills": [
-                    "React",
-                    "Node",
-                    "Java",
-                    "Python",
-                    "C++"
-                  ],
+                  "currentEngagementIds": ["be753dd4-7a33-449a-956a-a359b13282f3"],
+                  "caseStudyIds": ["7de2e0b9-a1f4-465f-b2bd-b94316cd24bc"],
+                  "skills": ["React", "Node", "Java", "Python", "C++"],
                   "role": "junior engineer",
                   "guild": "swe",
                   "pastEngagementIds": null,
@@ -250,17 +230,9 @@
                 "name": "john Doe",
                 "email": "johndoe@mckinsey.com",
                 "fmno": "328060",
-                "currentEngagementIds": [
-                  "d87ffb9b-06f2-4adb-8b6b-140995d97b04"
-                ],
-                "caseStudyIds": [
-                  "9225cf89-97f7-4ec8-8c36-54c68842a2e6"
-                ],
-                "skills": [
-                  "React",
-                  "Node",
-                  "GoLang"
-                ],
+                "currentEngagementIds": ["d87ffb9b-06f2-4adb-8b6b-140995d97b04"],
+                "caseStudyIds": ["9225cf89-97f7-4ec8-8c36-54c68842a2e6"],
+                "skills": ["React", "Node", "GoLang"],
                 "role": "engineer 1",
                 "guild": "product",
                 "pastEngagementIds": null,
