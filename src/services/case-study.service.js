@@ -1,5 +1,4 @@
 const { case_studies } = require('../models');
-const userService = require('./user.service');
 const db = require('../models');
 const logger = require('../logger');
 

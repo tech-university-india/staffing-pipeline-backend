@@ -1,6 +1,5 @@
 const caseStudyServices = require('../services/case-study.service');
 const userServices = require('../services/user.service');
-const { engagements } = require('../models/');
 const logger = require('../logger');
 const projectServices = require('../services/project.service');
 
@@ -8,22 +7,21 @@ const createCaseStudy = async (req, res) => {
   try {
     logger.info('creating a new case study');
     const caseStudy = await caseStudyServices.createCaseStudy(req.body);
-    const { caseStudyId, collaboratorsIds, engagementId } = caseStudy;
+    const { caseStudyId, collaboratorsIds, projectId } = caseStudy.dataValues;
 
     // update users case_study_ids
     for (let collabId of collaboratorsIds) {
       user = await userServices.getUser(collabId);
       console.log(user);
-      user['caseStudyIds'].push(caseStudyId);
-      userServices.updateUser(collabId, user);
+      user.dataValues['caseStudyIds'].push(caseStudyId);
+      user.save();
     }
 
     // update engagements case_study_ids
-    const engagement = await engagements.findByPk(engagementId);
-    console.log(engagement);
-    engagement['caseStudyIds'].push(caseStudyId);
-    engagement.save();
-    // Will refactor after the api is merged
+    const project = await projectServices.getProject(projectId);
+    console.log(project);
+    project.dataValues['caseStudyIds'].push(caseStudyId);
+    project.save();
 
     res.status(201).json(caseStudy);
   } catch (error) {
