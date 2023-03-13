@@ -2,6 +2,7 @@
 const express = require('express');
 const router = require('./routes/user.route');
 const authRouter = require('./routes/login.route');
+const cors = require('cors');
 require('dotenv').config();
 const projectRouter = require('./routes/project.route');
 const caseStudiesRouter = require('./routes/case-study.route');
@@ -24,6 +25,11 @@ const PORT = process.env.PORT || 8000;
 
 // middlewares
 app.use(express.json());
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 app.use('/api', router);
 app.use('/auth', authRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
